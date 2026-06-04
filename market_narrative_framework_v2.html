@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>市场叙事框架</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sand: #F5F0E8;
+  --sand2: #EDE6D8;
+  --sand3: #E0D8C8;
+  --cream: #FDFAF4;
+  --teal-dark: #1A6B5A;
+  --teal-mid: #2E8B72;
+  --teal-light: #C8E8E0;
+  --teal-pale: #EAF5F2;
+  --plum-dark: #4A3570;
+  --plum-mid: #6B52A0;
+  --plum-light: #DDD5F0;
+  --plum-pale: #F0EDF8;
+  --warm-brown: #6B5540;
+  --warm-brown2: #8B7060;
+  --text: #3A3028;
+  --text2: #6B5D50;
+  --text3: #9A8E84;
+  --gold: #C8961E;
+  --gold-light: #F5E8C0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--sand);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 0;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 56px 48px 64px;
+  background: var(--cream);
+  min-height: 100vh;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 28px;
+  border-bottom: 1.5px solid var(--sand3);
+  margin-bottom: 44px;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--gold);
+}
+.topbar-meta {
+  font-size: 12px;
+  color: var(--text3);
+  letter-spacing: .06em;
+  line-height: 1.6;
+}
+.topbar-meta strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.dl-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 20px;
+  background: var(--cream);
+  color: var(--warm-brown);
+  border: 1.5px solid var(--sand3);
+  border-radius: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.dl-btn:hover {
+  background: var(--sand);
+  border-color: var(--warm-brown2);
+  color: var(--text);
+}
+
+/* Hero title */
+.hero {
+  margin-bottom: 52px;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text);
+  max-width: 600px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--warm-brown2);
+}
+.hero-rule {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin-top: 20px;
+}
+
+/* Two-column layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Market column */
+.market-col {}
+
+.market-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.flag-me {
+  background: var(--teal-light);
+  color: var(--teal-dark);
+}
+.flag-eu {
+  background: var(--plum-light);
+  color: var(--plum-dark);
+}
+.flag-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.dot-me { background: var(--teal-mid); }
+.dot-eu { background: var(--plum-mid); }
+
+.positioning-card {
+  border-radius: 12px;
+  padding: 22px 22px 18px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.pos-me {
+  background: var(--teal-pale);
+  border: 1px solid rgba(46,139,114,.15);
+}
+.pos-eu {
+  background: var(--plum-pale);
+  border: 1px solid rgba(107,82,160,.15);
+}
+.pos-accent {
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 12px 0 0 12px;
+}
+.acc-me { background: var(--teal-mid); }
+.acc-eu { background: var(--plum-mid); }
+
+.pos-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.lbl-me { color: var(--teal-dark); }
+.lbl-eu { color: var(--plum-dark); }
+
+.pos-line {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.pos-sub {
+  font-size: 12.5px;
+  color: var(--text2);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* Product list */
+.prod-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.prod-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 11px 14px;
+  border: 1px solid var(--sand3);
+}
+.prod-dot-wrap {
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+.prod-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pd-me { background: var(--teal-mid); }
+.pd-eu { background: var(--plum-mid); }
+
+.prod-info {}
+.prod-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.pt-me { color: var(--teal-dark); }
+.pt-eu { color: var(--plum-dark); }
+.prod-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.prod-angle {
+  font-size: 11.5px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Quote box */
+.quote-box {
+  border-radius: 8px;
+  padding: 13px 16px;
+  font-size: 12px;
+  line-height: 1.7;
+  font-style: italic;
+  font-weight: 300;
+}
+.qb-me {
+  background: var(--teal-light);
+  color: var(--teal-dark);
+  border-left: 3px solid var(--teal-mid);
+}
+.qb-eu {
+  background: var(--plum-light);
+  color: var(--plum-dark);
+  border-left: 3px solid var(--plum-mid);
+}
+.qb-label {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  opacity: .7;
+}
+
+/* Vertical divider */
+.col-divider {
+  width: 1px;
+  background: var(--sand3);
+  grid-row: 1;
+  grid-column: 2;
+  display: none;
+}
+
+/* Center rule */
+.center-rule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 40px 0 36px;
+}
+.cr-line { flex: 1; height: 1px; background: var(--sand3); }
+.cr-diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* Footer */
+.footer {
+  margin-top: 52px;
+  padding-top: 20px;
+  border-top: 1px solid var(--sand3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-text {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: .04em;
+}
+.footer-dots {
+  display: flex;
+  gap: 6px;
+}
+.fd { width: 6px; height: 6px; border-radius: 50%; }
+.fd1 { background: var(--teal-light); }
+.fd2 { background: var(--gold-light); }
+.fd3 { background: var(--plum-light); }
+</style>
+</head>
+<body>
+<div class="page" id="content">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="logo-mark">B</div>
+      <div class="topbar-meta">
+        <strong>植物提取物 B2B 出口项目</strong>
+        内部战略文件 · 2026
+      </div>
+    </div>
+    <button class="dl-btn" onclick="downloadImage()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      下载图片
+    </button>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">Market Narrative Framework</div>
+    <div class="hero-title">统一市场<em>叙事</em>框架</div>
+    <div class="hero-rule"></div>
+  </div>
+
+  <!-- Two column -->
+  <div class="two-col">
+
+    <!-- 中东 -->
+    <div class="market-col">
+      <div class="market-flag flag-me">
+        <span class="flag-dot dot-me"></span>
+        中东 UAE / GCC
+      </div>
+
+      <div class="positioning-card pos-me">
+        <div class="pos-accent acc-me"></div>
+        <div class="pos-label lbl-me">统一叙事方向</div>
+        <div class="pos-line">天然植物来源的<br>"功能性健康管理"原料供应商</div>
+        <div class="pos-sub">免疫力 · 代谢控糖 · 运动恢复，三条线指向同一买家画像——GCC城市中产。强调Halal植物来源、中国供应链品质保障。</div>
+      </div>
+
+      <div class="prod-list">
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-me"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-me">免疫调节</div>
+            <div class="prod-name">灵芝提取物</div>
+            <div class="prod-angle">抗炎抗氧化，"东方草本"有历史认知，叙事切入门槛低</div>
+          </div>
+        </div>
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-me"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-me">代谢控糖</div>
+            <div class="prod-name">桑叶 / 苦瓜提取物</div>
+            <div class="prod-angle">GCC糖尿病发病率全球最高，控糖是结构性刚需，买家主动找货</div>
+          </div>
+        </div>
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-me"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-me">运动恢复</div>
+            <div class="prod-name">枸杞多糖 (LBP)</div>
+            <div class="prod-angle">"东方超级食物"，UAE健身文化增长，抗氧化+恢复双叙事</div>
+          </div>
+        </div>
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-me"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-me">睡眠辅助</div>
+            <div class="prod-name">酸枣仁提取物</div>
+            <div class="prod-angle">中国独有成分，与灵芝组合推，降低单品教育成本</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-box qb-me">
+        <div class="qb-label">一句话定位</div>
+        "We supply premium Halal-certified botanical ingredients for immunity, metabolic health, and sports recovery — traceable to Chinese origin, fully documented."
+      </div>
+    </div>
+
+    <!-- 欧洲 -->
+    <div class="market-col">
+      <div class="market-flag flag-eu">
+        <span class="flag-dot dot-eu"></span>
+        欧洲法语区
+      </div>
+
+      <div class="positioning-card pos-eu">
+        <div class="pos-accent acc-eu"></div>
+        <div class="pos-label lbl-eu">统一叙事方向</div>
+        <div class="pos-line">专注情绪·睡眠·运动恢复的<br>"东方植物活性成分"顾问型供应商</div>
+        <div class="pos-sub">情绪管理 · 睡眠质量 · 运动植物基恢复，指向法语区天然健康品牌新品开发需求。强调法语服务能力、欧盟合规文件、湖南溯源直采。</div>
+      </div>
+
+      <div class="prod-list">
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-eu"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-eu">情绪 / 睡眠</div>
+            <div class="prod-name">灵芝提取物</div>
+            <div class="prod-angle">睡眠+情绪双功效，子实体欧盟合规顺畅，phytothérapie文化契合</div>
+          </div>
+        </div>
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-eu"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-eu">情绪 / 睡眠</div>
+            <div class="prod-name">猴头菇提取物</div>
+            <div class="prod-angle">认知+情绪，功能性咖啡/软糖品牌核心采购，欧洲认知最成熟的功能蘑菇</div>
+          </div>
+        </div>
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-eu"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-eu">情绪 / 睡眠</div>
+            <div class="prod-name">酸枣仁提取物</div>
+            <div class="prod-angle">中国独有，竞争窗口期，与灵芝形成睡眠组合配方叙事</div>
+          </div>
+        </div>
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-eu"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-eu">运动恢复</div>
+            <div class="prod-name">枸杞多糖 (LBP)</div>
+            <div class="prod-angle">"东方超级食物"，法国户外/运动人群，抗氧化科学背书充足</div>
+          </div>
+        </div>
+        <div class="prod-item">
+          <div class="prod-dot-wrap"><div class="prod-dot pd-eu"></div></div>
+          <div class="prod-info">
+            <div class="prod-tag pt-eu">运动恢复</div>
+            <div class="prod-name">红景天提取物</div>
+            <div class="prod-angle">瑞士/法国Adaptogen核心品，科学文献强，高端运动营养品牌首选</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-box qb-eu">
+        <div class="qb-label">Une phrase de positionnement</div>
+        "Nous sommes votre partenaire francophone spécialisé en ingrédients botaniques chinois pour la gestion du stress, du sommeil et de la récupération sportive."
+      </div>
+    </div>
+
+  </div><!-- /two-col -->
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">内部战略参考文件 · 植物提取物 B2B 出口项目 · 2026</div>
+    <div class="footer-dots">
+      <div class="fd fd1"></div>
+      <div class="fd fd2"></div>
+      <div class="fd fd3"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+async function downloadImage() {
+  const btn = document.querySelector('.dl-btn');
+  btn.textContent = '生成中…';
+  btn.disabled = true;
+  try {
+    const canvas = await html2canvas(document.getElementById('content'), {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#FDFAF4',
+      logging: false
+    });
+    const link = document.createElement('a');
+    link.download = 'market_narrative_framework.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('下载失败，请截图保存。');
+  }
+  btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 下载图片`;
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>
