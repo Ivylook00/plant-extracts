@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>WOD 2026 参展商参考指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans SC',sans-serif;background:#F7F6F2;color:#1A1917;font-size:13px;line-height:1.5;}
+.page{padding:0 0 40px;}
+
+/* Header */
+.hdr{background:#1A1917;color:#fff;padding:16px 14px 12px;}
+.hdr h1{font-size:15px;font-weight:700;letter-spacing:-0.2px;}
+.hdr-sub{font-size:10px;color:#888;margin-top:3px;font-family:'DM Mono',monospace;}
+.hdr-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.dl-btn{flex-shrink:0;background:#1D9E75;color:#fff;border:none;border-radius:7px;padding:7px 12px;font-size:11.5px;font-family:'Noto Sans SC',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:4px;}
+.dl-btn svg{width:13px;height:13px;}
+.stats{display:flex;background:#111;border-top:1px solid #2A2926;}
+.stat{flex:1;padding:6px 0;text-align:center;border-right:1px solid #2A2926;}
+.stat:last-child{border-right:none;}
+.sn{font-size:16px;font-weight:700;font-family:'DM Mono',monospace;color:#fff;}
+.sl{font-size:9px;color:#666;margin-top:1px;}
+
+/* Section label */
+.sec-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:12px 14px 6px;display:flex;align-items:center;gap:6px;}
+.sec-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sec-count{font-size:9px;font-family:'DM Mono',monospace;padding:1px 6px;border-radius:99px;margin-left:auto;}
+.s1 .sec-dot{background:#1D9E75;} .s1 .sec-label{color:#085041;} .s1 .sec-count{background:#E1F5EE;color:#085041;}
+.s2 .sec-dot{background:#2B6CB0;} .s2 .sec-label{color:#1A365D;} .s2 .sec-count{background:#EBF4FF;color:#1A365D;}
+.s3 .sec-dot{background:#6B7280;} .s3 .sec-label{color:#374151;} .s3 .sec-count{background:#F3F4F6;color:#374151;}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;padding:0 14px;}
+table{width:100%;border-collapse:collapse;min-width:620px;}
+th{font-size:10px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#7A7870;padding:7px 8px;border-bottom:1.5px solid #E8E5DC;text-align:left;white-space:nowrap;background:#F7F6F2;}
+td{padding:9px 8px;border-bottom:0.5px solid #E8E5DC;vertical-align:top;font-size:11.5px;line-height:1.55;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#FAFAF7;}
+.co-name{font-weight:700;font-size:12px;white-space:nowrap;}
+.co-loc{font-size:10px;color:#7A7870;margin-top:1px;}
+.bdg{display:inline-block;font-size:9.5px;padding:1.5px 6px;border-radius:99px;font-weight:500;white-space:nowrap;margin:1px 1px 0 0;}
+.bg{background:#E1F5EE;color:#085041;}
+.bb{background:#EBF4FF;color:#1A365D;}
+.bgy{background:#F3F4F6;color:#374151;}
+.ba{background:#FEF3C7;color:#92400E;}
+.star{background:#FEF3C7;color:#92400E;font-weight:700;}
+.cv-list{padding-left:12px;list-style:none;}
+.cv-list li{position:relative;padding-left:10px;margin-bottom:3px;font-size:11px;line-height:1.5;}
+.cv-list li::before{content:'→';position:absolute;left:0;font-size:10px;top:1px;}
+.s1 .cv-list li::before{color:#1D9E75;}
+.s2 .cv-list li::before{color:#2B6CB0;}
+.s3 .cv-list li::before{color:#6B7280;}
+
+/* Recommendation footer */
+.rec-section{margin:16px 14px 0;background:#fff;border-radius:10px;border:1px solid #E8E5DC;overflow:hidden;}
+.rec-header{background:#1A1917;color:#fff;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
+.rec-item{padding:10px 14px;border-bottom:0.5px solid #E8E5DC;display:flex;gap:10px;align-items:flex-start;}
+.rec-item:last-child{border-bottom:none;}
+.rec-rank{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:#fff;background:#1D9E75;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.rec-rank.r2{background:#2B6CB0;}
+.rec-rank.r3{background:#B45309;}
+.rec-name{font-weight:700;font-size:12px;margin-bottom:2px;}
+.rec-why{font-size:11px;color:#4A4A45;line-height:1.55;}
+
+.footer{padding:10px 14px;font-size:10px;color:#9A9890;line-height:1.5;}
+
+/* Download overlay */
+#overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;flex-direction:column;gap:10px;}
+#overlay.on{display:flex;}
+#overlay p{color:#fff;font-size:13px;}
+.spin{width:32px;height:32px;border:3px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp 0.7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="overlay"><div class="spin"></div><p>正在生成图片...</p></div>
+
+<div class="page" id="main">
+
+<div class="hdr">
+  <div class="hdr-row">
+    <div>
+      <h1>WOD 2026 参展商参考指南</h1>
+      <div class="hdr-sub">上海新国际博览中心 · 6月3–5日 · Pro One项目专用</div>
+    </div>
+    <button class="dl-btn" onclick="dlImg()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      保存图片
+    </button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="sn">13</div><div class="sl">参展企业</div></div>
+    <div class="stat"><div class="sn">9</div><div class="sl">国内企业</div></div>
+    <div class="stat"><div class="sn">4</div><div class="sl">国外企业</div></div>
+    <div class="stat"><div class="sn">39</div><div class="sl">商用车场景</div></div>
+  </div>
+</div>
+
+<!-- Section 1: 国内龙头 -->
+<div class="s1">
+  <div class="sec-label">
+    <div class="sec-dot"></div>
+    <span>国内龙头企业</span>
+    <span class="sec-count">4家</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:11%">企业</th>
+          <th style="width:18%">简介</th>
+          <th style="width:16%">主要产品</th>
+          <th style="width:18%">降本增效价值点</th>
+          <th style="width:24%">🚌 商用车创新场景</th>
+          <th style="width:13%">出海相关性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="co-name">和利时</div><div class="co-loc">北京</div><div style="margin-top:4px;"><span class="bdg bg">⭐ 必谈</span></div></td>
+          <td>中国工业自动化龙头，PLC/DCS/MES全栈能力，近年积极拓展海外</td>
+          <td>DCS/PLC控制系统、MES、工业互联网平台、智能仪表</td>
+          <td>工厂全流程自动化控制；MES实现生产透明化，缩短异常响应时间</td>
+          <td><ul class="cv-list"><li>装配线PLC国产替代，降低欧洲工厂自动化成本</li><li>MES对接欧洲SAP，实现数据实时同步</li><li>发动机/底盘产线关键工序数字化监控</li></ul></td>
+          <td>已进东南亚、中东；欧洲起步，有出海意愿</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">宝信软件</div><div class="co-loc">上海</div></td>
+          <td>宝武集团旗下工业互联网平台，重工业数字化强，向外部市场扩张</td>
+          <td>工业互联网平台、MES、ERP、智慧工厂整体方案</td>
+          <td>统一管理工厂数据；宝武背书的降本案例库可直接参考</td>
+          <td><ul class="cv-list"><li>钢材/铝材供应链全链路数字化追溯</li><li>车架、车桥重型零件的能耗与良率管理</li><li>跨工厂协同排产（中国+欧洲工厂联动）</li></ul></td>
+          <td>国内重工业为主，部分海外制造项目</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">达智汇</div><div class="co-loc">上海</div></td>
+          <td>AI+制造业，聚焦工业AI视觉检测与质量管理，本届确认参展</td>
+          <td>AI质量检测、工业视觉、数据分析平台</td>
+          <td>AI替代人工质检，24小时不间断；直接提升良率</td>
+          <td><ul class="cv-list"><li>车身焊缝AI视觉检测，替代人工目视</li><li>驾驶室内饰件外观缺陷自动分拣</li><li>轮毂、制动盘等安全件全检（欧洲法规要求）</li></ul></td>
+          <td>国内为主，出海探索期</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">孚盟软件</div><div class="co-loc">上海</div><div style="margin-top:4px;"><span class="bdg bg">⭐ 必谈</span></div></td>
+          <td>专注外贸与供应链数字化SaaS，直接服务有出口需求的制造商</td>
+          <td>外贸管理系统、供应链协同平台、跨境电商数字化</td>
+          <td>订单/物流/报关一体化管理；供应链可视化降低库存成本</td>
+          <td><ul class="cv-list"><li>零部件出口欧洲的报关、合规文件数字化管理</li><li>中欧供应商协同，实时追踪零件在途状态</li><li>多币种、多语言报价单自动生成</li></ul></td>
+          <td>直接服务中国出口企业，已有欧洲出口场景客户</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Section 2: 国内中型 -->
+<div class="s2" style="margin-top:8px;">
+  <div class="sec-label">
+    <div class="sec-dot"></div>
+    <span>国内中型企业（专精特新）</span>
+    <span class="sec-count">5家</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:11%">企业</th>
+          <th style="width:18%">简介</th>
+          <th style="width:16%">主要产品</th>
+          <th style="width:18%">降本增效价值点</th>
+          <th style="width:24%">🚌 商用车创新场景</th>
+          <th style="width:13%">出海相关性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="co-name">成都数之联</div><div class="co-loc">成都 · 电科大孵化</div><div style="margin-top:4px;"><span class="bdg star">⭐ 重点推荐</span></div></td>
+          <td>工业AI质检"隐形冠军"，四川省AI链主企业，新型显示行业ADC市占率超80%</td>
+          <td>ADC自动缺陷检测、AI视觉装备、良率提升系统、精益生产监控</td>
+          <td>替代人工质检；良率提升减少废品损耗；软硬一体快速部署</td>
+          <td><ul class="cv-list"><li>安全件（制动系统、转向节）AI全检，满足欧洲强制全检要求</li><li>发动机缸体、缸盖精密加工缺陷检测，精度超人工</li><li>可直接部署欧洲工厂（已有欧盟落地经验）</li></ul></td>
+          <td><span class="bdg star">欧盟已落地</span><br>设备已出口斯洛文尼亚（欧盟）、墨西哥、泰国、越南</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">语核科技</div><div class="co-loc">中国</div></td>
+          <td>工业大语言模型，让工人用自然语言操控MES和查询生产数据</td>
+          <td>工业AI对话平台、MES自然语言交互、生产数据智能查询</td>
+          <td>降低数字化操作门槛和培训成本；减少查数据写报告时间</td>
+          <td><ul class="cv-list"><li>欧洲工厂工人用母语（法/意语）操作中国MES，消除语言壁垒</li><li>生产异常自动播报+AI建议，减少工程师响应时间</li><li>新车型导入时快速生成多语言SOP操作指导</li></ul></td>
+          <td>多语言能力可支持欧洲工厂本地化部署</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">上海联泉智能</div><div class="co-loc">上海</div></td>
+          <td>工业智能装备与柔性自动化系统集成，长三角汽车供应链有落地案例</td>
+          <td>柔性装配线、智能工装夹具、产线自动化改造、机器人集成</td>
+          <td>产线人工替代降人力成本；柔性生产减少换线停机时间</td>
+          <td><ul class="cv-list"><li>驾驶室焊装/涂装柔性产线改造，支持多车型混线</li><li>车桥、车架装配自动化单元，替代欧洲高人力成本工位</li><li>智能工装夹具快换系统，换型时间缩短至分钟级</li></ul></td>
+          <td>汽车行业背景扎实，出海意愿待现场确认</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">浙江远东工业</div><div class="co-loc">浙江</div><div style="margin-top:4px;"><span class="bdg bb">CBAM合规</span></div></td>
+          <td>工业线缆及能源互联网，帮助制造企业实现能耗监控与绿色低碳目标</td>
+          <td>工业线缆、能源管理系统（EMS）、碳排放监控、工厂电气数字化</td>
+          <td>能耗优化降低电力成本；碳排放数字化减少人工统计</td>
+          <td><ul class="cv-list"><li>欧洲工厂碳排放实时监控，自动生成CBAM申报数据</li><li>新能源商用车充电基础设施工业级线缆方案</li><li>工厂峰谷电智能调度，降低欧洲高电价运营成本</li></ul></td>
+          <td>CBAM碳边境调节是出海欧洲的强制合规项，直接相关</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">阿尔卑斯系统集成</div><div class="co-loc">ALSI · 中国</div></td>
+          <td>制造业IT/OT融合系统集成，MES落地"最后一公里"服务商</td>
+          <td>IT/OT融合、MES实施集成、工业网络基础设施、数字工厂集成</td>
+          <td>打通数据孤岛；降低信息化改造实施风险</td>
+          <td><ul class="cv-list"><li>欧洲工厂IT/OT系统从零搭建与集成</li><li>国内MES对接欧洲ERP（SAP/Oracle），实现数据互通</li><li>欧洲工厂网络安全合规架构（符合NIS2指令）</li></ul></td>
+          <td>系统集成能力在欧洲工厂落地时为必需环节</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Section 3: 国外 -->
+<div class="s3" style="margin-top:8px;">
+  <div class="sec-label">
+    <div class="sec-dot"></div>
+    <span>国外龙头企业（对标参考）</span>
+    <span class="sec-count">4家</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:11%">企业</th>
+          <th style="width:18%">简介</th>
+          <th style="width:16%">主要产品</th>
+          <th style="width:18%">参考价值</th>
+          <th style="width:24%">🚌 商用车创新场景</th>
+          <th style="width:13%">出海相关性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="co-name">西门子 Xcelerator</div><div class="co-loc">德国</div></td>
+          <td>全球工业数字化龙头，开放生态整合PLM/MES/工业云，欧洲OEM普遍采用</td>
+          <td>Teamcenter PLM、Opcenter MES、数字孪生、工业AI</td>
+          <td>了解欧洲数字化标准，判断中国方案兼容性；寻找已在欧洲落地的中国合作伙伴</td>
+          <td><ul class="cv-list"><li>欧洲商用车OEM数字化标准（PLM/MES接口），为中国供应商准入提供参考</li><li>数字孪生在整车开发中的应用标杆</li><li>Xcelerator生态中已在欧洲落地的中国合作伙伴名单</li></ul></td>
+          <td>工业软件欧洲No.1，中国方案兼容性判断基准</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">SGS</div><div class="co-loc">瑞士</div><div style="margin-top:4px;"><span class="bdg ba">⭐ 必约单谈</span></div></td>
+          <td>全球最大检测认证机构，欧盟汽车合规（UN-R/CE/WVTA）专家</td>
+          <td>UN-R认证、CE认证、整车型式认证（WVTA）、碳排放核查</td>
+          <td>直接咨询商用车出海欧洲认证路径与时间成本，这是推荐中国企业出海的关键前置信息</td>
+          <td><ul class="cv-list"><li>商用车整车欧洲WVTA认证全流程辅导（进入欧盟市场的法律门槛）</li><li>中国零部件供应商CE认证及UN-R符合性测试</li><li>碳足迹核查报告（欧洲客户采购评审必备文件）</li></ul></td>
+          <td>全球检测Top 3，出海欧洲认证的硬门槛</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">费斯托 Festo</div><div class="co-loc">德国</div></td>
+          <td>1925年创立，全球自动化技术领导者，欧洲工厂广泛使用，在华深耕40年</td>
+          <td>气动 &amp; 电气自动化元件、智能制造解决方案、工业培训</td>
+          <td>了解欧洲工厂自动化标准配置，作为中国替代方案的对标基准</td>
+          <td><ul class="cv-list"><li>欧洲装配产线气动/电动执行器标准配置，中国替代方案对标</li><li>欧洲工厂对自动化元件可靠性、防护等级要求（IP65/67）</li><li>工业培训系统用于欧洲工厂中国籍工程师快速上岗</li></ul></td>
+          <td>欧洲自动化主流，中国企业方案差距对标参考</td>
+        </tr>
+        <tr>
+          <td><div class="co-name">CONTACT Software</div><div class="co-loc">德国</div></td>
+          <td>德国汽车行业PLM/IoT软件商，客户涵盖欧洲OEM供应链</td>
+          <td>CIM Database PLM、Elements for IoT、项目组合管理</td>
+          <td>了解欧洲汽车PLM生态标准，评估中国方案兼容性</td>
+          <td><ul class="cv-list"><li>商用车研发BOM/ECO数据管理欧洲标准，判断中国供应商系统兼容性</li><li>IoT平台连接欧洲工厂设备，实现远程运维监控</li></ul></td>
+          <td>德语区PLM玩家，了解欧洲OEM数据接口标准</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Recommendation -->
+<div class="rec-section">
+  <div class="rec-header">📌 最推荐企业 TOP 3</div>
+  <div class="rec-item">
+    <div class="rec-rank">1</div>
+    <div>
+      <div class="rec-name">成都数之联（国内中型）</div>
+      <div class="rec-why">本次展会中型国内企业中唯一已有欧盟落地记录（斯洛文尼亚），AI质检直接对应商用车安全件全检场景，技术领先且非营销驱动，合作说服力强。</div>
+    </div>
+  </div>
+  <div class="rec-item">
+    <div class="rec-rank r2">2</div>
+    <div>
+      <div class="rec-name">SGS（国外，建议单独约谈）</div>
+      <div class="rec-why">商用车整车欧洲型式认证（WVTA）是进入欧盟市场的法律硬门槛，与SGS直接谈认证路径和时间成本，是向中国企业推荐出海方案的关键前置信息。</div>
+    </div>
+  </div>
+  <div class="rec-item">
+    <div class="rec-rank r3">3</div>
+    <div>
+      <div class="rec-name">孚盟软件（国内龙头）</div>
+      <div class="rec-why">唯一直接服务"中国制造商出口欧洲"全流程的SaaS企业，报关/合规/供应链协同一体化，与Pro One项目"帮中国企业出海"的定位高度匹配。</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">⚠️ 展位号请在WOD小程序"展商名录"搜索确认 · 数据截至2026年6月 · 部分中型企业信息基于有限公开资料，建议现场核实</div>
+
+</div><!-- end main -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+function dlImg(){
+  var ov=document.getElementById('overlay');
+  ov.classList.add('on');
+  var btn=document.querySelector('.dl-btn');
+  btn.disabled=true;
+  setTimeout(function(){
+    html2canvas(document.getElementById('main'),{
+      scale:2,useCORS:true,backgroundColor:'#F7F6F2',
+      onclone:function(d){d.getElementById('overlay').style.display='none';}
+    }).then(function(c){
+      var a=document.createElement('a');
+      a.download='WOD2026参展商参考指南.png';
+      a.href=c.toDataURL('image/png');
+      a.click();
+      ov.classList.remove('on');
+      btn.disabled=false;
+    }).catch(function(){
+      ov.classList.remove('on');
+      btn.disabled=false;
+      alert('图片生成失败，请截图保存。');
+    });
+  },300);
+}
+</script>
+</body>
+</html>

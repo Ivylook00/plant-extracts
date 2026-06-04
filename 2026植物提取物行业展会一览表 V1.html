@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026年植物提取物行业展会一览表</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #e8e0d0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: #f5f0e8;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2c5f2d;
+            color: white;
+            padding: 20px 30px;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .header-left { flex: 1; }
+        
+        .header-label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+        
+        .header-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .header-subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+            margin-top: 4px;
+        }
+        
+        .header-right {
+            text-align: right;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .controls {
+            padding: 15px 30px;
+            background: #e8e0d0;
+            border-bottom: 1px solid #d0c8b8;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #2c5f2d;
+            color: white;
+        }
+        
+        .btn-primary:hover { background: #1e4520; }
+        
+        .btn-secondary {
+            background: #8b7355;
+            color: white;
+        }
+        
+        .btn-secondary:hover { background: #6d5a40; }
+        
+        .content { padding: 0; }
+        
+        #previewArea {
+            padding: 20px;
+            background: #e8e0d0;
+        }
+        
+        .status {
+            padding: 12px 30px;
+            background: #d4e8d4;
+            border-left: 4px solid #2c5f2d;
+            margin: 15px 30px;
+            border-radius: 4px;
+            display: none;
+            font-size: 14px;
+        }
+        
+        .status.show { display: block; }
+        .status.error { background: #f8d7da; border-left-color: #dc3545; }
+        
+        /* ===== 精确还原参考图片样式 ===== */
+        .export-wrapper {
+            width: 1400px;
+            margin: 0 auto;
+            background: #f5f0e8;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'SimSun', serif;
+            color: #333;
+            position: relative;
+        }
+        
+        /* 纸质纹理背景 */
+        .export-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.01) 2px,
+                    rgba(0,0,0,0.01) 4px
+                );
+            pointer-events: none;
+        }
+        
+        /* 顶部标题区 */
+        .export-top {
+            padding: 25px 30px 20px;
+            position: relative;
+        }
+        
+        .export-top-label {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 3px;
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 8px;
+        }
+        
+        .export-top-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c2c2c;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+        
+        .export-top-sub {
+            font-size: 20px;
+            color: #555;
+            margin-top: 6px;
+            font-weight: 400;
+        }
+        
+        .export-top-right {
+            position: absolute;
+            right: 30px;
+            top: 25px;
+            text-align: right;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .export-top-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        /* 分隔线 */
+        .export-divider {
+            height: 1px;
+            background: #c8b99a;
+            margin: 0 30px;
+        }
+        
+        /* 表头 - 深墨绿色圆角 */
+        .export-header-row {
+            display: flex;
+            margin: 15px 30px 0;
+            background: #1a3a1b;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+        
+        .export-th {
+            padding: 12px 16px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-right: 1px solid rgba(255,255,255,0.15);
+        }
+        
+        .export-th:last-child { border-right: none; }
+        
+        .th-time { width: 90px; }
+        .th-name { width: 220px; }
+        .th-loc { width: 150px; }
+        .th-content { flex: 1; }
+        .th-link { width: 160px; text-align: center; }
+        
+        /* 数据行 */
+        .export-body {
+            margin: 0 30px;
+            background: #f5f0e8;
+        }
+        
+        .export-row {
+            display: flex;
+            border-bottom: 1px solid #e0d8c8;
+            min-height: 75px;
+        }
+        
+        .export-row:nth-child(even) {
+            background: #faf6f0;
+        }
+        
+        .export-td {
+            padding: 12px 16px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-right: 1px solid #e0d8c8;
+            color: #444;
+        }
+        
+        .export-td:last-child { border-right: none; }
+        
+        .td-time { width: 90px; font-weight: 500; color: #333; }
+        .td-name { width: 220px; }
+        .td-loc { width: 150px; }
+        .td-content { flex: 1; }
+        .td-link { width: 160px; text-align: center; display: flex; align-items: center; justify-content: center; }
+        
+        .td-name-main {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        
+        .td-name-sub {
+            font-size: 11px;
+            color: #777;
+            line-height: 1.3;
+        }
+        
+        .td-loc-main {
+            font-size: 12px;
+            color: #333;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .td-loc-sub {
+            font-size: 11px;
+            color: #888;
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+        
+        /* 国旗 - 小图标 */
+        .flag {
+            width: 18px;
+            height: 12px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        /* 标签 - 圆角柔和 */
+        .tags {
+            margin-bottom: 6px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 4px;
+            border: 1px solid;
+        }
+        
+        .tag-g1 { background: #e8f5e9; color: #2c5f2d; border-color: #a5d6a7; }
+        .tag-g2 { background: #fff8e1; color: #e65100; border-color: #ffcc80; }
+        .tag-g3 { background: #e3f2fd; color: #1565c0; border-color: #90caf9; }
+        .tag-g4 { background: #f3e5f5; color: #7b1fa2; border-color: #ce93d8; }
+        
+        .td-content-text {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .td-link-text {
+            font-size: 11px;
+            color: #1976d2;
+            word-break: break-all;
+        }
+        
+        .td-link-search {
+            font-size: 11px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* 底部 */
+        .export-footer {
+            margin: 0 30px;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #888;
+            border-top: 1px solid #d0c8b8;
+        }
+        
+        .footer-legends {
+            display: flex;
+            gap: 18px;
+        }
+        
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div class="header-left">
+                    <div class="header-label">GLOBAL EXHIBITION GUIDE</div>
+                    <div class="header-title">2026年植物提取物行业展会一览表</div>
+                    <div class="header-subtitle">6月起 · 完整版</div>
+                </div>
+                <div class="header-right">
+                    <div>共14场展会</div>
+                    <div>2026.06 — 2026.12</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-primary" onclick="generatePNG()">生成高清PNG</button>
+            <button class="btn btn-secondary" onclick="generateExcel()">生成精简Excel</button>
+        </div>
+        
+        <div id="statusMsg" class="status"></div>
+        
+        <div class="content">
+            <div id="previewArea"></div>
+        </div>
+    </div>
+
+    <div id="exportContainer" style="position: absolute; left: -9999px; top: 0;"></div>
+
+    <script>
+        // 数据
+        const data = [
+            {t:'2026.06.16-18', n:'CPHI China 2026', ne:'世界制药原料中国展', loc:'中国·上海', ven:'浦东新国际博览中心', f:'🇨🇳', tags:['天然产物展区','500+龙头企业'], txt:'亚洲制药原料风向标。天然产物展区汇聚500+龙头企业，设有第十九届天然提取物创新与发展交流会，解读植物提取物进出口贸易等关键议题。', link:'cphi-china.cn', s:false},
+            {t:'2026.06.22-25', n:'BIO International Convention', ne:'美国生物技术大会', loc:'美国', ven:'具体城市待定', f:'🇺🇸', tags:['生物合成','合成生物学'], txt:'全球最大生物技术盛会，覆盖天然产物生物合成、合成生物学等前沿领域，适合关注技术驱动型原料的企业。', link:'bio.org', s:false},
+            {t:'2026.07.29-31', n:'贵州植物提取物、健康天然原料展', ne:'', loc:'中国·贵阳', ven:'贵阳国际会议展览中心', f:'🇨🇳', tags:['区域特色','刺梨/天麻/杜仲'], txt:'区域特色新展。依托西南丰富的植物资源（刺梨、天麻、杜仲等），适合关注特色原料和国内市场下沉的企业。', link:'搜索"贵州植物提取物展"', s:true},
+            {t:'2026.07.30-08.01', n:'WPE&WHPE Vietnam', ne:'', loc:'越南·胡志明市', ven:'西贡国际会展中心', f:'🇻🇳', tags:['东南亚市场门户'], txt:'东南亚市场门户。西安旗舰展的海外分站，连接中越健康产业供应链，适合试水东南亚市场。', link:'搜索"WPE WHPE Vietnam"', s:true},
+            {t:'2026.08.06-08', n:'上海有机植养功能食品展', ne:'', loc:'中国·上海', ven:'上海新国际博览中心', f:'🇨🇳', tags:['药食同源','植物基','1,200+品牌'], txt:'聚焦终端消费趋势。重点关注药食同源、植物基、功能性食品，预计1,200+品牌、60,000+采购商。', link:'搜索"上海有机植养功能食品展"', s:true},
+            {t:'2026.08.24-26', n:'WPE&WHPE 2026', ne:'天然健康原料世界博览会', loc:'中国·西安', ven:'西安国际会展中心', f:'🇨🇳', tags:['旗舰展','40,000㎡','700+展商'], txt:'全球植提产业心脏地带的旗舰展。西安是中国最大植提产业集群，规模40,000㎡，700+展商、30,000+观众。覆盖从原料到成品的全产业链。', link:'搜索"WPE WHPE 西安"', s:true},
+            {t:'2026.08.25-27', n:'CPHI Korea 2026', ne:'国际医药原料韩国展', loc:'韩国·首尔', ven:'韩国', f:'🇰🇷', tags:['K-Beauty','K-Food'], txt:'韩国是化妆品、保健品原料重要市场，聚焦K-Beauty、K-Food背后的原料供应链，适合拓展韩国及东北亚市场。', link:'搜索"CPHI Korea"', s:true},
+            {t:'2026.09.02-04', n:'Vitafoods Asia 2026', ne:'亚洲国际营养保健食品展', loc:'泰国·曼谷', ven:'诗丽吉王后国家会议中心', f:'🇹🇭', tags:['行业风向标','650家展商'], txt:'亚洲营养保健食品行业风向标。2025年吸引650家展商、13,460名观众，聚焦植物提取物、功能性食品原料。', link:'vitafoodsasia.com', s:false},
+            {t:'2026.09.07-09', n:'Bharat Nutraverse Expo 2026', ne:'印度国际营养保健食品展', loc:'印度·新德里', ven:'Bharat Mandapam', f:'🇮🇳', tags:['阿育吠陀','国际买家招待'], txt:'印度首个国家级营养保健食品B2B平台。由印度政府主办，覆盖阿育吠陀植物提取物、功能性原料，设有国际买家招待计划（含机票住宿补贴）。', link:'搜索"Bharat Nutraverse Expo"', s:true},
+            {t:'2026.09.16-18', n:'CPHI & PMEC Shenzhen 2026', ne:'制药工业展（深圳）', loc:'中国·深圳', ven:'深圳会展中心（福田）', f:'🇨🇳', tags:['华南核心展会','天然提取物专区'], txt:'粤港澳大湾区核心展。设有天然产物展区，辐射东南亚及"一带一路"市场，规模30,000㎡。', link:'cphi-china.cn/shenzhen', s:false},
+            {t:'2026.10.06-08', n:'CPHI Milan 2026', ne:'世界制药原料欧洲展', loc:'意大利·米兰', ven:'米兰展览中心', f:'🇮🇹', tags:['全球最大','2,400+展商','62,000+观众'], txt:'全球制药原料行业规模最大、水准最高的展会！2025年数据：2,400+展商、62,000+观众（含650家中国企业）。天然提取物为核心展区。', link:'搜索"CPHI Milan 2026"', s:true},
+            {t:'2026.10.28-30', n:'SupplySide Global 2026', ne:'美国国际天然健康原料供应商展', loc:'美国·拉斯维加斯', ven:'Mandalay Bay Convention Center', f:'🇺🇸', tags:['北美规模最大','1,600+展商','20,000+参与者'], txt:'北美地区规模最大的健康原料B2B展。预计1,600+展商、20,000+参与者，覆盖膳食补充剂、食品饮料、个人护理等。', link:'supplysideglobal.com', s:false},
+            {t:'2026.11.17-19', n:'Fi Europe 2026', ne:'欧洲食品配料展', loc:'德国·法兰克福', ven:'德国', f:'🇩🇪', tags:['全球顶级食品配料展','1,500+展商','25,000+观众'], txt:'全球食品配料行业最具影响力展会。预计1,500+展商、25,000+观众，适合寻求国际合作和前沿技术交流。', link:'figlobal.com/europe', s:false},
+            {t:'2026.12月', n:'CPHI Middle East & Africa', ne:'中东非洲制药原料展', loc:'沙特阿拉伯', ven:'中东', f:'🇸🇦', tags:['新兴市场门户','生物医药本地化'], txt:'中东非洲新兴市场门户。沙特正推进生物医药产业本地化，是开拓中东及伊斯兰市场的战略平台。', link:'搜索"CPHI Middle East Africa"', s:true}
+        ];
+
+        function showStatus(msg, err=false) {
+            const el = document.getElementById('statusMsg');
+            el.textContent = msg;
+            el.className = 'status show' + (err ? ' error' : '');
+            setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
+        function genHTML() {
+            const tc = ['g1','g2','g3','g4'];
+            const rows = data.map((d,i) => {
+                const tags = d.tags.map((t,ti) => `<span class="tag tag-${tc[ti%4]}">${t}</span>`).join('');
+                const ne = d.ne ? `<div class="td-name-sub">${d.ne}</div>` : '';
+                const lc = d.s ? `<span class="td-link-search">${d.link}</span>` : `<span class="td-link-text">${d.link}</span>`;
+                return `
+                    <div class="export-row">
+                        <div class="export-td td-time">${d.t}</div>
+                        <div class="export-td td-name">
+                            <div class="td-name-main">${d.n}</div>
+                            ${ne}
+                        </div>
+                        <div class="export-td td-loc">
+                            <div class="td-loc-main"><span style="font-size:14px;">${d.f}</span> ${d.loc}</div>
+                            <div class="td-loc-sub">${d.ven}</div>
+                        </div>
+                        <div class="export-td td-content">
+                            <div class="tags">${tags}</div>
+                            <div class="td-content-text">${d.txt}</div>
+                        </div>
+                        <div class="export-td td-link">${lc}</div>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="export-wrapper" id="exportTable">
+                    <div class="export-top">
+                        <div class="export-top-label">全球展会导览 · GLOBAL EXHIBITION GUIDE</div>
+                        <div class="export-top-title">2026 植物提取物行业展会一览表</div>
+                        <div class="export-top-sub">6月起 · 完整版</div>
+                        <div class="export-top-right">
+                            <div class="export-top-icon">🌿</div>
+                            <div>共14场展会</div>
+                            <div>2026.06 — 2026.12</div>
+                            <div>中国 · 越南 · 美国 · 韩国 · 泰国 · 印度 · 意大利 · 德国 · 沙特</div>
+                        </div>
+                    </div>
+                    <div class="export-divider"></div>
+                    <div class="export-header-row">
+                        <div class="export-th th-time">时间</div>
+                        <div class="export-th th-name">展会名称（中/英）</div>
+                        <div class="export-th th-loc">地点</div>
+                        <div class="export-th th-content">核心看点 / 与植物提取物的关联</div>
+                        <div class="export-th th-link">官方网页</div>
+                    </div>
+                    <div class="export-body">${rows}</div>
+                    <div class="export-footer">
+                        <div class="footer-legends">
+                            <div class="legend"><div class="legend-box" style="background:#e8f5e9;border-color:#a5d6a7;"></div><span>中国展会</span></div>
+                            <div class="legend"><div class="legend-box" style="background:#fff8e1;border-color:#ffcc80;"></div><span>华南/大湾区</span></div>
+                            <div class="legend"><div class="legend-box" style="background:#e3f2fd;border-color:#90caf9;"></div><span>东南亚</span></div>
+                            <div class="legend"><div class="legend-box" style="background:#f3e5f5;border-color:#ce93d8;"></div><span>北美</span></div>
+                            <div class="legend"><div class="legend-box" style="background:#e8f5e9;border-color:#a5d6a7;"></div><span>旗舰/全球</span></div>
+                        </div>
+                        <div>数据整理仅供参考，请以官方公告为准</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function genPreview() {
+            document.getElementById('previewArea').innerHTML = genHTML();
+            document.getElementById('exportContainer').innerHTML = genHTML();
+        }
+
+        function generatePNG() {
+            genPreview();
+            const el = document.getElementById('exportTable');
+            el.style.position = 'fixed';
+            el.style.left = '0';
+            el.style.top = '0';
+            el.style.zIndex = '-9999';
+
+            html2canvas(el, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#f5f0e8',
+                logging: false,
+                width: 1400,
+                windowWidth: 1400
+            }).then(canvas => {
+                el.style.position = '';
+                el.style.left = '';
+                el.style.top = '';
+                el.style.zIndex = '';
+                
+                const a = document.createElement('a');
+                a.download = '2026植物提取物行业展会一览表.png';
+                a.href = canvas.toDataURL('image/png', 1.0);
+                a.click();
+                showStatus('PNG已生成！' + canvas.width + '×' + canvas.height);
+            }).catch(err => {
+                showStatus('错误：' + err.message, true);
+            });
+        }
+
+        function generateExcel() {
+            const wsData = [];
+            wsData.push(['2026植物提取物行业展会一览表（6月起·完整版）']);
+            wsData.push(['']);
+            wsData.push(['时间','展会名称（中/英）','地点','核心看点/与植物提取物的关联','官方网页']);
+            
+            data.forEach(d => {
+                const name = d.ne ? d.n + ' / ' + d.ne : d.n;
+                const loc = d.loc + ' - ' + d.ven;
+                const tags = d.tags.join(' / ');
+                const content = '[' + tags + '] ' + d.txt;
+                wsData.push([d.t, name, loc, content, d.link]);
+            });
+
+            const ws = XLSX.utils.aoa_to_sheet(wsData);
+            ws['!cols'] = [{wch:14},{wch:40},{wch:28},{wch:85},{wch:32}];
+            ws['!rows'] = [{hpt:35},{hpt:10},{hpt:30}];
+            data.forEach(() => ws['!rows'].push({hpt:55}));
+            
+            ws['!merges'] = [{s:{r:0,c:0},e:{r:0,c:4}}];
+            
+            // 样式
+            const title = ws['A1'];
+            if(title) title.s = {font:{sz:16,bold:true,color:{rgb:'2C5F2D'}},alignment:{horizontal:'center',vertical:'center'}};
+            
+            for(let c=0;c<<5;c++) {
+                const cell = ws[XLSX.utils.encode_cell({r:2,c})];
+                if(cell) cell.s = {
+                    font:{bold:true,sz:11,color:{rgb:'FFFFFF'}},
+                    fill:{fgColor:{rgb:'1A3A1B'},patternType:'solid'},
+                    alignment:{horizontal:'center',vertical:'center',wrapText:true},
+                    border:{top:{style:'thin',color:{rgb:'E0D8C8'}},bottom:{style:'thin',color:{rgb:'E0D8C8'}},left:{style:'thin',color:{rgb:'E0D8C8'}},right:{style:'thin',color:{rgb:'E0D8C8'}}}
+                };
+            }
+            
+            for(let r=3;r<<3+data.length;r++) {
+                for(let c=0;c<<5;c++) {
+                    const cell = ws[XLSX.utils.encode_cell({r,c})];
+                    if(cell) {
+                        const s = {
+                            alignment:{vertical:'top',wrapText:true},
+                            border:{top:{style:'thin',color:{rgb:'E0D8C8'}},bottom:{style:'thin',color:{rgb:'E0D8C8'}},left:{style:'thin',color:{rgb:'E0D8C8'}},right:{style:'thin',color:{rgb:'E0D8C8'}}}
+                        };
+                        if(c===0) s.font = {bold:true,sz:11,color:{rgb:'333333'}};
+                        else if(c===1) s.font = {bold:true,sz:11,color:{rgb:'1A1A1A'}};
+                        else if(c===4) {
+                            const isS = cell.v && cell.v.includes('搜索');
+                            s.font = {sz:10,color:{rgb:isS?'888888':'1976D2'},italic:isS};
+                        }
+                        cell.s = s;
+                    }
+                }
+            }
+            
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, '展会一览表');
+            XLSX.writeFile(wb, '2026植物提取物行业展会一览表.xlsx');
+            showStatus('Excel已生成！');
+        }
+
+        window.onload = genPreview;
+    </script>
+</body>
+</html>

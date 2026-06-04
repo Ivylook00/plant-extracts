@@ -1,0 +1,403 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 全球大健康外贸赛道矩阵 · 最终推荐版</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel=\"stylesheet\">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --ink: #1a1a18;
+  --ink-2: #4a4a44;
+  --ink-3: #8a8a80;
+  --paper: #f5f3ee;
+  --paper-2: #eceae3;
+  --paper-3: #e0ddd4;
+  --gold: #b8963e;
+  --gold-light: #f0e4c4;
+  --gold-pale: #faf6ec;
+  --green: #2d6a4f;
+  --green-light: #d8eedf;
+  --amber: #9c4b00;
+  --amber-light: #fdecd8;
+  --blue: #1a3a5c;
+  --blue-light: #dde8f5;
+  --purple: #4a154b;
+  --purple-light: #f3ebf4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  line-height: 1.5;
+  padding: 30px 15px;
+}
+
+.toolbar {
+  max-width: 1200px;
+  margin: 0 auto 15px auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-download {
+  background-color: var(--gold);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(184,150,62,0.2);
+  transition: all 0.2s ease;
+}
+.btn-download:hover { background-color: #a38233; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 8px;
+  border: 1px solid var(--paper-3);
+  box-shadow: 0 4px 15px rgba(26,26,24,0.03);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--paper-2);
+}
+header h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 28px;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+header p {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.phase-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 25px 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.phase-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--paper-3);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--paper-3);
+  border-radius: 6px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+.card:hover { transform: translateY(-2px); }
+
+.card-top { position: relative; }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.track-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.score-badge {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* 状态色 */
+.status-p1 { background: var(--green-light); color: var(--green); }
+.status-p2 { background: var(--amber-light); color: var(--amber); }
+.status-p3 { background: var(--blue-light); color: var(--blue); }
+
+.item-row { margin-bottom: 10px; font-size: 13.5px; }
+.label { font-weight: 500; color: var(--ink-3); font-size: 12px; text-transform: uppercase; margin-bottom: 2px; }
+.value { color: var(--ink-2); }
+.value-strong { color: var(--ink); font-weight: 600; }
+
+.highlights-box {
+  background: var(--gold-pale);
+  border-left: 3px solid var(--gold);
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #735a1f;
+  border-radius: 0 4px 4px 0;
+}
+
+.reason-box {
+  font-size: 13px;
+  color: var(--ink-2);
+  background: #fdfdfd;
+  border: 1px dashed var(--paper-3);
+  padding: 10px 12px;
+  border-radius: 4px;
+}
+
+.timeline-summary {
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid var(--paper-2);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+.timeline-summary h4 { font-size: 13px; font-weight: 600; color: var(--ink-3); text-transform: uppercase; margin-bottom: 6px; }
+.timeline-box { padding: 15px; border-radius: 6px; border: 1px solid var(--paper-3); }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .container { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn-download" id="downloadBtn">📸 导出最终推荐版图片</button>
+</div>
+
+<div class="container" id="captureArea">
+  <header>
+    <h1>2026 全球大健康外贸赛道矩阵 · 最终推荐版</h1>
+    <p>结合全国产区控制力、海外需求认知度与法规确定性提炼的破局功能赛道</p>
+  </header>
+
+  <div class="phase-title" style="color:var(--green)">Phase 1 · 立即启动（高合规确定性与高产区壁垒）</div>
+  <div class="grid">
+    
+    <div class="card" style="border-top: 4px solid var(--green)">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="track-title">赛道 1 · 情绪管理与认知健康</div>
+          <span class="score-badge status-p1">综合得分: 94</span>
+        </div>
+        <div class="item-row">
+          <div class="label">主打单品方案</div>
+          <div class="value-strong">去苦味高水溶猴头菇提取物 + 标准化酸枣仁（酸枣仁皂苷）</div>
+        </div>
+        <div class="highlights-box">
+          <strong>核心亮点：</strong>直击海外“菇类咖啡（Mushroom Coffee）”与都市脑雾痛点；东北及华北（陕西/河北）核心大厂供应链技术极其烂熟；在欧洲属于传统非新资源食品，规避准入风险。
+        </div>
+      </div>
+      <div class="reason-box">
+        <strong>推选原因：</strong>符合欧盟传统食品规定。可调用黑龙江、浙江等地的KIWA/ECOCERT欧盟有机菌类认证种植基地，通过高纯度水溶性复配颗粒（Ready-to-Blend）形式，直接切入欧洲新锐代餐及轻功能膳食补充剂品牌，实现高溢价造血。
+      </div>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--green)">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="track-title">赛道 2 · 深度肠道屏障与免疫调理</div>
+          <span class="score-badge status-p1">综合得分: 92</span>
+        </div>
+        <div class="item-row">
+          <div class="label">主打单品方案</div>
+          <div class="value-strong">水溶性植物多糖（高纯菊粉/灵芝多糖）+ 益生元复配颗粒</div>
+        </div>
+        <div class="highlights-box">
+          <strong>核心亮点：</strong>顺应欧美“脑肠轴（Gut-Brain Axis）”前沿心智；中国作为全球核心主产区拥有绝对定价权；国内供应链具备低MOQ定制和成品造粒的一站式OEM贴牌能力。
+        </div>
+      </div>
+      <div class="reason-box">
+        <strong>推选原因：</strong>欧美膳食补充剂的基本盘大类目。初创期无需做市场教育，利用国内成熟的精制加工与掩味工艺，主打高溶解度、无杂质的品质优势，为跨境电商卖家或海外中小保健品品牌做私有标签（Private Label）代工。
+      </div>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--green)">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="track-title">赛道 3 · 运动表现与自然适应原</div>
+          <span class="score-badge status-p1">综合得分: 88</span>
+        </div>
+        <div class="item-row">
+          <div class="label">主打单品方案</div>
+          <div class="value-strong">长白山红景天提取物（红景天苷）+ 宁夏枸杞多糖 + 西北沙棘全果粉</div>
+        </div>
+        <div class="highlights-box">
+          <strong>核心亮点：</strong>踩中欧美健身圈从“合成氨基酸”转向“天然植物适应原（Adaptogens）”的升级潮流；红景天与枸杞在欧洲有成熟的HMPC传统草药身份；沙棘完美贴合法语区Bio（有机）和纯素抗炎心智。
+        </div>
+      </div>
+      <div class="reason-box">
+        <strong>推选原因：</strong>通过全国辐射网络直接调用吉林长白山及宁夏中宁的核心大厂货源。沙棘与红景天的复配配方在欧洲户外运动与功能性饮料市场极具故事性，B端买家愿意为完整科学定量检测报告（HPLC）支付高溢价。
+      </div>
+    </div>
+
+  </div>
+
+  <div class="phase-title" style="color:var(--amber)">Phase 2 · 条件切入（把握阶段窗口，精细化突破）</div>
+  <div class="grid">
+
+    <div class="card" style="border-top: 4px solid var(--amber)">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="track-title">赛道 4 · 代谢综合体（餐前控糖与重塑）</div>
+          <span class="score-badge status-p2">综合得分: 85</span>
+        </div>
+        <div class="item-row">
+          <div class="label">主打单品方案</div>
+          <div class="value-strong">桑叶提取物（1-DNJ）+ 标准化白芸豆提取物（淀粉酶抑制剂）</div>
+        </div>
+        <div class="highlights-box">
+          <strong>核心亮点：</strong>全面下调监管风暴中心的小檗碱，死守白芸豆与桑叶基本盘；海外对“天然控糖”流量长盛不衰；国内蚕桑产区（四川/江浙）提纯工艺成熟。
+        </div>
+      </div>
+      <div class="reason-box">
+        <strong>推选原因：</strong>规避了欧洲对黄连素/小檗碱的剂量收紧红线。主攻淀粉阻断（Amylase inhibitor）的传统胶囊与压片。利用东南亚（泰/越）对普通植物提取物准入宽松的优势，先通过反向中国代工（OEM）跑通现金流。
+      </div>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--amber)">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="track-title">赛道 5 · 高阶宠物代谢与关节机能</div>
+          <span class="score-badge status-p2">综合得分: 82</span>
+        </div>
+        <div class="item-row">
+          <div class="label">主打单品方案</div>
+          <div class="value-strong">山东产区高纯玻尿酸/软骨素 + 饲料级丝兰提取物（除臭/肠道）</div>
+        </div>
+        <div class="highlights-box">
+          <strong>核心亮点：</strong>果断突破纯植提局限，跨界整合大健康功能原料；依托山东全球玻尿酸/软骨素的绝对统治供应链；对接欧美/中东富裕阶层宠物“拟人化”营养刚需。
+        </div>
+      </div>
+      <div class="reason-box">
+        <strong>推选原因：</strong>欧美宠物食品/营养品法规（NASC标准）在准入上对部分成分的操作空间比人吃更具弹性。结合高粘稠度配方及精美的医药级包材叙事，直接切入高客单价的海外宠物沙龙与兽医渠道，利润率远超传统大宗。
+      </div>
+    </div>
+
+  </div>
+
+  <div class="phase-title" style="color:var(--blue)">Phase 3 · 长期储备（具备技术护城河的特定品类）</div>
+  <div class="grid">
+
+    <div class="card" style="border-top: 4px solid var(--blue)">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="track-title">赛道 6 · 沙龙级头皮微生态与外用抗炎</div>
+          <span class="score-badge status-p3">综合得分: 72</span>
+        </div>
+        <div class="item-row">
+          <div class="label">主打单品方案</div>
+          <div class="value-strong">高纯侧柏叶提取物 + 迷迭香精油（工业级/复配原液）</div>
+        </div>
+        <div class="highlights-box">
+          <strong>核心亮点：</strong>避开复杂的内服法规，走化妆品原料（INCI/CPSR合规）路线；精准对标欧洲独立药妆品牌与高级生发沙龙的天然无毒心智。
+        </div>
+      </div>
+      <div class="reason-box">
+        <strong>推选原因：</strong>化妆品合规属于独立体系，初期不宜过度分散初创精力。作为中后期战略储备，利用英法双语及里昂地区天然的时尚药妆渠道资源，主打“天然防脱提取液+定制包材”的一站式液料套组套线。
+      </div>
+    </div>
+
+    <div class="card" style="border-top: 4px solid var(--blue)">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="track-title">赛道 7 · 银发族长寿与细胞抗衰</div>
+          <span class="score-badge status-p3">综合得分: 65</span>
+        </div>
+        <div class="item-row">
+          <div class="label">主打单品方案</div>
+          <div class="value-strong">标准化黄精提取物（黄精多糖）+ 山药/草本抗疲劳提取物</div>
+        </div>
+        <div class="highlights-box">
+          <strong>核心亮点：</strong>锁定全球严重老龄化背景下的健康寿命（Healthspan）延长刚需；主打“东方长寿草本”差异化叙事。
+        </div>
+      </div>
+      <div class="reason-box">
+        <strong>推选原因：</strong>尽管极具高溢价潜力，但黄精等药食同源成分在欧美依然面临较大的市场教育阻力及复杂的天然产物定量拆解法规。第一年列为纯技术储备，待后期资金充裕、跑通新加坡和马来华人区基本盘后再行重评。
+      </div>
+    </div>
+
+  </div>
+
+  <div class="timeline-summary">
+    <div class="timeline-box" style="border-left: 4px solid var(--green); background: #fafafa;">
+      <h4>Phase 1 · 1-6个月核心攻坚</h4>
+      <p style="font-size: 13px; color:var(--ink-2)">全力推进<strong>赛道1、2、3</strong>。调动东北、西北及江浙有机认证大厂，以高水溶、去苦味的 Ready-to-Blend 颗粒成品或符合欧盟无农残标准的优质原料作为首发突破口，快速产生稳健现金流。</p>
+    </div>
+    <div class="timeline-box" style="border-left: 4px solid var(--amber); background: #fafafa;">
+      <h4>Phase 2 · 6个月后精细切入</h4>
+      <p style="font-size: 13px; color:var(--ink-2)">在摸清目的国最新剂量红线后，跟进<strong>赛道4（控糖）</strong>与<strong>赛道5（宠物）</strong>。重点利用山东的玻尿酸/软骨素绝对主产区控制力，配合预充式功能营养膏等高级医美级包材进行差异化降维打击。</p>
+    </div>
+    <div class="timeline-box" style="border-left: 4px solid var(--blue); background: #fafafa;">
+      <h4>Phase 3 · 2年以后长效储备</h4>
+      <p style="font-size: 13px; color:var(--ink-2)">对<strong>赛道6、7</strong>进行独立子线孵化。利用后期积累的充裕资金进行欧美化妆品INCI合规备案或专利配方研发，最终凭借语言与渠道优势反攻欧洲高端独立药妆与沙龙品牌。</p>
+    </div>
+  </div>
+
+  <div class="footer-note" style="margin-top:30px; padding-top:20px; border-top:1px solid var(--paper-2); font-size:12px; color:var(--ink-3)">
+    © 2026 全球大健康外贸矩阵选品 scorecard · 数据化反向推导与供应链绝对控制力原则
+  </div>
+</div>
+
+<script>
+document.getElementById('downloadBtn').addEventListener('click', function () {
+    const button = this;
+    button.innerText = '⏳ 正在生成高清图像...';
+    button.style.opacity = '0.6';
+    
+    const captureArea = document.getElementById('captureArea');
+    
+    html2canvas(captureArea, {
+        scale: 2, 
+        useCORS: true, 
+        backgroundColor: '#ffffff'
+    }).then(canvas => {
+        const image = canvas.toDataURL('image/png');
+        const createLink = document.createElement('a');
+        createLink.download = '2026全球大健康外贸赛道矩阵_最终推荐版.png';
+        createLink.href = image;
+        document.body.appendChild(createLink);
+        createLink.click();
+        document.body.removeChild(createLink);
+        
+        button.innerText = '📸 导出最终推荐版图片';
+        button.style.opacity = '1';
+    }).catch(err => {
+        console.error('导出失败:', err);
+        alert('生成图片遇到未知阻碍，建议您直接使用 Ctrl+P 另存为 PDF');
+        button.innerText = '📸 导出最终推荐版图片';
+        button.style.opacity = '1';
+    });
+});
+</script>
+
+</body>
+</html>
+
+```

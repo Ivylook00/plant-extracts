@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,sans-serif;background:#f5f4f0;color:#1a1917;font-size:15px;}
+.app{max-width:480px;margin:0 auto;padding:16px;}
+
+/* TABS */
+.tabs{display:flex;gap:2px;margin-bottom:16px;background:#e0ddd6;border-radius:6px;padding:3px;}
+.tab{flex:1;text-align:center;padding:8px;font-size:13px;font-weight:500;border-radius:4px;cursor:pointer;color:#6a6860;transition:all .15s;}
+.tab.active{background:#fff;color:#1a1917;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+
+/* FORM VIEW */
+.view{display:none;}
+.view.active{display:block;}
+
+.form-header{background:#1a1917;color:#fff;padding:14px 16px;border-radius:6px 6px 0 0;margin-bottom:0;}
+.form-header-label{font-size:11px;color:#c8a448;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.form-header-title{font-size:16px;font-weight:700;}
+.form-counter{font-size:12px;color:rgba(255,255,255,.5);margin-top:2px;}
+
+.form-body{background:#fff;border-radius:0 0 6px 6px;padding:16px;margin-bottom:12px;}
+
+.field{margin-bottom:16px;}
+.field:last-child{margin-bottom:0;}
+.field-label{font-size:12px;font-weight:500;color:#6a6860;margin-bottom:6px;letter-spacing:.02em;}
+.field-label .required{color:#c8a448;margin-left:2px;}
+
+input[type=text], textarea, select{
+  width:100%;
+  padding:10px 12px;
+  border:1.5px solid #e0ddd6;
+  border-radius:6px;
+  font-size:14px;
+  font-family:inherit;
+  color:#1a1917;
+  background:#fff;
+  transition:border-color .15s;
+  -webkit-appearance:none;
+}
+input[type=text]:focus, textarea:focus, select:focus{
+  outline:none;
+  border-color:#1a1917;
+}
+textarea{resize:vertical;min-height:72px;}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236a6860' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;}
+
+/* TOGGLE GROUP */
+.toggle-group{display:flex;gap:6px;flex-wrap:wrap;}
+.toggle-btn{padding:8px 14px;border:1.5px solid #e0ddd6;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;color:#6a6860;background:#fff;transition:all .15s;user-select:none;}
+.toggle-btn.selected{border-color:#1a1917;background:#1a1917;color:#fff;}
+.toggle-btn.green.selected{border-color:#1a6832;background:#1a6832;}
+.toggle-btn.red.selected{border-color:#8a2818;background:#8a2818;}
+
+/* STAR RATING */
+.stars{display:flex;gap:6px;}
+.star{font-size:28px;cursor:pointer;color:#e0ddd6;transition:color .1s;user-select:none;}
+.star.active{color:#c8a448;}
+
+/* SECTION DIVIDER */
+.section-divider{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9a9688;padding:10px 0 8px;border-bottom:1px solid #e8e5de;margin-bottom:14px;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:8px;}
+.btn{flex:1;padding:13px;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:opacity .15s;}
+.btn:hover{opacity:.85;}
+.btn-primary{background:#1a1917;color:#fff;}
+.btn-secondary{background:#e8e5de;color:#1a1917;}
+.btn-save{background:#1a6832;color:#fff;}
+
+/* RECORDS VIEW */
+.records-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.records-title{font-size:16px;font-weight:700;}
+.records-count{font-size:12px;color:#9a9688;background:#e8e5de;padding:3px 10px;border-radius:20px;}
+.empty-state{text-align:center;padding:48px 20px;color:#9a9688;}
+.empty-icon{font-size:36px;margin-bottom:10px;}
+.empty-text{font-size:14px;}
+
+.record-card{background:#fff;border-radius:8px;padding:14px 16px;margin-bottom:10px;border:1px solid #e8e5de;}
+.rc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.rc-name{font-size:15px;font-weight:700;color:#1a1917;}
+.rc-booth{font-size:12px;color:#9a9688;margin-top:2px;}
+.rc-score{display:flex;gap:2px;}
+.rc-star{font-size:14px;}
+.rc-follow{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;}
+.follow-yes{background:#e8f2ec;color:#1a6832;}
+.follow-no{background:#fde8e4;color:#8a2818;}
+.follow-maybe{background:#fdf0e0;color:#8a5c08;}
+.rc-fields{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;}
+.rc-field{}
+.rc-field-label{font-size:11px;color:#9a9688;}
+.rc-field-val{font-size:12px;color:#1a1917;font-weight:500;}
+.rc-notes{margin-top:10px;padding-top:10px;border-top:1px solid #f0ede8;font-size:12px;color:#6a6860;line-height:1.6;}
+.rc-delete{font-size:11px;color:#c8a448;cursor:pointer;margin-top:8px;display:inline-block;}
+
+.export-btn{width:100%;padding:12px;background:#e8e5de;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px;color:#1a1917;}
+.export-btn:hover{background:#d8d5ce;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('form')">填写新记录</div>
+    <div class="tab" onclick="switchTab('records')">已记录 (<span id="count">0</span>)</div>
+  </div>
+
+  <!-- FORM VIEW -->
+  <div class="view active" id="view-form">
+    <div class="form-header">
+      <div class="form-header-label">B类 · 供应商合作评估</div>
+      <div class="form-header-title">CPHI China 2026</div>
+      <div class="form-counter" id="form-counter">第 1 条记录</div>
+    </div>
+    <div class="form-body">
+
+      <div class="section-divider">基本信息</div>
+
+      <div class="field">
+        <div class="field-label">公司名 <span class="required">*</span></div>
+        <input type="text" id="f-company" placeholder="填写公司全称">
+      </div>
+      <div class="field">
+        <div class="field-label">展位号</div>
+        <input type="text" id="f-booth" placeholder="如 E4-B012">
+      </div>
+      <div class="field">
+        <div class="field-label">联系人 / 职位</div>
+        <input type="text" id="f-contact" placeholder="姓名 · 职位">
+      </div>
+
+      <div class="section-divider">品类匹配</div>
+
+      <div class="field">
+        <div class="field-label">主要品种</div>
+        <input type="text" id="f-products" placeholder="列出主要品种">
+      </div>
+      <div class="field">
+        <div class="field-label">目标品类覆盖</div>
+        <div class="toggle-group">
+          <div class="toggle-btn green" onclick="tog(this,'f-category')">✅ 覆盖</div>
+          <div class="toggle-btn red" onclick="tog(this,'f-category')">❌ 不覆盖</div>
+          <div class="toggle-btn" onclick="tog(this,'f-category')">部分覆盖</div>
+        </div>
+        <input type="hidden" id="f-category" value="">
+      </div>
+
+      <div class="section-divider">合作门槛</div>
+
+      <div class="field">
+        <div class="field-label">英文COA</div>
+        <div class="toggle-group">
+          <div class="toggle-btn green" onclick="tog(this,'f-coa')">✅ 可以提供</div>
+          <div class="toggle-btn red" onclick="tog(this,'f-coa')">❌ 不能提供</div>
+          <div class="toggle-btn" onclick="tog(this,'f-coa')">需确认</div>
+        </div>
+        <input type="hidden" id="f-coa" value="">
+      </div>
+      <div class="field">
+        <div class="field-label">MOQ（最低起订量）</div>
+        <input type="text" id="f-moq" placeholder="如 50kg / 100kg">
+      </div>
+      <div class="field">
+        <div class="field-label">出口经验</div>
+        <div class="toggle-group">
+          <div class="toggle-btn green" onclick="tog(this,'f-export')">✅ 有</div>
+          <div class="toggle-btn red" onclick="tog(this,'f-export')">❌ 无</div>
+        </div>
+        <input type="hidden" id="f-export" value="">
+      </div>
+      <div class="field">
+        <div class="field-label">主要出口市场</div>
+        <input type="text" id="f-exportmarket" placeholder="如 欧洲、北美、中东">
+      </div>
+      <div class="field">
+        <div class="field-label">第三方检测报告</div>
+        <div class="toggle-group">
+          <div class="toggle-btn green" onclick="tog(this,'f-test')">✅ 有</div>
+          <div class="toggle-btn red" onclick="tog(this,'f-test')">❌ 无</div>
+          <div class="toggle-btn" onclick="tog(this,'f-test')">需确认</div>
+        </div>
+        <input type="hidden" id="f-test" value="">
+      </div>
+      <div class="field">
+        <div class="field-label">样品配合 / 周期</div>
+        <input type="text" id="f-sample" placeholder="如 可以 · 7天">
+      </div>
+
+      <div class="section-divider">市场情报</div>
+
+      <div class="field">
+        <div class="field-label">近期询盘增加品类</div>
+        <input type="text" id="f-trending" placeholder="他们接到最多询盘的品种">
+      </div>
+      <div class="field">
+        <div class="field-label">欧洲客户新要求</div>
+        <input type="text" id="f-euroreq" placeholder="规格/认证/剂型的新变化">
+      </div>
+      <div class="field">
+        <div class="field-label">供应紧张/涨价品种</div>
+        <input type="text" id="f-supply" placeholder="近期市场供应变化">
+      </div>
+
+      <div class="section-divider">评估</div>
+
+      <div class="field">
+        <div class="field-label">综合评分</div>
+        <div class="stars" id="stars">
+          <div class="star" onclick="setStar(1)">★</div>
+          <div class="star" onclick="setStar(2)">★</div>
+          <div class="star" onclick="setStar(3)">★</div>
+          <div class="star" onclick="setStar(4)">★</div>
+          <div class="star" onclick="setStar(5)">★</div>
+        </div>
+        <input type="hidden" id="f-score" value="0">
+      </div>
+      <div class="field">
+        <div class="field-label">跟进意向</div>
+        <div class="toggle-group">
+          <div class="toggle-btn green" onclick="tog(this,'f-follow')">跟进</div>
+          <div class="toggle-btn red" onclick="tog(this,'f-follow')">放弃</div>
+          <div class="toggle-btn" onclick="tog(this,'f-follow')">待定</div>
+        </div>
+        <input type="hidden" id="f-follow" value="">
+      </div>
+      <div class="field">
+        <div class="field-label">下一步行动</div>
+        <input type="text" id="f-action" placeholder="如 发送样品申请邮件">
+      </div>
+      <div class="field">
+        <div class="field-label">备注</div>
+        <textarea id="f-notes" placeholder="其他观察和想法"></textarea>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="resetForm()">清空</button>
+      <button class="btn btn-save" onclick="saveRecord()">保存并记录下一家 →</button>
+    </div>
+  </div>
+
+  <!-- RECORDS VIEW -->
+  <div class="view" id="view-records">
+    <div class="records-header">
+      <div class="records-title">已记录供应商</div>
+      <div class="records-count"><span id="count2">0</span> 家</div>
+    </div>
+    <div id="records-list"></div>
+    <button class="export-btn" onclick="exportData()">导出所有记录（复制文本）</button>
+  </div>
+
+</div>
+
+<script>
+var records = [];
+var starVal = 0;
+
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(function(el,i){el.classList.toggle('active',i===(t==='form'?0:1));});
+  document.getElementById('view-form').classList.toggle('active',t==='form');
+  document.getElementById('view-records').classList.toggle('active',t==='records');
+  if(t==='records') renderRecords();
+}
+
+function tog(el, hiddenId) {
+  var group = el.parentElement;
+  group.querySelectorAll('.toggle-btn').forEach(function(b){b.classList.remove('selected');});
+  el.classList.add('selected');
+  document.getElementById(hiddenId).value = el.textContent.trim();
+}
+
+function setStar(n) {
+  starVal = n;
+  document.getElementById('f-score').value = n;
+  document.querySelectorAll('.star').forEach(function(s,i){s.classList.toggle('active',i<n);});
+}
+
+function g(id){return document.getElementById(id).value.trim();}
+
+function saveRecord() {
+  var company = g('f-company');
+  if(!company){alert('请填写公司名');return;}
+  var r = {
+    company: company,
+    booth: g('f-booth'),
+    contact: g('f-contact'),
+    products: g('f-products'),
+    category: g('f-category'),
+    coa: g('f-coa'),
+    moq: g('f-moq'),
+    export: g('f-export'),
+    exportmarket: g('f-exportmarket'),
+    test: g('f-test'),
+    sample: g('f-sample'),
+    trending: g('f-trending'),
+    euroreq: g('f-euroreq'),
+    supply: g('f-supply'),
+    score: starVal,
+    follow: g('f-follow'),
+    action: g('f-action'),
+    notes: g('f-notes'),
+    time: new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})
+  };
+  records.push(r);
+  updateCount();
+  resetForm();
+  document.getElementById('form-counter').textContent = '第 '+(records.length+1)+' 条记录';
+}
+
+function resetForm() {
+  ['f-company','f-booth','f-contact','f-products','f-moq','f-exportmarket','f-sample','f-trending','f-euroreq','f-supply','f-action','f-notes'].forEach(function(id){document.getElementById(id).value='';});
+  ['f-category','f-coa','f-export','f-test','f-follow'].forEach(function(id){document.getElementById(id).value='';});
+  document.querySelectorAll('.toggle-btn').forEach(function(b){b.classList.remove('selected');});
+  starVal=0;
+  document.getElementById('f-score').value=0;
+  document.querySelectorAll('.star').forEach(function(s){s.classList.remove('active');});
+}
+
+function updateCount() {
+  document.getElementById('count').textContent = records.length;
+  document.getElementById('count2').textContent = records.length;
+}
+
+function renderRecords() {
+  var list = document.getElementById('records-list');
+  if(records.length===0){
+    list.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">还没有记录，去填写第一家吧</div></div>';
+    return;
+  }
+  list.innerHTML = records.map(function(r,i){
+    var stars = '';
+    for(var s=1;s<=5;s++) stars+='<span class="rc-star" style="color:'+(s<=r.score?'#c8a448':'#e0ddd6')+'">★</span>';
+    var followClass = r.follow==='跟进'?'follow-yes':r.follow==='放弃'?'follow-no':'follow-maybe';
+    return '<div class="record-card">'
+      +'<div class="rc-top"><div><div class="rc-name">'+r.company+'</div><div class="rc-booth">'+r.booth+(r.contact?' · '+r.contact:'')+'</div></div>'
+      +'<div style="text-align:right"><div class="rc-score">'+stars+'</div>'+(r.follow?'<div class="rc-follow '+followClass+'" style="margin-top:4px">'+r.follow+'</div>':'')+'</div></div>'
+      +'<div class="rc-fields">'
+      +(r.products?'<div class="rc-field"><div class="rc-field-label">品种</div><div class="rc-field-val">'+r.products+'</div></div>':'')
+      +(r.moq?'<div class="rc-field"><div class="rc-field-label">MOQ</div><div class="rc-field-val">'+r.moq+'</div></div>':'')
+      +(r.coa?'<div class="rc-field"><div class="rc-field-label">英文COA</div><div class="rc-field-val">'+r.coa+'</div></div>':'')
+      +(r.exportmarket?'<div class="rc-field"><div class="rc-field-label">出口市场</div><div class="rc-field-val">'+r.exportmarket+'</div></div>':'')
+      +(r.trending?'<div class="rc-field"><div class="rc-field-label">热门询盘品类</div><div class="rc-field-val">'+r.trending+'</div></div>':'')
+      +(r.action?'<div class="rc-field"><div class="rc-field-label">下一步</div><div class="rc-field-val">'+r.action+'</div></div>':'')
+      +'</div>'
+      +(r.notes?'<div class="rc-notes">'+r.notes+'</div>':'')
+      +'<span class="rc-delete" onclick="deleteRecord('+i+')">删除</span>'
+      +'</div>';
+  }).join('');
+}
+
+function deleteRecord(i) {
+  if(confirm('确认删除这条记录？')) {
+    records.splice(i,1);
+    updateCount();
+    renderRecords();
+  }
+}
+
+function exportData() {
+  if(records.length===0){alert('还没有记录');return;}
+  var text = 'CPHI 2026 · B类供应商记录\n\n';
+  records.forEach(function(r,i){
+    text += '【'+(i+1)+'】'+r.company+'\n';
+    if(r.booth) text += '展位：'+r.booth+'\n';
+    if(r.contact) text += '联系人：'+r.contact+'\n';
+    if(r.products) text += '品种：'+r.products+'\n';
+    if(r.moq) text += 'MOQ：'+r.moq+'\n';
+    if(r.coa) text += '英文COA：'+r.coa+'\n';
+    if(r.exportmarket) text += '出口市场：'+r.exportmarket+'\n';
+    if(r.trending) text += '热门询盘：'+r.trending+'\n';
+    if(r.score) text += '评分：'+r.score+'星\n';
+    if(r.follow) text += '跟进意向：'+r.follow+'\n';
+    if(r.action) text += '下一步：'+r.action+'\n';
+    if(r.notes) text += '备注：'+r.notes+'\n';
+    text += '\n';
+  });
+  navigator.clipboard.writeText(text).then(function(){alert('已复制到剪贴板');}).catch(function(){
+    var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('已复制到剪贴板');
+  });
+}
+</script>
+</body>
+</html>

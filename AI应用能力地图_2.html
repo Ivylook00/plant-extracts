@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI应用能力地图</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0F14;
+    --bg2: #141720;
+    --bg3: #1C2030;
+    --surface: #181B26;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #E8E6DF;
+    --text2: #A0A2B2;
+    --text3: #6A6C7C;
+    --green: #3DD68C;
+    --green-bg: rgba(61,214,140,0.1);
+    --green-border: rgba(61,214,140,0.2);
+    --amber: #F0A429;
+    --amber-bg: rgba(240,164,41,0.1);
+    --amber-border: rgba(240,164,41,0.2);
+    --purple: #A78BFA;
+    --purple-bg: rgba(167,139,250,0.1);
+    --purple-border: rgba(167,139,250,0.2);
+    --accent: #3DD68C;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    padding: 0;
+  }
+
+  /* TOOLBAR */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,15,20,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .toolbar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text2);
+  }
+  .dl-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--green);
+    color: #031A0A;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    cursor: pointer;
+    transition: opacity .15s;
+    white-space: nowrap;
+  }
+  .dl-btn:hover { opacity: .85; }
+  .dl-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* DOC */
+  #doc { padding: 28px 20px 56px; max-width: 680px; margin: 0 auto; }
+
+  /* HEADER */
+  .header { margin-bottom: 28px; }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .header-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -.01em;
+    line-height: 1.2;
+  }
+  .header-title em { font-style: normal; color: var(--accent); }
+  .header-sub {
+    font-size: 13px;
+    color: var(--text2);
+    font-weight: 300;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* STATS OVERVIEW */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .stat-card.s-green { border-color: var(--green-border); }
+  .stat-card.s-amber { border-color: var(--amber-border); }
+  .stat-card.s-purple { border-color: var(--purple-border); }
+  .stat-num {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .s-green .stat-num { color: var(--green); }
+  .s-amber .stat-num { color: var(--amber); }
+  .s-purple .stat-num { color: var(--purple); }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    line-height: 1.4;
+  }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text2);
+    margin-top: 5px;
+    font-weight: 300;
+  }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 28px;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--bg3);
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+  }
+  .pb-green { background: var(--green); border-radius: 4px 0 0 4px; }
+  .pb-amber { background: var(--amber); }
+  .pb-purple { background: var(--purple); border-radius: 0 4px 4px 0; }
+  .progress-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .pl-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text2);
+  }
+  .pl-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* SECTION */
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 20px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ROWS */
+  .rows { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
+  .row {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .row-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .row-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-weight: 500;
+    letter-spacing: .04em;
+    border: 1px solid;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .b-yes { background: var(--green-bg); color: var(--green); border-color: var(--green-border); }
+  .b-partial { background: var(--amber-bg); color: var(--amber); border-color: var(--amber-border); }
+  .b-ext { background: var(--purple-bg); color: var(--purple); border-color: var(--purple-border); }
+
+  .row-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .row-how-wrap {
+    background: var(--bg3);
+    border-radius: 6px;
+    padding: 10px 12px;
+    border-left: 2px solid var(--border2);
+  }
+  .row-how-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 5px;
+  }
+  .row-how {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .row-how code {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    background: rgba(61,214,140,0.08);
+    color: var(--accent);
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid rgba(61,214,140,0.18);
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-note {
+    font-size: 11px;
+    color: var(--text3);
+    font-weight: 300;
+    line-height: 1.7;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="toolbar-label">AI 能力地图 · 2026</span>
+  <button class="dl-btn" onclick="downloadImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    下载图片
+  </button>
+</div>
+
+<div id="doc">
+
+  <div class="header">
+    <div class="header-eyebrow">Internal Reference · 内部参考文件</div>
+    <div class="header-title">AI 应用<em>能力地图</em></div>
+    <div class="header-sub">植物提取物外贸创业 · 各功能实现方式说明 · 2026</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card s-green">
+      <div class="stat-num">68%</div>
+      <div class="stat-label">Claude<br>直接做</div>
+      <div class="stat-sub">15个功能</div>
+    </div>
+    <div class="stat-card s-amber">
+      <div class="stat-num">27%</div>
+      <div class="stat-label">部分<br>外接</div>
+      <div class="stat-sub">6个功能</div>
+    </div>
+    <div class="stat-card s-purple">
+      <div class="stat-num">5%</div>
+      <div class="stat-label">需要<br>外接</div>
+      <div class="stat-sub">1个功能</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span style="color:var(--text2);font-size:12px;">22个功能总览</span>
+      <span style="color:var(--text3);font-size:11px;font-family:'DM Mono',monospace;">Claude负责内容，外接负责存储/自动化</span>
+    </div>
+    <div class="progress-bar">
+      <div class="pb-green" style="width:68%"></div>
+      <div class="pb-amber" style="width:27%"></div>
+      <div class="pb-purple" style="width:5%"></div>
+    </div>
+    <div class="progress-legend">
+      <div class="pl-item"><div class="pl-dot" style="background:var(--green)"></div>直接做（对话即可）</div>
+      <div class="pl-item"><div class="pl-dot" style="background:var(--amber)"></div>部分外接（内容归Claude，存储/触发靠工具）</div>
+      <div class="pl-item"><div class="pl-dot" style="background:var(--purple)"></div>需要外接（Claude只出模板）</div>
+    </div>
+  </div>
+
+  <!-- 客户沟通 -->
+  <div class="section-title">客户沟通与销售</div>
+  <div class="rows">
+    <div class="row">
+      <div class="row-top"><span class="row-name">询盘质量筛选</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">判断意向高低，给出跟进建议</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">把邮件原文粘贴给Claude，直接对话</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">英法双语询盘回复</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">生成专业双语回复草稿</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">产品信息（规格/价格/COA/交货周期）存在 <code>Project文件</code> 里，Claude每次对话自动读取；粘贴询盘内容即可生成草稿</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">触达前买家研究</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">分析产品线、发现缺口、生成法语开发信</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">给Claude买家官网或LinkedIn链接，直接生成定制开发信</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">多语言邮件润色</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">法语/英语措辞检查，确保地道</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">把草稿粘贴给Claude，直接润色</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">客户关系跟进提醒</span><span class="badge b-partial">部分外接</span></div>
+      <div class="row-desc">设计跟进逻辑和节点</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">跟进逻辑和模板Claude设计；自动触发提醒需外接 <code>Google Calendar</code> 或 <code>Notion</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 供应链 -->
+  <div class="section-title">供应链支持</div>
+  <div class="rows">
+    <div class="row">
+      <div class="row-top"><span class="row-name">报价单生成</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">生成格式化英法双语报价单</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">提供成本和利润率参数，直接生成；可做成 <code>Project</code> 固定模板</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">COA文件归档管理</span><span class="badge b-partial">部分外接</span></div>
+      <div class="row-desc">设计分类体系，协助整理</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">分类结构和命名规范Claude设计；实际文件存储用 <code>Notion</code> / <code>飞书</code>，目录清单上传到Project可检索</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">样品进度跟踪</span><span class="badge b-partial">部分外接</span></div>
+      <div class="row-desc">提供跟踪模板和节点设计</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">模板Claude生成；手动更新后粘贴分析；自动提醒需 <code>Notion</code> 或 <code>飞书</code> 数据库提醒</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">产品信息库维护</span><span class="badge b-partial">部分外接</span></div>
+      <div class="row-desc">格式化、补充、标准化内容</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">B维护Excel/文本文件，定期上传到 <code>Project</code>；Claude每次对话自动调用最新版本</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 对外内容 -->
+  <div class="section-title">对外内容与品牌</div>
+  <div class="rows">
+    <div class="row">
+      <div class="row-top"><span class="row-name">LinkedIn个人形象建立</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">双语简介、定位叙事、内容策略</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话生成，复制粘贴到LinkedIn发布</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">产品宣传册内容</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">英法双语内容、功效叙事、合规表述</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话生成文字稿；排版需 <code>Canva</code> 或设计师</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">LinkedIn法语内容矩阵</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">每周内容策划和撰写</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话生成每篇内容；定时发布用LinkedIn原生定时功能（免费）</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">市场信号Newsletter</span><span class="badge b-partial">部分外接</span></div>
+      <div class="row-desc">内容撰写和编辑</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">把行业资讯粘贴给Claude整理成正文；发送需 <code>Brevo</code>（免费额度够用）</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">独立站SEO内容</span><span class="badge b-partial">部分外接</span></div>
+      <div class="row-desc">产品页文案、SEO优化</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话生成文案；发布需手动操作 <code>Shopify</code> / <code>WordPress</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 市场研究 -->
+  <div class="section-title">市场研究与分析</div>
+  <div class="rows">
+    <div class="row">
+      <div class="row-top"><span class="row-name">产品竞争力简报</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">成分依据、合规状态、竞品分析</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话生成；Claude可联网搜索补充实时数据</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">选品八维框架分析</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">给定品类跑框架，出判断结论</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话，给品类名称即可</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">CPHI展会情报收集</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">展前策略、问卷设计、信息整理</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">展前直接生成问题清单和目标供应商研究；展后把笔记粘贴给Claude整理</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">欧盟合规文件清单</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">EU/UAE各市场合规要求</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话生成，可存入 <code>Project</code> 作固定参考</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">市场信号持续监测</span><span class="badge b-partial">部分外接</span></div>
+      <div class="row-desc">分析提供的行业资讯</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">粘贴内容Claude分析；自动抓取用 <code>Google Alerts</code>（免费）设关键词，结果发邮箱后转给Claude</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 财务法务 -->
+  <div class="section-title">财务与法务辅助</div>
+  <div class="rows">
+    <div class="row">
+      <div class="row-top"><span class="row-name">毛利率计算与定价</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">给定参数直接计算</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话；可让Claude生成Excel定价模板存入Project</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">合同初审</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">识别不利条款和风险点</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">把合同文本粘贴或上传到对话，直接分析；重要合同仍需律师</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-top"><span class="row-name">利润自动追踪看板</span><span class="badge b-ext">需要外接</span></div>
+      <div class="row-desc">模板设计与搭建</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">模板Claude帮你建好；自动化运行需 <code>Google Sheets</code> 公式或 <code>Airtable</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 产品化 -->
+  <div class="section-title">未来产品化（Phase 5）</div>
+  <div class="rows">
+    <div class="row">
+      <div class="row-top"><span class="row-name">AI服务打包输出</span><span class="badge b-yes">直接做</span></div>
+      <div class="row-desc">服务定义、定价框架、交付物模板</div>
+      <div class="row-how-wrap">
+        <div class="row-how-label">实现方式</div>
+        <div class="row-how">直接对话设计，存入 <code>Project</code> 作固定参考</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-note">"直接做"指在 Claude Project 对话中完成，无需额外工具。"部分外接"指Claude负责内容生成，外部工具负责存储或自动化触发。所有AI生成内容须经人工判断后使用。</div>
+  </div>
+
+</div>
+
+<script>
+async function downloadImage() {
+  const btn = document.querySelector('.dl-btn');
+  const toolbar = document.querySelector('.toolbar');
+  btn.textContent = '生成中...';
+  btn.style.opacity = '.5';
+  btn.style.pointerEvents = 'none';
+  toolbar.style.display = 'none';
+  try {
+    const el = document.getElementById('doc');
+    const canvas = await html2canvas(el, {
+      backgroundColor: '#0D0F14',
+      scale: 2,
+      useCORS: true,
+      logging: false,
+    });
+    const link = document.createElement('a');
+    link.download = 'AI应用能力地图.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('下载失败，请截图代替。');
+  } finally {
+    toolbar.style.display = 'flex';
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 下载图片`;
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  }
+}
+</script>
+</body>
+</html>

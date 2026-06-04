@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026全球大健康外贸蓝海功能赛道矩阵</title>
+    <!-- 引入 html2canvas 库用于将HTML转换为图片 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --text-muted: #7f8c8d;
+            --highlight-bg: #e8f8f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        /* 顶部工具栏：固定在右上角 */
+        .toolbar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-download:active {
+            transform: translateY(0);
+        }
+
+        /* 需要被导出的核心画布区域 */
+        #capture-area {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* 矩阵表格样式 */
+        .matrix-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+            margin-top: 20px;
+        }
+
+        .matrix-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 16px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: left;
+            border: none;
+        }
+
+        .matrix-table th:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .matrix-table th:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .matrix-table tr.row-item {
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 8px;
+        }
+
+        @media (hover: hover) {
+            .matrix-table tr.row-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .matrix-table td {
+            padding: 22px 20px;
+            vertical-align: top;
+            border-top: 1px solid #edf2f7;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 0.95rem;
+            background-color: var(--card-bg);
+        }
+
+        .matrix-table td:first-child {
+            border-left: 1px solid #edf2f7;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            width: 18%;
+        }
+
+        .matrix-table td:last-child {
+            border-right: 1px solid #edf2f7;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            width: 22%;
+        }
+
+        /* 得分徽章 */
+        .score-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(39, 174, 96, 0.2);
+        }
+
+        .score-high {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        }
+
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            background-color: #f1f2f6;
+            color: #57606f;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* 主打品类列表 */
+        .product-list {
+            list-style: none;
+        }
+
+        .product-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .product-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .product-list strong {
+            color: #2c3e50;
+        }
+
+        .highlight-text {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 992px) {
+            .toolbar {
+                position: static;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .btn-download {
+                display: inline-flex;
+                width: auto;
+            }
+            .matrix-table, .matrix-table thead, .matrix-table tbody, .matrix-table th, .matrix-table td, .matrix-table tr {
+                display: block;
+            }
+            .matrix-table thead {
+                display: none;
+            }
+            .matrix-table tr.row-item {
+                margin-bottom: 20px;
+                padding: 15px;
+                border: 1px solid #edf2f7;
+            }
+            .matrix-table td {
+                border: none;
+                padding: 10px 5px;
+                width: 100% !important;
+            }
+            .matrix-table td:first-child {
+                font-size: 1.2rem;
+                border-bottom: 2px solid #f1f2f6;
+                padding-bottom: 10px;
+            }
+            .matrix-table td::before {
+                content: attr(data-label);
+                display: block;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                color: var(--text-muted);
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 工具栏：下载按钮 -->
+<div class="toolbar">
+    <button class="btn-download" onclick="downloadMatrixImage()">
+        <span>📥</span> 导出高清矩阵图
+    </button>
+</div>
+
+<!-- 核心截图区域 -->
+<div id="capture-area">
+    <header>
+        <h1>2026 全球大健康外贸蓝海功能赛道矩阵</h1>
+        <p>📊 结合跨境数据思维、医药级品控与独特包装资源的轻资产战略路线图</p>
+    </header>
+
+    <table class="matrix-table">
+        <thead>
+            <tr>
+                <th>潜力功能赛道</th>
+                <th style="width: 10%; text-align: center;">推荐得分</th>
+                <th style="width: 28%;">核心推荐理由</th>
+                <th style="width: 22%;">高潜力主打品类 (中国优势)</th>
+                <th>核心对标买家与起步形态 (OEM)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 赛道 1 -->
+            <tr class="row-item">
+                <td data-label="潜力功能赛道">
+                    1. 代谢综合体：控糖抗初老与全天候减重<br>
+                    <span class="tag">Glucose & Weight</span>
+                </td>
+                <td data-label="推荐得分" style="text-align: center; vertical-align: middle;">
+                    <span class="score-badge score-high">9.8</span>
+                </td>
+                <td data-label="核心推荐理由">
+                    <strong>绝对的皇冠暴利赛道。</strong> 完美踩中海外“口服植物型GLP-1（天然减肥针）”的巨大风口。利用亚马逊BA数据反向定位海外爆款复配比例，合伙人直接调用植提大厂渠道和中药饮片源头拿货。两端利润吃尽，且粉剂/胶囊物流极轻。
+                </td>
+                <td data-label="高潜力主打品类">
+                    <ul class="product-list">
+                        <li><strong>桑叶提取物 (高纯度1-DNJ)</strong>：全球压倒性桑树产地与水提基地，成本极低，海外溢价极高。</li>
+                        <li><strong>黄连素/小檗碱 (Berberine)</strong>：中药传统饮片绝对优势成分，海外TikTok控糖爆款。</li>
+                        <li><strong>白芸豆提取物</strong>：传统淀粉阻断剂，国内提纯工艺极其烂熟。</li>
+                    </ul>
+                </td>
+                <td data-label="核心对标买家与起步形态">
+                    海外新锐抗衰老品牌、独立站减重滴剂大卖家、欧洲天然膳死补充剂商。<br>
+                    <span class="highlight-text">👉 起步形态：控糖减重二合一胶囊、晚间植物控糖冲剂。</span>
+                </td>
+            </tr>
+
+            <!-- 赛道 2 -->
+            <tr class="row-item">
+                <td data-label="潜力功能赛道">
+                    2. 情绪管理与日夜修复<br>
+                    <span class="tag">Stress & Sleep</span>
+                </td>
+                <td data-label="推荐得分" style="text-align: center; vertical-align: middle;">
+                    <span class="score-badge">9.2</span>
+                </td>
+                <td data-label="核心推荐理由">
+                    针对海外都市人群前所未有的精神内耗与脑雾。海外买家痛点是“大厂粗提原料做成软糖或即饮粉后口感太苦、不溶于水”，需要中国极其成熟的<strong>去苦味、高水溶</strong>比例粗提技术来做差异化截胡。
+                </td>
+                <td data-label="高潜力主打品类">
+                    <ul class="product-list">
+                        <li><strong>标准化真菌菇类 (猴头菇/灵芝)</strong>：中国华中/东北核心产区。欧美正疯狂流行“菌菇咖啡/功能性软糖”。</li>
+                        <li><strong>酸枣仁/茯苓提取物</strong>：传统中药安神类绝对王牌，复配空间极大。</li>
+                    </ul>
+                </td>
+                <td data-label="核心对标买家与起步形态">
+                    欧美功能性咖啡品牌、新锐晚安软糖（Gummies）厂、独立电子烟替代（吸入精油）品牌。<br>
+                    <span class="highlight-text">👉 起步形态：水溶性去苦比例粉、晚间即饮固体饮料条。</span>
+                </td>
+            </tr>
+
+            <!-- 新增：赛道 3（肠道健康） -->
+            <tr class="row-item">
+                <td data-label="潜力功能赛道">
+                    3. 深度肠道屏障与免疫轴修复<br>
+                    <span class="tag">Gut Health & Immunity</span>
+                </td>
+                <td data-label="推荐得分" style="text-align: center; vertical-align: middle;">
+                    <span class="score-badge">9.0</span>
+                </td>
+                <td data-label="核心推荐理由">
+                    <strong>爆发性强的黄金赛道。</strong> 迎合欧美、东南亚目前对“肠脑轴（脑雾改善）”和“肠胃免疫”的强烈诉求。中国是猴头菇绝对主产区，合伙人拿到的初提料自带强大故事属性，复配高抗炎的岩藻多糖，溢价和壁垒极高。
+                </td>
+                <td data-label="高潜力主打品类">
+                    <ul class="product-list">
+                        <li><strong>标准化猴头菇提取物</strong>：中国东北/华东主产区，技术成熟度高。主打海外正火的“胃黏膜修复+神经保护”概念。</li>
+                        <li><strong>岩藻多糖 (Fucoidan)</strong>：来源于海带等褐藻，中国沿海大厂供应链优势明显，主打清除幽门螺杆菌、抗炎与免疫。</li>
+                        <li><strong>菊粉 (Inulin) / 水溶性膳食纤维</strong>：优质植物高纯益生元基底。</li>
+                    </ul>
+                </td>
+                <td data-label="核心对标买家与起步形态">
+                    欧美独立站胃肠调理品牌、东南亚清肠排毒微商大卖家、膳食纤维粉贴牌商。<br>
+                    <span class="highlight-text">👉 起步形态：肠道抗炎胶囊、水溶性复配清肠冲剂（无糖版）。</span>
+                </td>
+            </tr>
+
+            <!-- 赛道 4 -->
+            <tr class="row-item">
+                <td data-label="潜力功能赛道">
+                    4. 高阶宠物代谢与机能调理<br>
+                    <span class="tag">Premium Pet Care</span>
+                </td>
+                <td data-label="推荐得分" style="text-align: center; vertical-align: middle;">
+                    <span class="score-badge">8.8</span>
+                </td>
+                <td data-label="核心推荐理由">
+                    最能发挥合伙人“医疗包装与推注器械资源”的赛道。海外对猫狗泪痕、关节退化的预防性消费极其爽快。做功能性营养膏可以完美避开大宗宠物粮的沉重物流费用，利用器械壁垒做高溢价OEM。
+                </td>
+                <td data-label="高潜力主打品类">
+                    <ul class="product-list">
+                        <li><strong>宠物级玻尿酸/软骨素</strong>：中国山东全球绝对统治地位，拿货价格极具优势。</li>
+                        <li><strong>药食同源果蔬冻干粉 (山药/蔓越莓)</strong>：主打海外宠物高发的脾胃与泌尿健康。</li>
+                    </ul>
+                </td>
+                <td data-label="核心对标买家与起步形态">
+                    海外亚马逊中型宠物保健品牌、高端连锁宠物沙龙和海外独立宠物电商。<br>
+                    <span class="highlight-text">👉 起步形态：预充式营养膏（针筒推注棒）、独立小条装营养粉。</span>
+                </td>
+            </tr>
+
+            <!-- 赛道 5 -->
+            <tr class="row-item">
+                <td data-label="潜力功能赛道">
+                    5. 都市抗炎与纯素美妆内服<br>
+                    <span class="tag">Clean Beauty</span>
+                </td>
+                <td data-label="推荐得分" style="text-align: center; vertical-align: middle;">
+                    <span class="score-badge">8.5</span>
+                </td>
+                <td data-label="核心推荐理由">
+                    欧洲（尤其是法国）出台严厉反化学合成法律，清洁美妆被迫寻找纯素、纯天然植物源替代。你的法英双语和里昂大学背景，可以直接提供高标准技术文件，快速敲开法国独立药妆和护肤品牌大门。
+                </td>
+                <td data-label="高潜力主打品类">
+                    <ul class="product-list">
+                        <li><strong>补骨脂酚 (Bakuchiol)</strong>：纯素维A醇替代，海外2026绝对红人。中国提取工艺透明，代工厂极多。</li>
+                        <li><strong>积雪草提取物 (高纯Cica) / 广藿香精油</strong>：主打炎性衰老与皮肤屏障修复。</li>
+                    </ul>
+                </td>
+                <td data-label="核心对标买家与起步形态">
+                    法国/欧洲独立高端美妆工作室、纯素护肤品牌。<br>
+                    <span class="highlight-text">👉 起步形态：1kg/5kg工业桶装高纯精油、活性修复功能原液.</span>
+                </td>
+            </tr>
+
+            <!-- 赛道 6 -->
+            <tr class="row-item">
+                <td data-label="潜力功能赛道">
+                    6. 口服沙龙级头皮微生态<br>
+                    <span class="tag">Scalp Care</span>
+                </td>
+                <td data-label="推荐得分" style="text-align: center; vertical-align: middle;">
+                    <span class="score-badge" style="background: #7f8c8d;">7.5</span>
+                </td>
+                <td data-label="核心推荐理由">
+                    2026全球趋势：“头皮即肌肤”。海外高级沙龙在疯狂推“内服防脱胶囊+外用精华”的轻医美套装。可复用合伙人的包材资源（生产自带导液梳、微针的瓶子），做“液料+高阶器械瓶”的整体整体OEM。
+                </td>
+                <td data-label="高潜力主打品类">
+                    <ul class="product-list">
+                        <li><strong>侧柏叶提取物 / 侧柏纯露</strong>：中国药食同源绝对特色，防脱控油故事性强，生产工艺极其简单（蒸馏）。</li>
+                        <li><strong>迷迭香精油</strong>：海外公认的生发天花板级植物成分。</li>
+                    </ul>
+                </td>
+                <td data-label="核心对标买家与起步形态">
+                    高级微创美发沙龙、海外小众防脱生发独立品牌。<br>
+                    <span class="highlight-text">👉 起步形态：头皮精华原液 + 导液梳/微针包装一站式套组。</span>
+                </td>
+            </tr>
+
+            <!-- 赛道 7 -->
+            <tr class="row-item">
+                <td data-label="潜力功能赛道">
+                    7. 银发族肌肉与长寿管理<br>
+                    <span class="tag">Healthy Aging</span>
+                </td>
+                <td data-label="推荐得分" style="text-align: center; vertical-align: middle;">
+                    <span class="score-badge" style="background: #7f8c8d;">7.0</span>
+                </td>
+                <td data-label="核心推荐理由">
+                    欧洲老龄化极其严重。中产老人极度害怕因肌肉流失（肌肉减少症）导致行动不便。避开大厂卷得要死的乳清蛋白，主打“中药强壮草本与细胞线粒体修复”，颗粒剂在国内技术已烂熟于心。
+                </td>
+                <td data-label="高潜力主打品类">
+                    <ul class="product-list">
+                        <li><strong>黄精 / 山药提取物</strong>：利用中药饮片优势，提取物极具“东方长寿（Longevity）”故事性。</li>
+                        <li><strong>植物源氨基酸复配颗粒</strong>：提供定制复合配方，绕开普通单一蛋白。</li>
+                    </ul>
+                </td>
+                <td data-label="核心对标买家与起步形态">
+                    欧洲老年健康管理平台、海外专门针对50+人群的线上膳食补充剂品牌。<br>
+                    <span class="highlight-text">👉 起步形态：医药级质控全谱营养强化颗粒剂（Granules）。</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function downloadMatrixImage() {
+        const element = document.getElementById('capture-area');
+        const btn = document.querySelector('.btn-download');
+        
+        btn.innerHTML = "<span>⏳</span> 正在生成超清图...";
+        btn.style.opacity = "0.7";
+
+        html2canvas(element, {
+            scale: 2, 
+            useCORS: true, 
+            backgroundColor: "#f8f9fa", 
+            logging: false
+        }).then(canvas => {
+            const image = canvas.toDataURL("image/png");
+            const createEl = document.createElement('a');
+            createEl.href = image;
+            createEl.download = "2026全球大健康外贸蓝海功能赛道矩阵_含肠道健康.png";
+            document.body.appendChild(createEl);
+            createEl.click();
+            document.body.removeChild(createEl);
+
+            btn.innerHTML = "<span>📥</span> 导出高清矩阵图";
+            btn.style.opacity = "1";
+        }).catch(err => {
+            console.error("生成图片失败:", err);
+            alert("生成图片失败，请尝试在电脑端现代浏览器（如Chrome/Edge）中操作。");
+            btn.innerHTML = "<span>📥</span> 导出高清矩阵图";
+            btn.style.opacity = "1";
+        });
+    }
+</script>
+
+</body>
+</html>

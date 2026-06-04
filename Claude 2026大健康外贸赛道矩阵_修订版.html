@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 全球大健康外贸赛道矩阵 · 修订版</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a18;
+  --ink-2: #4a4a44;
+  --ink-3: #8a8a80;
+  --paper: #f5f3ee;
+  --paper-2: #eceae3;
+  --paper-3: #e0ddd4;
+  --gold: #b8963e;
+  --gold-light: #f0e4c4;
+  --gold-pale: #faf6ec;
+  --green: #2d6a4f;
+  --green-light: #d8eedf;
+  --amber: #9c4b00;
+  --amber-light: #fdecd8;
+  --red: #8b2020;
+  --red-light: #fde8e8;
+  --blue: #1a3a5c;
+  --blue-light: #dde8f5;
+  --teal: #1a5050;
+  --teal-light: #d8eeee;
+  --purple: #3d2060;
+  --purple-light: #ede8f8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── TOOLBAR ── */
+.toolbar {
+  position: fixed;
+  top: 20px; right: 24px;
+  z-index: 100;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  letter-spacing: 0.02em;
+  transition: background 0.15s, color 0.15s;
+}
+.btn:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
+.btn svg { width: 14px; height: 14px; }
+
+/* ── WRAPPER ── */
+#capture-area {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 64px 40px 80px;
+}
+
+/* ── HEADER ── */
+.page-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 32px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 28px;
+  margin-bottom: 52px;
+}
+
+.header-left {}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.header-desc {
+  font-size: 14px;
+  color: var(--ink-2);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.header-right {
+  text-align: right;
+}
+.meta-item {
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.8;
+}
+.meta-item strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding: 14px 20px;
+  background: var(--paper-2);
+  border-radius: 6px;
+  border: 1px solid var(--paper-3);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── TRACK CARDS ── */
+.track {
+  background: #fff;
+  border: 1px solid var(--paper-3);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.track:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+
+.track-head {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.track-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--ink-3);
+  padding: 22px 0;
+  border-right: 1px solid var(--paper-3);
+  min-height: 80px;
+}
+
+.track-info {
+  padding: 18px 20px;
+}
+.track-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+.track-name-en {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+}
+.track-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 7px;
+}
+.tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.tag-priority { background: var(--ink); color: var(--paper); }
+.tag-wait { background: var(--paper-2); color: var(--ink-2); border: 1px solid var(--paper-3); }
+.tag-caution { background: var(--amber-light); color: var(--amber); }
+.tag-new { background: var(--gold-light); color: var(--gold); }
+.tag-expand { background: var(--blue-light); color: var(--blue); }
+
+.track-score-wrap {
+  padding: 18px 24px;
+  border-left: 1px solid var(--paper-3);
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.score-label { font-size: 10px; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; }
+.score-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  line-height: 1;
+}
+.score-orig { font-size: 10px; color: var(--ink-3); text-decoration: line-through; }
+.score-bar {
+  width: 80px;
+  height: 4px;
+  background: var(--paper-2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.score-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
+.chevron {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-left: 12px;
+  transition: transform 0.25s;
+}
+.chevron.open { transform: rotate(180deg); }
+
+/* Score color tiers */
+.s-high { color: var(--green); }
+.s-high .score-fill { background: var(--green); }
+.s-mid { color: var(--gold); }
+.s-mid .score-fill { background: var(--gold); }
+.s-low { color: var(--ink-3); }
+.s-low .score-fill { background: var(--ink-3); }
+
+/* ── TRACK BODY ── */
+.track-body {
+  display: none;
+  border-top: 1px solid var(--paper-3);
+}
+.track-body.open { display: block; }
+
+.body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+.body-col {
+  padding: 24px 24px;
+  border-right: 1px solid var(--paper-3);
+}
+.body-col:last-child { border-right: none; }
+.col-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--paper-3);
+}
+
+/* Rationale */
+.rationale-text {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.75;
+}
+.rationale-text strong { color: var(--ink); font-weight: 600; }
+
+/* Products */
+.product-item {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--paper-3);
+}
+.product-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.product-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.product-desc {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+/* Market access */
+.mkt-block { margin-bottom: 14px; }
+.mkt-block:last-child { margin-bottom: 0; }
+.mkt-flag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mkt-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+.dot-g { width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px; }
+.dot-a { width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px; }
+.dot-r { width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px; }
+
+/* Alert boxes */
+.alert {
+  margin: 0 24px 20px;
+  padding: 10px 14px;
+  border-radius: 5px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.alert-warn { background: var(--amber-light); color: var(--amber); border: 1px solid #f5cfa0; }
+.alert-tip { background: var(--green-light); color: var(--green); border: 1px solid #a8d8b8; }
+.alert-info { background: var(--blue-light); color: var(--blue); border: 1px solid #a8c0e0; }
+.alert-icon { font-size: 14px; flex-shrink: 0; }
+
+/* Bottom target row */
+.target-row {
+  background: var(--paper-2);
+  border-top: 1px solid var(--paper-3);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.target-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.target-text {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  flex: 1;
+}
+.target-form {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--green-light);
+  padding: 4px 12px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* ── SKIP SECTION ── */
+.skip-section {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: var(--paper-2);
+  border: 1px solid var(--paper-3);
+  border-radius: 8px;
+}
+.skip-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.skip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+.skip-item {
+  background: #fff;
+  border: 1px solid var(--paper-3);
+  border-radius: 5px;
+  padding: 12px 14px;
+}
+.skip-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.skip-reason {
+  font-size: 11.5px;
+  color: var(--red);
+}
+
+/* ── FOOTER NOTE ── */
+.footer-note {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--paper-3);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  line-height: 1.8;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .body-grid { grid-template-columns: 1fr; }
+  .body-col { border-right: none; border-bottom: 1px solid var(--paper-3); }
+  .body-col:last-child { border-bottom: none; }
+  .page-header { grid-template-columns: 1fr; }
+  .header-right { text-align: left; }
+  .track-head { grid-template-columns: 44px 1fr auto; }
+  .footer-note { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  #capture-area { padding: 32px 16px 48px; }
+  .track-score-wrap { min-width: 90px; padding: 14px 12px; }
+  .score-num { font-size: 22px; }
+  .score-bar { width: 60px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn" onclick="window.print()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    打印 / 导出PDF
+  </button>
+</div>
+
+<div id="capture-area">
+
+  <header class="page-header">
+    <div class="header-left">
+      <div class="eyebrow">战略规划文件 · 修订版 v2.0</div>
+      <h1>2026 全球大健康外贸<br><em>功能赛道</em>优先级矩阵</h1>
+      <p class="header-desc">基于欧盟/美国/中东准入现状、中国供应链真实优势与初创资源匹配度的二次审查评估。监管风险已纳入评分，部分原始得分已下调修正。</p>
+    </div>
+    <div class="header-right">
+      <div class="meta-item"><strong>目标市场</strong> 欧盟（法语区优先）· 北美 · 中东海湾</div>
+      <div class="meta-item"><strong>商业模式</strong> 2B 原料出口 + OEM 贴牌</div>
+      <div class="meta-item"><strong>团队优势</strong> 法语 / 欧洲渠道 × 全国供应商网络</div>
+      <div class="meta-item"><strong>修订日期</strong> 2026年</div>
+    </div>
+  </header>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span style="font-size:11px;font-weight:600;color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase;margin-right:4px">准入状态</span>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>合规畅通</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>需满足条件</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>有明确障碍</div>
+    <div style="width:1px;background:var(--paper-3);margin:0 8px"></div>
+    <span style="font-size:11px;font-weight:600;color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase;margin-right:4px">标签</span>
+    <div class="legend-item"><span class="tag tag-priority">立即主攻</span></div>
+    <div class="legend-item"><span class="tag tag-caution">谨慎评估</span></div>
+    <div class="legend-item"><span class="tag tag-wait">暂缓</span></div>
+    <div class="legend-item"><span class="tag tag-new">新增赛道</span></div>
+    <div class="legend-item"><span class="tag tag-expand">需扩品类</span></div>
+  </div>
+
+  <!-- ══ TRACK 1 ══ -->
+  <div class="track" id="t1">
+    <div class="track-head" onclick="toggle('t1')">
+      <div class="track-num">1</div>
+      <div class="track-info">
+        <div class="track-name">情绪管理与日夜修复 <span class="track-name-en">Stress · Sleep · Mood</span></div>
+        <div class="track-tags">
+          <span class="tag tag-priority">立即主攻</span>
+          <span class="tag" style="background:var(--teal-light);color:var(--teal);">灵芝 · 猴头菇 · 酸枣仁</span>
+        </div>
+      </div>
+      <div class="track-score-wrap">
+        <div class="score-label">修订得分</div>
+        <div class="score-num s-high">8.8</div>
+        <div class="score-bar s-high"><div class="score-fill" style="width:88%"></div></div>
+        <div class="score-orig">原9.2</div>
+        <span class="chevron" id="ch-t1">▼</span>
+      </div>
+    </div>
+    <div class="track-body" id="b-t1">
+      <div class="body-grid">
+        <div class="body-col">
+          <div class="col-title">核心推荐理由</div>
+          <div class="rationale-text">
+            与团队资源匹配度最高的赛道。B的湖南供应商网络覆盖灵芝、茯苓核心产区；A的法语优势正好对接法国 <em>phytothérapie</em>（植物疗法）传统市场，消费者基础深厚。<br><br>
+            去苦味、高水溶提取技术是真实的中国差异化优势，可以直接服务"软糖/即饮粉"需求强烈的欧美功能性食品品牌。<strong>酸枣仁</strong>是本赛道新增推荐——中国独有的安神成分，海外认知度正在快速提升，竞争格局尚未固化。
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">高潜力主打品类</div>
+          <div class="product-item">
+            <div class="product-name">灵芝提取物（子实体）</div>
+            <div class="product-desc">睡眠+情绪双功效，欧盟子实体形式非Novel Food，合规最顺畅。湖南直接产区优势。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">猴头菇提取物（子实体）</div>
+            <div class="product-desc">认知/情绪赛道增速最快单品，功能性咖啡/软糖品牌核心采购对象。注意：必须子实体来源。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">酸枣仁提取物</div>
+            <div class="product-desc">新增。中国独有，陕西/湖南主产区。海外"枣仁"concept正在快速破圈，竞争低价格高。</div>
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">市场准入状态</div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇪🇺 欧盟</div>
+            <div class="mkt-item"><div class="dot-g"></div>灵芝/猴头菇子实体：非Novel Food，可直销</div>
+            <div class="mkt-item"><div class="dot-r"></div>菌丝体粉：Novel Food，需买家端授权</div>
+            <div class="mkt-item"><div class="dot-a"></div>标签不可宣称具体功效（EFSA未批）</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇺🇸 美国</div>
+            <div class="mkt-item"><div class="dot-g"></div>DSHEA框架，无预审批要求</div>
+            <div class="mkt-item"><div class="dot-a"></div>Structure/function claim，不可声称治病</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🌙 中东GCC</div>
+            <div class="mkt-item"><div class="dot-g"></div>植物来源天然符合Halal</div>
+            <div class="mkt-item"><div class="dot-a"></div>沙特/UAE需SFDA/ESMA注册</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-tip"><span class="alert-icon">💡</span>起步形态建议：水溶性比例粉（B2B原料）→ 再升级为晚间固体饮料条OEM。优先服务法语区功能性饮料/软糖品牌。</div>
+      <div class="target-row">
+        <span class="target-label">对标买家</span>
+        <span class="target-text">欧美功能性咖啡/软糖品牌、法国/比利时天然健康品牌、新锐晚安gummies厂</span>
+        <span class="target-form">👉 水溶粉料 / 胶囊OEM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TRACK 2 ══ -->
+  <div class="track" id="t2">
+    <div class="track-head" onclick="toggle('t2')">
+      <div class="track-num">2</div>
+      <div class="track-info">
+        <div class="track-name">深度肠道屏障与免疫轴 <span class="track-name-en">Gut Health · Immunity</span></div>
+        <div class="track-tags">
+          <span class="tag tag-priority">立即主攻</span>
+          <span class="tag" style="background:var(--teal-light);color:var(--teal);">猴头菇 · 茯苓多糖</span>
+        </div>
+      </div>
+      <div class="track-score-wrap">
+        <div class="score-label">修订得分</div>
+        <div class="score-num s-high">8.0</div>
+        <div class="score-bar s-high"><div class="score-fill" style="width:80%"></div></div>
+        <div class="score-orig">原9.0</div>
+        <span class="chevron" id="ch-t2">▼</span>
+      </div>
+    </div>
+    <div class="track-body" id="b-t2">
+      <div class="body-grid">
+        <div class="body-col">
+          <div class="col-title">核心推荐理由</div>
+          <div class="rationale-text">
+            可与赛道1共享供应商，边际成本极低。猴头菇"胃黏膜修复"功效在欧美有多项临床研究支撑，是目前功能性蘑菇里最容易向欧洲买家讲清楚的故事。<br><br>
+            原清单中的<strong>岩藻多糖（Fucoidan）</strong>已从本赛道移除——欧盟属于Novel Food，初创阶段合规负担过重，不建议主动开发。专注猴头菇+茯苓多糖的"肠道修复"概念，单一赛道打透效率更高。
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">高潜力主打品类</div>
+          <div class="product-item">
+            <div class="product-name">猴头菇提取物（子实体）</div>
+            <div class="product-desc">胃黏膜修复+神经保护双诉求，与赛道1共用供应商，供应链协同性强。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">茯苓多糖</div>
+            <div class="product-desc">湖南核心产区，免疫调节功效研究成熟，可作为复配基础成分与猴头菇组合。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">菊粉/水溶性膳食纤维</div>
+            <div class="product-desc">益生元基底，合规简单，可用于充量+功效提升，降低整体配方成本。</div>
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">市场准入状态</div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇪🇺 欧盟</div>
+            <div class="mkt-item"><div class="dot-g"></div>猴头菇子实体：非Novel Food，可直销</div>
+            <div class="mkt-item"><div class="dot-r"></div>岩藻多糖：Novel Food（已移除）</div>
+            <div class="mkt-item"><div class="dot-g"></div>菊粉：传统食品成分，无障碍</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇺🇸 美国</div>
+            <div class="mkt-item"><div class="dot-g"></div>DSHEA框架全部畅通</div>
+            <div class="mkt-item"><div class="dot-a"></div>β-葡聚糖含量标准化是买家核心诉求</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🌙 中东GCC</div>
+            <div class="mkt-item"><div class="dot-g"></div>Halal合规，肠道健康诉求增长显著</div>
+            <div class="mkt-item"><div class="dot-a"></div>需确认提取溶剂无酒精残留</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-warn"><span class="alert-icon">⚠️</span>岩藻多糖已从本赛道移除。欧盟Novel Food授权周期长达3-5年，初创阶段不应将合规资源押注于此。如买家有需求，提示其寻找已完成授权的供应商。</div>
+      <div class="target-row">
+        <span class="target-label">对标买家</span>
+        <span class="target-text">欧美独立站胃肠调理品牌、日本/韩国天然健康OEM商、功能性食品配方开发商</span>
+        <span class="target-form">👉 胶囊OEM / 复配粉料</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TRACK 3 ══ -->
+  <div class="track" id="t3">
+    <div class="track-head" onclick="toggle('t3')">
+      <div class="track-num">3</div>
+      <div class="track-info">
+        <div class="track-name">代谢综合体：控糖与减重 <span class="track-name-en">Glucose Control · Weight</span></div>
+        <div class="track-tags">
+          <span class="tag tag-caution">谨慎切入</span>
+          <span class="tag" style="background:var(--purple-light);color:var(--purple);">桑叶1-DNJ · 白芸豆</span>
+        </div>
+      </div>
+      <div class="track-score-wrap">
+        <div class="score-label">修订得分</div>
+        <div class="score-num s-mid">7.5</div>
+        <div class="score-bar s-mid"><div class="score-fill" style="width:75%"></div></div>
+        <div class="score-orig">原9.8 ↓大幅修正</div>
+        <span class="chevron" id="ch-t3">▼</span>
+      </div>
+    </div>
+    <div class="track-body" id="b-t3">
+      <div class="body-grid">
+        <div class="body-col">
+          <div class="col-title">核心推荐理由（修正版）</div>
+          <div class="rationale-text">
+            方向长期成立，但原清单9.8分严重高估了初创切入的难度。<strong>桑叶（1-DNJ）保留</strong>，中国确有绝对供应链优势。<br><br>
+            <strong>小檗碱（Berberine）已移除</strong>：欧盟对高剂量小檗碱要求按药品管理，多国已明确限制剂量；美国FDA收到不良事件报告增加，监管收紧信号明显。TikTok爆款≠B2B安全品种。<br><br>
+            建议在摸清目标市场具体剂量上限、拿到供应商标准COA后，再决定是否切入。
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">高潜力主打品类（修正后）</div>
+          <div class="product-item">
+            <div class="product-name">桑叶提取物（高纯度1-DNJ）✅</div>
+            <div class="product-desc">中国桑树产区绝对优势，海外溢价高，合规路径相对清晰，保留推荐。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">白芸豆提取物 ✅</div>
+            <div class="product-desc">传统淀粉阻断剂，国内工艺成熟，欧美长期上市成分，DSHEA框架畅通。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name" style="color:var(--red)">小檗碱（Berberine）❌ 已移除</div>
+            <div class="product-desc" style="color:var(--red)">欧盟多国限制剂量/按药品管理，监管风险高于收益，不建议初期主动开发。</div>
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">市场准入状态</div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇪🇺 欧盟</div>
+            <div class="mkt-item"><div class="dot-g"></div>桑叶/白芸豆：传统食品成分，可销售</div>
+            <div class="mkt-item"><div class="dot-r"></div>小檗碱：多国剂量限制严格，风险高</div>
+            <div class="mkt-item"><div class="dot-a"></div>"口服植物GLP-1"宣称在欧盟属违规医疗声明</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇺🇸 美国</div>
+            <div class="mkt-item"><div class="dot-g"></div>桑叶/白芸豆：DSHEA合规，长期上市</div>
+            <div class="mkt-item"><div class="dot-a"></div>小檗碱：FDA收到不良事件报告，监管趋严</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🌙 中东GCC</div>
+            <div class="mkt-item"><div class="dot-g"></div>控糖/代谢诉求强烈（糖尿病发病率高）</div>
+            <div class="mkt-item"><div class="dot-a"></div>需提供完整安全性文件用于注册</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-warn"><span class="alert-icon">⚠️</span>小檗碱从本清单移除。欧盟德国、意大利、西班牙已出台明确剂量上限或需要处方。"植物型GLP-1"是营销话术，对欧洲监管机构讲这个故事存在合规风险。</div>
+      <div class="target-row">
+        <span class="target-label">对标买家</span>
+        <span class="target-text">欧洲天然膳食补充剂品牌、中东糖尿病保健品进口商、减重功能食品OEM商</span>
+        <span class="target-form">👉 胶囊 / 控糖冲剂粉料</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TRACK 4 (NEW) ══ -->
+  <div class="track" id="t4">
+    <div class="track-head" onclick="toggle('t4')">
+      <div class="track-num">4</div>
+      <div class="track-info">
+        <div class="track-name">运动恢复与植物基电解质 <span class="track-name-en">Sport Recovery · Adaptogens</span></div>
+        <div class="track-tags">
+          <span class="tag tag-new">新增赛道</span>
+          <span class="tag tag-priority">立即关注</span>
+          <span class="tag" style="background:var(--purple-light);color:var(--purple);">枸杞多糖 · 红景天 · 苦瓜苷</span>
+        </div>
+      </div>
+      <div class="track-score-wrap">
+        <div class="score-label">新增评分</div>
+        <div class="score-num s-high">8.2</div>
+        <div class="score-bar s-high"><div class="score-fill" style="width:82%"></div></div>
+        <div class="score-orig">新增推荐</div>
+        <span class="chevron" id="ch-t4">▼</span>
+      </div>
+    </div>
+    <div class="track-body" id="b-t4">
+      <div class="body-grid">
+        <div class="body-col">
+          <div class="col-title">新增推荐理由</div>
+          <div class="rationale-text">
+            欧美运动营养市场2025-2026年正经历结构转型：消费者从"蛋白粉"向<strong>"天然植物基恢复配方"</strong>迁移。法国、德国户外运动和健身人群是高客单价、高忠诚度的B端采购驱动力。<br><br>
+            枸杞多糖、红景天、苦瓜苷是中国有<strong>绝对供应链优势</strong>的品种，欧洲本地几乎没有竞争性供应商。A的法语背景可以直接对接法国运动营养品牌和有机运动食品商。<br><br>
+            与赛道1/2不同，本赛道目标买家更愿意为"科学背书+产品规格稳定"支付溢价。
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">高潜力主打品类</div>
+          <div class="product-item">
+            <div class="product-name">枸杞多糖（LBP）</div>
+            <div class="product-desc">宁夏/新疆绝对产区优势，抗氧化+运动恢复双诉求，欧洲认知度快速提升，"东方超级食物"叙事天然适配法语市场。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">红景天提取物（Rhodiola）</div>
+            <div class="product-desc">西藏/云南产区，全球公认adaptogen，欧洲运动营养品牌主动采购，中国供应链竞争格局比Ashwagandha友好得多。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">苦瓜苷（Charantin）</div>
+            <div class="product-desc">运动后血糖稳定+代谢支持，中国南方供应链完善，欧美运动营养圈认知度增长中，复配价值高。</div>
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">市场准入状态</div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇪🇺 欧盟</div>
+            <div class="mkt-item"><div class="dot-g"></div>枸杞多糖：传统食品成分，非Novel Food</div>
+            <div class="mkt-item"><div class="dot-g"></div>红景天：欧盟传统草药（HMPC），可销售</div>
+            <div class="mkt-item"><div class="dot-a"></div>需提供完整重金属/农残检测文件</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇺🇸 美国</div>
+            <div class="mkt-item"><div class="dot-g"></div>全部品种DSHEA框架畅通</div>
+            <div class="mkt-item"><div class="dot-g"></div>运动营养赛道买家对价格不是第一敏感维度</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🌙 中东GCC</div>
+            <div class="mkt-item"><div class="dot-g"></div>Halal合规，运动+健身文化快速兴起</div>
+            <div class="mkt-item"><div class="dot-a"></div>UAE是中东运动营养采购集散地，值得重点开发</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info"><span class="alert-icon">🆕</span>这是原清单未涵盖的赛道。红景天是少数中国有供应优势、且欧盟监管框架完善（HMPC传统草药）的品种，建议与赛道1并行评估。</div>
+      <div class="target-row">
+        <span class="target-label">对标买家</span>
+        <span class="target-text">法国/德国有机运动营养品牌、欧美功能性电解质冲剂OEM商、中东健身补剂进口商</span>
+        <span class="target-form">👉 功能粉料 / 胶囊复配OEM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TRACK 5 ══ -->
+  <div class="track" id="t5">
+    <div class="track-head" onclick="toggle('t5')">
+      <div class="track-num">5</div>
+      <div class="track-info">
+        <div class="track-name">高阶宠物代谢与机能调理 <span class="track-name-en">Premium Pet Care</span></div>
+        <div class="track-tags">
+          <span class="tag tag-expand">需扩品类边界</span>
+          <span class="tag" style="background:var(--blue-light);color:var(--blue);">玻尿酸 · 冻干山药粉</span>
+        </div>
+      </div>
+      <div class="track-score-wrap">
+        <div class="score-label">修订得分</div>
+        <div class="score-num s-mid">7.8</div>
+        <div class="score-bar s-mid"><div class="score-fill" style="width:78%"></div></div>
+        <div class="score-orig">原8.8</div>
+        <span class="chevron" id="ch-t5">▼</span>
+      </div>
+    </div>
+    <div class="track-body" id="b-t5">
+      <div class="body-grid">
+        <div class="body-col">
+          <div class="col-title">核心推荐理由（修正版）</div>
+          <div class="rationale-text">
+            整张清单里最值得重新认真对待的赛道之一。宠物保健品在欧美的监管要求比人类补充剂<strong>更宽松</strong>，进入门槛反而更低。<br><br>
+            山东玻尿酸/软骨素是全球统治级供应链，B的医药采购背景在宠物产品质控上完全适用。<br><br>
+            <strong>需要做的决策</strong>：玻尿酸/软骨素不是植物提取物，是否愿意扩展品类边界？如果是，这个赛道的得分可以提升至8.5+。
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">高潜力主打品类</div>
+          <div class="product-item">
+            <div class="product-name">宠物级透明质酸（玻尿酸）</div>
+            <div class="product-desc">山东全球统治，关节健康诉求强烈，欧美宠物品牌主动寻源，客单价高复购稳定。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">药食同源冻干粉（山药/蔓越莓）</div>
+            <div class="product-desc">主打脾胃与泌尿健康，植物来源，Halal/有机认证获取容易，逻辑更接近植物提取物主线。</div>
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">市场准入状态</div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇪🇺 欧盟</div>
+            <div class="mkt-item"><div class="dot-g"></div>宠物饲料补充剂：受EC 767/2009监管，相对宽松</div>
+            <div class="mkt-item"><div class="dot-a"></div>需提供产品成分安全声明（SDS）</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇺🇸 美国</div>
+            <div class="mkt-item"><div class="dot-g"></div>NASC成员+AAFCO合规，门槛低于人类补充剂</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🌙 中东GCC</div>
+            <div class="mkt-item"><div class="dot-a"></div>宠物经济起步阶段，UAE/沙特高消费人群是目标</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info"><span class="alert-icon">📌</span>核心决策点：是否将品类边界从"植物提取物"扩展至"宠物保健原料"？建议两位合伙人明确讨论后再决定投入资源。</div>
+      <div class="target-row">
+        <span class="target-label">对标买家</span>
+        <span class="target-text">欧美亚马逊中型宠物保健品牌、高端连锁宠物沙龙、宠物功能食品OEM商</span>
+        <span class="target-form">👉 营养膏 / 粉剂OEM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TRACK 6 ══ -->
+  <div class="track" id="t6">
+    <div class="track-head" onclick="toggle('t6')">
+      <div class="track-num">6</div>
+      <div class="track-info">
+        <div class="track-name">都市抗炎与纯素美妆内服 <span class="track-name-en">Clean Beauty · Vegan Actives</span></div>
+        <div class="track-tags">
+          <span class="tag tag-wait">暂缓——第二阶段</span>
+          <span class="tag" style="background:var(--pink-light,#fdeef8);color:#7a3060;">补骨脂酚 · 积雪草</span>
+        </div>
+      </div>
+      <div class="track-score-wrap">
+        <div class="score-label">修订得分</div>
+        <div class="score-num s-low">6.5</div>
+        <div class="score-bar s-low"><div class="score-fill" style="width:65%"></div></div>
+        <div class="score-orig">原8.5</div>
+        <span class="chevron" id="ch-t6">▼</span>
+      </div>
+    </div>
+    <div class="track-body" id="b-t6">
+      <div class="body-grid">
+        <div class="body-col">
+          <div class="col-title">修正理由</div>
+          <div class="rationale-text">
+            方向有潜力，A的法语背景对接法国药妆品牌有真实优势，但存在一个根本性障碍：<strong>美妆原料和保健食品是两套完全不同的监管体系。</strong><br><br>
+            欧盟化妆品原料受EC No 1223/2009监管，与食品补充剂体系没有交叉。初创阶段同时应对两套合规框架，资源分散风险极高。<br><br>
+            建议：保健食品B2B跑通之后，以独立子线的方式切入化妆品原料，不要初期混合管理。
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">保留品种（第二阶段）</div>
+          <div class="product-item">
+            <div class="product-name">补骨脂酚（Bakuchiol）</div>
+            <div class="product-desc">纯素维A醇替代，2026欧美美妆圈真实爆款，中国提取工艺成熟，法国独立药妆品牌是精准目标客户。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">积雪草提取物（Cica）</div>
+            <div class="product-desc">皮肤屏障修复成分，已被全球主流护肤品广泛使用，B端采购需求稳定。</div>
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">市场准入状态</div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇪🇺 欧盟</div>
+            <div class="mkt-item"><div class="dot-a"></div>化妆品原料：受EC 1223/2009监管（≠食品补充剂）</div>
+            <div class="mkt-item"><div class="dot-a"></div>需提供INCI名称、安全评估报告（CPSR）</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇺🇸 美国</div>
+            <div class="mkt-item"><div class="dot-g"></div>FDA化妆品原料登记相对宽松（MoCRA 2023）</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-warn"><span class="alert-icon">⚠️</span>不是不做，是不要现在做。化妆品原料和保健食品原料是两条不同的跑道，初期资源集中在一条主线上，成功率更高。</div>
+      <div class="target-row">
+        <span class="target-label">对标买家</span>
+        <span class="target-text">法国/比利时独立药妆品牌、欧洲纯素护肤ODM工厂</span>
+        <span class="target-form">👉 第二阶段独立子线</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TRACK 7 ══ -->
+  <div class="track" id="t7">
+    <div class="track-head" onclick="toggle('t7')">
+      <div class="track-num">7</div>
+      <div class="track-info">
+        <div class="track-name">银发族肌肉与长寿管理 <span class="track-name-en">Healthy Aging · Longevity</span></div>
+        <div class="track-tags">
+          <span class="tag tag-wait">暂缓——长期储备</span>
+          <span class="tag" style="background:var(--paper-2);color:var(--ink-2);">黄精 · 山药 · 植物氨基酸</span>
+        </div>
+      </div>
+      <div class="track-score-wrap">
+        <div class="score-label">修订得分</div>
+        <div class="score-num s-low">6.0</div>
+        <div class="score-bar s-low"><div class="score-fill" style="width:60%"></div></div>
+        <div class="score-orig">原7.0</div>
+        <span class="chevron" id="ch-t7">▼</span>
+      </div>
+    </div>
+    <div class="track-body" id="b-t7">
+      <div class="body-grid">
+        <div class="body-col">
+          <div class="col-title">修正理由</div>
+          <div class="rationale-text">
+            方向长期正确，欧洲老龄化是不可逆趋势。但"黄精/山药"在欧洲买家认知中几乎为空白，从零教育市场需要大量时间和资源，与初创阶段资源有限的现实不匹配。<br><br>
+            建议等赛道1/4建立基本客户信任后，自然延伸至长寿赛道，而非现在主动开发。
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">储备品种</div>
+          <div class="product-item">
+            <div class="product-name">黄精提取物</div>
+            <div class="product-desc">中国药食同源，"东方长寿（Longevity）"叙事天然契合海外Biohacker群体，2-3年内可能破圈。</div>
+          </div>
+          <div class="product-item">
+            <div class="product-name">植物源氨基酸复配颗粒</div>
+            <div class="product-desc">绕开乳清蛋白竞争，主打植物基+中草药强壮概念，技术壁垒相对高。</div>
+          </div>
+        </div>
+        <div class="body-col">
+          <div class="col-title">市场准入状态</div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇪🇺 欧盟</div>
+            <div class="mkt-item"><div class="dot-a"></div>黄精：部分国家要求传统草药授权，需逐国核查</div>
+          </div>
+          <div class="mkt-block">
+            <div class="mkt-flag">🇺🇸 美国</div>
+            <div class="mkt-item"><div class="dot-g"></div>DSHEA框架无障碍</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-tip"><span class="alert-icon">📋</span>列为2-3年储备赛道，现在可以开始小规模积累供应商资源和样品，但不建议投入主要销售资源。</div>
+      <div class="target-row">
+        <span class="target-label">对标买家</span>
+        <span class="target-text">欧洲50+人群专属健康管理平台、海外Longevity营养品独立站</span>
+        <span class="target-form">👉 长期储备，暂不主攻</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SKIP SECTION ══ -->
+  <div class="skip-section">
+    <div class="skip-title">初期建议回避的品种</div>
+    <div class="skip-grid">
+      <div class="skip-item">
+        <div class="skip-name">小檗碱（Berberine）</div>
+        <div class="skip-reason">欧盟多国剂量限制/按药品管理，监管风险高</div>
+      </div>
+      <div class="skip-item">
+        <div class="skip-name">岩藻多糖（Fucoidan）</div>
+        <div class="skip-reason">欧盟Novel Food，授权周期3-5年</div>
+      </div>
+      <div class="skip-item">
+        <div class="skip-name">圣约翰草</div>
+        <div class="skip-reason">EU 2024年已列入健康风险成分限制清单</div>
+      </div>
+      <div class="skip-item">
+        <div class="skip-name">褪黑素原料</div>
+        <div class="skip-reason">欧盟监管持续收紧，剂量争议未决</div>
+      </div>
+      <div class="skip-item">
+        <div class="skip-name">南非醉茄（Ashwagandha）</div>
+        <div class="skip-reason">印度供应链主导，中国无成本优势</div>
+      </div>
+      <div class="skip-item">
+        <div class="skip-name">Cordyceps militaris</div>
+        <div class="skip-reason">欧盟Novel Food未获授权，与sinensis严格区分</div>
+      </div>
+      <div class="skip-item">
+        <div class="skip-name">迷迭香精油</div>
+        <div class="skip-reason">西班牙/突尼斯主产区，中国无供应链优势</div>
+      </div>
+      <div class="skip-item">
+        <div class="skip-name">CBD / 大麻提取物</div>
+        <div class="skip-reason">合规地雷密集，初创资源不足以承担风险</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PRIORITY SUMMARY ══ -->
+  <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;">
+    <div style="background:#fff;border:1px solid var(--paper-3);border-radius:8px;padding:20px 22px;border-left:4px solid var(--green);">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Phase 1 · 立即启动</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;">赛道1 灵芝+猴头菇+酸枣仁<br>赛道2 猴头菇肠道（共享供应链）<br>赛道4 运动恢复（红景天/枸杞多糖）</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--paper-3);border-radius:8px;padding:20px 22px;border-left:4px solid var(--gold);">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Phase 2 · 6个月后评估</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;">赛道3 控糖（桑叶/白芸豆，摸清监管后）<br>赛道5 宠物（需决策品类扩展边界）</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--paper-3);border-radius:8px;padding:20px 22px;border-left:4px solid var(--ink-3);">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px">Phase 3 · 长期储备</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;">赛道6 美妆内服（独立子线）<br>赛道7 长寿管理（2-3年后重评）</div>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer-note">
+    <div>
+      <strong style="color:var(--ink)">监管数据来源参考</strong><br>
+      欧盟Novel Food目录（EC 2015/2283）· EFSA植物成分清单 · 欧盟化妆品法规EC 1223/2009 · 美国FDA DSHEA 1994 · 沙特SFDA.FD 55:2023 · UAE ESMA Halal标准 · NutraIngredients 2025-2026行业报告
+    </div>
+    <div>
+      <strong style="color:var(--ink)">免责说明</strong><br>
+      本矩阵为战略规划参考，不构成法律或合规建议。各品种在目标市场的具体准入状态请在正式出口前委托专业法规顾问核查。监管法规随时可能更新，以官方最新版本为准。
+    </div>
+  </div>
+
+</div><!-- /capture-area -->
+
+<script>
+function toggle(id) {
+  var body = document.getElementById('b-' + id);
+  var ch = document.getElementById('ch-' + id);
+  if (!body) return;
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  ch.classList.toggle('open', !isOpen);
+}
+</script>
+<style>@media print { .toolbar { display: none; } body { background: #fff; } }</style>
+</body>
+</html>

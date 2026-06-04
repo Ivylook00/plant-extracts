@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPHI 2026 · 论坛清单</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans SC',sans-serif;background:#f5f4f0;color:#1a1917;font-size:14px;line-height:1.6;}
+.toolbar{position:fixed;top:14px;right:14px;z-index:200;display:flex;gap:8px;}
+.tbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;background:#1a1917;color:#f5f4f0;font-size:12px;font-weight:500;border:none;cursor:pointer;border-radius:2px;transition:opacity .15s;white-space:nowrap;}
+.tbtn:hover{opacity:.75;}
+.tbtn.loading{opacity:.4;pointer-events:none;}
+.tbtn svg{width:12px;height:12px;flex-shrink:0;}
+#doc{max-width:680px;margin:0 auto;padding:48px 20px 64px;}
+
+/* HEADER */
+.hdr{padding-bottom:20px;border-bottom:3px solid #1a1917;margin-bottom:32px;}
+.hdr-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#8a6c18;margin-bottom:8px;}
+.hdr-title{font-size:clamp(20px,5vw,28px);font-weight:700;color:#1a1917;line-height:1.2;margin-bottom:12px;}
+.hdr-meta{display:flex;flex-wrap:wrap;gap:6px 20px;}
+.hdr-meta-item{font-size:12px;color:#6a6860;}
+.hdr-meta-item strong{color:#1a1917;font-weight:500;}
+
+/* NOTE */
+.note{background:#fffbec;border-left:3px solid #c8a448;padding:10px 14px;font-size:12px;color:#8a6c18;line-height:1.65;margin-bottom:28px;}
+
+/* CHAPTER */
+.chapter{margin-bottom:28px;}
+.ch-head{background:#1a1917;color:#f5f4f0;padding:10px 16px;display:flex;align-items:center;gap:12px;}
+.ch-letter{font-size:18px;font-weight:700;color:#c8a448;line-height:1;flex-shrink:0;}
+.ch-title{font-size:14px;font-weight:700;}
+.ch-sub{font-size:11px;color:rgba(245,244,240,.5);margin-left:auto;}
+
+/* FORUM ROW */
+.forum-row{background:#fff;border-bottom:1px solid #e8e5de;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;}
+.forum-row:last-child{border-bottom:none;}
+.fr-name{font-size:13px;font-weight:700;color:#1a1917;margin-bottom:4px;line-height:1.4;}
+.fr-meta{font-size:12px;color:#9a9688;margin-bottom:6px;}
+.fr-meta span{margin-right:12px;}
+.fr-desc{font-size:12px;color:#6a6860;line-height:1.65;}
+.fr-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
+.priority{font-size:11px;font-weight:500;padding:3px 9px;border-radius:2px;white-space:nowrap;}
+.p1{background:#1a6832;color:#fff;}
+.p2{background:#8a5c08;color:#fff;}
+.p3{background:#e8e5de;color:#6a6860;}
+.checkbox{width:20px;height:20px;border:2px solid #dedad2;border-radius:2px;cursor:pointer;flex-shrink:0;background:#fff;transition:all .15s;}
+.checkbox.checked{background:#1a1917;border-color:#1a1917;}
+.checkbox.checked::after{content:'✓';color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;height:100%;}
+
+/* SPECIAL ROW */
+.special-row{background:#fff;border-bottom:1px solid #e8e5de;padding:12px 16px;display:flex;align-items:center;gap:12px;}
+.special-row:last-child{border-bottom:none;}
+.sr-dot{width:6px;height:6px;border-radius:50%;background:#c8a448;flex-shrink:0;}
+.sr-text{font-size:13px;color:#1a1917;flex:1;font-weight:500;}
+.sr-sub{font-size:12px;color:#9a9688;}
+
+/* FOOTER */
+.footer{margin-top:28px;padding-top:14px;border-top:2px solid #1a1917;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;}
+.fl{font-size:11px;color:#9a9688;line-height:1.8;}
+.fr{font-size:12px;color:#9a9688;text-align:right;}
+
+@media print{
+  @page{margin:10mm 8mm;size:A4 portrait;}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  .toolbar{display:none!important;}
+  #doc{max-width:100%;padding:0;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="tbtn" id="imgBtn" onclick="dlImg()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    下载图片
+  </button>
+</div>
+
+<div id="doc">
+
+<div class="hdr">
+  <div class="hdr-label">展会准备材料 · CPHI China 2026</div>
+  <div class="hdr-title">论坛清单 · 待B确认</div>
+  <div class="hdr-meta">
+    <div class="hdr-meta-item"><strong>展会日期</strong> 2026.06.16–18</div>
+    <div class="hdr-meta-item"><strong>地点</strong> 上海新国际博览中心</div>
+  </div>
+</div>
+
+<div class="note">
+  ⚠ 以下论坛具体时间尚未公布，需通过 CPHI 官方小程序查看完整议程并报名。建议 B 根据专业判断勾选值得参加的场次，再统一安排日程。
+</div>
+
+<!-- 第一优先级 -->
+<div class="chapter">
+  <div class="ch-head">
+    <div class="ch-letter">1</div>
+    <div class="ch-title">第一优先级 · A+B都应该去</div>
+    <div class="ch-sub">直接相关</div>
+  </div>
+
+  <div class="forum-row">
+    <div>
+      <div class="fr-name">第十九届天然提取物创新与发展论坛</div>
+      <div class="fr-meta"><span>📅 6月17日</span><span>📍 E4馆M26会议室</span><span>🗣 中文</span></div>
+      <div class="fr-desc">行业最重要的年度论坛，连续举办19年。聚焦植提产业如何突破困局、挖掘市场潜力、通过标准规制减少贸易壁垒。主办方为中国医药保健品进出口商会，演讲者多为行业龙头和监管专家。<br><strong style="color:#1a1917;">对你们的价值：</strong>直接了解行业现状和出口市场趋势，是A补课最高效的一场。</div>
+    </div>
+    <div class="fr-right">
+      <span class="priority p1">必去</span>
+      <div class="checkbox" onclick="this.classList.toggle('checked')" title="勾选确认参加"></div>
+    </div>
+  </div>
+
+  <div class="forum-row">
+    <div>
+      <div class="fr-name">2026 营养健康产品法规与市场创新论坛</div>
+      <div class="fr-meta"><span>📅 6月17日</span><span>📍 E5馆M30会议室</span><span>🗣 中文</span></div>
+      <div class="fr-desc">围绕全球营养健康产业法规前沿趋势，探讨欧美最新监管政策、合成生物学、精准营养等话题。邀请国内外权威专家分享研究成果，聚焦消费者需求变化。<br><strong style="color:#1a1917;">对你们的价值：</strong>A最需要补的欧盟合规知识，一场胜过自己读一周资料。</div>
+    </div>
+    <div class="fr-right">
+      <span class="priority p1">必去</span>
+      <div class="checkbox" onclick="this.classList.toggle('checked')" title="勾选确认参加"></div>
+    </div>
+  </div>
+
+  <div class="forum-row">
+    <div>
+      <div class="fr-name">2026 天然原料创新与健康应用大会 · 主论坛</div>
+      <div class="fr-meta"><span>📅 6月16日</span><span>📍 E15馆C50展位</span><span>🗣 中文</span></div>
+      <div class="fr-desc">主题：全球食品原料监管趋势与合规实践。解读欧盟、中美等主要市场最新监管政策，探讨天然活性成分在医药、保健食品、功能食品等赛道的创新应用方案。<br><strong style="color:#1a1917;">对你们的价值：</strong>展位就在展区内，参观途中可顺路进入，无需专程绕路。</div>
+    </div>
+    <div class="fr-right">
+      <span class="priority p1">顺路去</span>
+      <div class="checkbox" onclick="this.classList.toggle('checked')" title="勾选确认参加"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 第二优先级 -->
+<div class="chapter">
+  <div class="ch-head">
+    <div class="ch-letter">2</div>
+    <div class="ch-title">第二优先级 · 按兴趣选择</div>
+    <div class="ch-sub">B 判断是否相关</div>
+  </div>
+
+  <div class="forum-row">
+    <div>
+      <div class="fr-name">2026 天然原料创新与健康应用大会 · 论坛一：药食同源</div>
+      <div class="fr-meta"><span>📅 6月16日</span><span>📍 E15馆C50展位</span><span>🗣 中文</span></div>
+      <div class="fr-desc">深度解析高潜力药食同源原料商业化路径、生物利用度提升技术，探讨护肝、抗糖、减脂等细分市场增速显著的成分创新方向。<br><strong style="color:#1a1917;">对你们的价值：</strong>了解酸枣仁、红景天等药食同源品类的市场化路径。</div>
+    </div>
+    <div class="fr-right">
+      <span class="priority p2">酌情</span>
+      <div class="checkbox" onclick="this.classList.toggle('checked')" title="勾选确认参加"></div>
+    </div>
+  </div>
+
+  <div class="forum-row">
+    <div>
+      <div class="fr-name">2026 天然原料创新与健康应用大会 · 论坛三：运动营养</div>
+      <div class="fr-meta"><span>📅 6月17日</span><span>📍 E15馆C50展位</span><span>🗣 中文</span></div>
+      <div class="fr-desc">聚焦运动营养赛道天然原料应用趋势，探讨代谢健康、运动恢复相关成分的产品创新。<br><strong style="color:#1a1917;">对你们的价值：</strong>与红景天、枸杞多糖等你们关注的运动恢复品类直接相关。</div>
+    </div>
+    <div class="fr-right">
+      <span class="priority p2">酌情</span>
+      <div class="checkbox" onclick="this.classList.toggle('checked')" title="勾选确认参加"></div>
+    </div>
+  </div>
+
+  <div class="forum-row">
+    <div>
+      <div class="fr-name">2026 功能食品原料前沿趋势洞察论坛</div>
+      <div class="fr-meta"><span>📅 6月16日</span><span>📍 E5馆M29会议室</span><span>🗣 中文</span></div>
+      <div class="fr-desc">聚焦情绪管理、代谢健康、精准营养等热门赛道，探讨原料创新的破局之道和商业化路径。<br><strong style="color:#1a1917;">对你们的价值：</strong>"情绪管理"赛道直接对应你们主攻方向，了解业内对这个赛道的判断。</div>
+    </div>
+    <div class="fr-right">
+      <span class="priority p2">酌情</span>
+      <div class="checkbox" onclick="this.classList.toggle('checked')" title="勾选确认参加"></div>
+    </div>
+  </div>
+
+  <div class="forum-row">
+    <div>
+      <div class="fr-name">2026 中医药现代化及国际化发展论坛</div>
+      <div class="fr-meta"><span>📅 6月17日</span><span>📍 E5馆M30会议室</span><span>🗣 中文</span></div>
+      <div class="fr-desc">探讨中医药如何走向国际市场，包括欧盟、北美、东南亚等市场的准入经验和实际案例分享。<br><strong style="color:#1a1917;">对你们的价值：</strong>实际出口案例比理论更有参考价值，B可以从中识别有合作意向的企业。</div>
+    </div>
+    <div class="fr-right">
+      <span class="priority p2">酌情</span>
+      <div class="checkbox" onclick="this.classList.toggle('checked')" title="勾选确认参加"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 特别活动 -->
+<div class="chapter">
+  <div class="ch-head">
+    <div class="ch-letter">★</div>
+    <div class="ch-title">特别活动 · 全程不要错过</div>
+    <div class="ch-sub">无需报名</div>
+  </div>
+
+  <div class="special-row">
+    <div class="sr-dot"></div>
+    <div>
+      <div class="sr-text">天然产物优质产品探索之旅</div>
+      <div class="sr-sub">6月16日 · 集合地点：E15馆C50展位门口 · 专家带领参观标杆展商展台，直接接触优质供应商</div>
+    </div>
+    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+  </div>
+
+  <div class="special-row">
+    <div class="sr-dot"></div>
+    <div>
+      <div class="sr-text">天然产物首秀品牌孵化专区</div>
+      <div class="sr-sub">全3天 · E5馆E02展位 · 新兴品牌聚集，MOQ低、合作意愿强，黑马OEM供应商首选</div>
+    </div>
+    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+  </div>
+
+  <div class="special-row">
+    <div class="sr-dot"></div>
+    <div>
+      <div class="sr-text">海外买家配对会</div>
+      <div class="sr-sub">6月16–17日 · 海外买家休息区 · A以买家身份、B以供应商身份分别参加，了解海外采购需求和竞争对手服务</div>
+    </div>
+    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+  </div>
+
+  <div class="special-row">
+    <div class="sr-dot"></div>
+    <div>
+      <div class="sr-text">Natural Ingredients Awards 颁奖</div>
+      <div class="sr-sub">全3天 · E4馆门厅 · 年度创新原料评选，获奖产品代表行业最新创新方向，可借此发现新赛道线索</div>
+    </div>
+    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+  </div>
+
+</div>
+
+<!-- 提醒 -->
+<div class="chapter">
+  <div class="ch-head">
+    <div class="ch-letter">!</div>
+    <div class="ch-title">行动提醒</div>
+  </div>
+  <div class="forum-row" style="grid-template-columns:1fr;">
+    <div style="font-size:13px;color:#4a4840;line-height:1.8;">
+      <div style="margin-bottom:6px;">→ <strong style="color:#1a1917;">今天</strong>下载 CPHI China 官方微信小程序，查看论坛具体时间并提前报名（部分论坛有人数限制）</div>
+      <div style="margin-bottom:6px;">→ <strong style="color:#1a1917;">B确认后</strong>把勾选结果告诉 A，A 负责统一排进三天日程表</div>
+      <div>→ <strong style="color:#1a1917;">注意</strong>论坛和展位参观之间的时间冲突，展位参观优先级更高</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="fl">CPHI China 2026 · 上海新国际博览中心<br>具体议程：CPHI China 官方微信小程序</div>
+  <div class="fr">论坛清单<br>待B确认</div>
+</div>
+
+</div>
+
+<script>
+async function dlImg(){
+  var btn=document.getElementById('imgBtn');
+  var tb=document.querySelector('.toolbar');
+  btn.textContent='生成中...';btn.classList.add('loading');tb.style.display='none';
+  try{
+    var canvas=await html2canvas(document.getElementById('doc'),{
+      backgroundColor:'#f5f4f0',scale:2.5,useCORS:true,logging:false,windowWidth:680
+    });
+    var a=document.createElement('a');
+    a.download='CPHI2026_论坛清单.png';
+    a.href=canvas.toDataURL('image/png');a.click();
+  }catch(e){alert('下载失败，请截图保存。');}
+  finally{
+    tb.style.display='flex';
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 下载图片';
+    btn.classList.remove('loading');
+  }
+}
+</script>
+</body>
+</html>

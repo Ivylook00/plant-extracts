@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 植提大健康外贸选品决策模型 (Scorecard)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --ink: #1a1a18;
+            --ink-2: #4a4a44;
+            --ink-3: #8a8a80;
+            --paper: #f5f3ee;
+            --paper-2: #eceae3;
+            --paper-3: #e0ddd4;
+            --gold: #b8963e;
+            --gold-light: #f0e4c4;
+            --gold-pale: #faf6ec;
+            
+            --primary: #1a3a5c;
+            --primary-light: #dde8f5;
+            --success: #2d6a4f;
+            --success-light: #d8eedf;
+            --warning: #9c4b00;
+            --warning-light: #fdecd8;
+            --danger: #8b2020;
+            --danger-light: #fde8e8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        /* 工具栏：放置下载按钮 */
+        .toolbar {
+            max-width: 1100px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-download {
+            background-color: var(--gold);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(184, 150, 62, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #a38233;
+            box-shadow: 0 4px 12px rgba(184, 150, 62, 0.3);
+        }
+
+        .btn-download:active {
+            transform: scale(0.98);
+        }
+
+        /* 核心需要被截图包裹的容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(26, 26, 24, 0.05);
+            border: 1px solid var(--paper-3);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--paper-2);
+            padding-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: var(--ink-2);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .weight-overview {
+            background-color: var(--gold-pale);
+            border: 1px solid var(--gold-light);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .weight-overview h3 {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .progress-stack {
+            display: flex;
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--paper-2);
+            margin-bottom: 20px;
+        }
+
+        .progress-segment {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .seg-1 { width: 30%; background-color: var(--danger); }
+        .seg-2 { width: 25%; background-color: var(--primary); }
+        .seg-3 { width: 20%; background-color: var(--success); }
+        .seg-4 { width: 15%; background-color: var(--warning); }
+        .seg-5 { width: 10%; background-color: #7f8c8d; }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--ink-2);
+        }
+
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .model-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--paper-3);
+        }
+
+        .model-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 16px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .model-table td {
+            padding: 20px;
+            vertical-align: top;
+            border-bottom: 1px solid var(--paper-2);
+            background-color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .model-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .weight-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .badge-compliance { background-color: var(--danger-light); color: var(--danger); }
+        .badge-awareness { background-color: var(--primary-light); color: var(--primary); }
+        .badge-supply { background-color: var(--success-light); color: var(--success); }
+        .badge-formulation { background-color: var(--warning-light); color: var(--warning); }
+        .badge-differentiation { background-color: #e2e8f0; color: #4a5568; }
+
+        .dimension-name {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        .dimension-en {
+            font-size: 0.8rem;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .criterion-list {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .criterion-list li {
+            margin-bottom: 6px;
+            padding-left: 14px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--ink-2);
+        }
+
+        .criterion-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--paper-2);
+            font-size: 0.85rem;
+            color: var(--ink-3);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 20px 10px; }
+            .container { padding: 20px; }
+            header h1 { font-size: 1.6rem; }
+            .toolbar { justify-content: center; }
+            .model-table, .model-table thead, .model-table tbody, .model-table th, .model-table td, .model-table tr {
+                display: block;
+            }
+            .model-table thead { display: none; }
+            .model-table tr {
+                border-bottom: 2px solid var(--paper-3);
+                padding: 15px 0;
+            }
+            .model-table td {
+                border: none;
+                padding: 8px 5px;
+            }
+            .model-table td::before {
+                content: attr(data-label);
+                display: block;
+                font-weight: bold;
+                font-size: 0.8rem;
+                color: var(--ink-3);
+                margin-bottom: 4px;
+                text-transform: uppercase;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="toolbar">
+    <button class="btn-download" id="downloadBtn">
+        📸 导出并下载为图片
+    </button>
+</div>
+
+<div class="container" id="captureArea">
+    <header>
+        <h1>大健康外贸选品决策模型 (Scorecard)</h1>
+        <p>基于“确定性”与“投资回报率 (ROI)”的轻资产外贸选品量化底盘，规避主观盲区，确立核心主打品类</p>
+    </header>
+
+    <div class="weight-overview">
+        <h3>📊 选品核心要素权重分配 (总分: 100分)</h3>
+        <div class="progress-stack">
+            <div class="progress-segment seg-1">30%</div>
+            <div class="progress-segment seg-2">25%</div>
+            <div class="progress-segment seg-3">20%</div>
+            <div class="progress-segment seg-4">15%</div>
+            <div class="progress-segment seg-5">10%</div>
+        </div>
+        <div class="legend-grid">
+            <div class="legend-item"><span class="color-dot" style="background-color: var(--danger);"></span>合规壁垒高低 (30%)</div>
+            <div class="legend-item"><span class="color-dot" style="background-color: var(--primary);"></span>海外用户认知度 (25%)</div>
+            <div class="legend-item"><span class="color-dot" style="background-color: var(--success);"></span>主产区优势与控制力 (20%)</div>
+            <div class="legend-item"><span class="color-dot" style="background-color: var(--warning);"></span>方案与形态成熟度 (15%)</div>
+            <div class="legend-item"><span class="color-dot" style="background-color: #7f8c8d;"></span>差异化与复配空间 (10%)</div>
+        </div>
+    </div>
+
+    <table class="model-table">
+        <thead>
+            <tr>
+                <th style="width: 25%;">评估核心维度 (Dimension)</th>
+                <th style="width: 15%;">分配权重 (Weight)</th>
+                <th style="width: 35%;">战略底层解释 (Strategic Logic)</th>
+                <th style="width: 25%;">量化打分依据 (Scoring Standard)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="评估核心维度">
+                    <div class="dimension-name">合规壁垒高低</div>
+                    <div class="dimension-en">Regulatory Compliance</div>
+                </td>
+                <td data-label="分配权重">
+                    <span class="weight-badge badge-compliance">30% (30分)</span>
+                </td>
+                <td data-label="战略底层解释">
+                    <strong>外贸业务的第一生死线。</strong> 初创公司必须追求快速周转与资产轻量化，无法承担长达数年的新资源食品（如欧盟 Novel Food、美国 NDIN）审批时间及昂贵的诉讼/合规检测成本。通关无阻碍是品类能产生现金流的绝对前提。
+                </td>
+                <td data-label="量化打分依据">
+                    <ul class="criterion-list">
+                        <li><strong>高分 (25-30分):</strong> 目的国传统允许成分，海关商检免卡关，法规完全透明。</li>
+                        <li><strong>中分 (15-24分):</strong> 需清真(Halal)或有机等特殊认证，但国内大厂现成支持。</li>
+                        <li><strong>低分 (0-14分):</strong> 处于灰色地带或剂量受严格限制。</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td data-label="评估核心维度">
+                    <div class="dimension-name">海外用户认知度</div>
+                    <div class="dimension-en">Market Awareness</div>
+                </td>
+                <td data-label="分配权重">
+                    <span class="weight-badge badge-awareness">25% (25分)</span>
+                </td>
+                <td data-label="战略底层解释">
+                    <strong>拒绝高昂的市场教育成本。</strong> 初创公司不具备在海外 C 端打响全新概念的预算。应当死死锚定海外买家、主流平台（亚马逊、独立站、TikTok）已经在大规模采购、高频搜索，且正在疯狂寻找“高品质中国平替”或“升级工艺”的成熟品类。
+                </td>
+                <td data-label="量化打分依据">
+                    <ul class="criterion-list">
+                        <li><strong>高分 (20-25分):</strong> 海外主流电商长期爆款，属于 B 端刚需大宗类目。</li>
+                        <li><strong>中分 (10-19分):</strong> 处于快速上升期的流行概念，买家认知正在形成。</li>
+                        <li><strong>低分 (0-9分):</strong> 极其小众或东方特色成分，需要漫长的客户说教。</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td data-label="评估核心维度">
+                    <div class="dimension-name">主产区优势与资源控制力</div>
+                    <div class="dimension-en">Supply Chain Power</div>
+                </td>
+                <td data-label="分配权重">
+                    <span class="weight-badge badge-supply">20% (20分)</span>
+                </td>
+                <td data-label="战略底层解释">
+                    <strong>全国寻源辐射力的直接变现。</strong> 必须看该品类在我国是否具备核心主产区集聚优势。产区越集中、产业链越烂熟（如西北、东北、山东、江浙等地的产业带），中国在国际上就越具备“绝对定价权”，初创公司拿到的原始大货价格和毛利空间就越安全。
+                </td>
+                <td data-label="量化打分依据">
+                    <ul class="criterion-list">
+                        <li><strong>高分 (16-20分):</strong> 中国为全球绝对主产区，产能及提纯技术全球垄断。</li>
+                        <li><strong>中分 (10-15分):</strong> 国内种植面积大，但面临部分国际产区竞争.</li>
+                        <li><strong>低分 (0-9分):</strong> 原料依赖海外进口，国内仅做粗加工或精制。</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td data-label="评估核心维度">
+                    <div class="dimension-name">产品形态与成品方案成熟度</div>
+                    <div class="dimension-en">Formulation & Galenic</div>
+                </td>
+                <td data-label="分配权重">
+                    <span class="weight-badge badge-formulation">15% (15分)</span>
+                </td>
+                <td data-label="战略底层解释">
+                    <strong>保障低起订量（MOQ）与高周转。</strong> 国内代工厂的成品技术越成熟（如去苦味、高水溶性造粒、稳定液体滴剂），初创公司能谈下的最低起订量就越低，交货期（Lead Time）就越短。同时，产品形态应尽量选择“物流极轻”的方案（如粉剂条、胶囊），提升跨境物流的 ROI。
+                </td>
+                <td data-label="量化打分依据">
+                    <ul class="criterion-list">
+                        <li><strong>高分 (12-15分):</strong> 国内大厂技术烂熟，支持低 MOQ 快速贴牌，物流轻便。</li>
+                        <li><strong>中分 (8-11分):</strong> 技术可行但需针对海外口味调味，或包材需小幅定制。</li>
+                        <li><strong>低分 (0-7分):</strong> 工艺不稳定，或形态笨重（如玻璃瓶液体）导致物流成本高。</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td data-label="评估核心维度">
+                    <div class="dimension-name">配方复配空间与差异化可能性</div>
+                    <div class="dimension-en">Differentiation Potentials</div>
+                </td>
+                <td data-label="分配权重">
+                    <span class="weight-badge badge-differentiation">10% (10分)</span>
+                </td>
+                <td data-label="战略底层解释">
+                    <strong>打破纯粹价格战的防御武器。</strong> 大路货的单一原料贸易极易陷入极其内卷的微利竞争。若产品形态支持“基础料 + 差异化功效包”，或者可以复用医疗级包材、推注器械等独特跨境资源的类目，就能形成一道天然的护城河，从而溢价售卖。
+                </td>
+                <td data-label="量化打分依据">
+                    <ul class="criterion-list">
+                        <li><strong>高分 (8-10分):</strong> 极易进行多成分复配，可无缝结合高端独特器械或包材叙事。</li>
+                        <li><strong>中分 (5-7分):</strong> 可做复合粉剂或片剂，但难以在包装上建立壁垒。</li>
+                        <li><strong>低分 (0-4分):</strong> 只能卖单一大宗标准原料，完全依赖价格竞争。</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer-note">
+        <p>© 2026 选品矩阵决策辅助模型 · 遵循数据化反向推导与供应链绝对控制力原则</p>
+    </div>
+</div>
+
+<script>
+    // 网页截图并自动触发下载的引擎逻辑
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+        const button = this;
+        button.innerText = '⏳ 正在生成高清图像...';
+        button.style.opacity = '0.6';
+        
+        const captureArea = document.getElementById('captureArea');
+        
+        // 调用 html2canvas 参数配置提高图片像素和兼容性
+        html2canvas(captureArea, {
+            scale: 2, // 2倍高动态分辨率，确保文字和色块印刷级清晰
+            useCORS: true, // 允许加载跨域字体/图片
+            backgroundColor: '#ffffff' // 强制底色白色防止透明图出现
+        }).then(canvas => {
+            // 将 canvas 转化为 png 图片流
+            const image = canvas.toDataURL('image/png');
+            
+            // 建立虚拟 A 标签触发浏览器底层下载
+            const createLink = document.createElement('a');
+            createLink.download = '2026大健康外贸选品决策模型.png';
+            createLink.href = image;
+            document.body.appendChild(createLink);
+            createLink.click();
+            document.body.removeChild(createLink);
+            
+            // 恢复原按钮状态
+            button.innerText = '📸 导出并下载为图片';
+            button.style.opacity = '1';
+        }).catch(err => {
+            console.error('导出失败:', err);
+            alert('生成图片遇到未知阻碍，建议您直接使用 Ctrl+P 另存为 PDF');
+            button.innerText = '📸 导出并下载为图片';
+            button.style.opacity = '1';
+        });
+    });
+</script>
+
+</body>
+</html>

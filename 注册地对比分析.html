@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注册地三地对比分析</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink2: #4a4a4a;
+    --ink3: #888;
+    --bg: #faf8f4;
+    --paper: #ffffff;
+    --gold: #b8922a;
+    --gold-light: #f5ecd6;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --red: #a32d2d;
+    --red-light: #fcebeb;
+    --blue: #185fa5;
+    --blue-light: #e6f1fb;
+    --border: #e0dbd0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--ink);
+    padding: 2rem;
+    min-height: 100vh;
+  }
+
+  #download-btn {
+    display: block;
+    margin: 0 auto 2rem;
+    padding: 10px 28px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    letter-spacing: .05em;
+    transition: background .2s;
+  }
+  #download-btn:hover { background: #333; }
+
+  #report {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 3rem 3.5rem;
+  }
+
+  .report-header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .report-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    line-height: 1.3;
+  }
+
+  .report-sub {
+    font-size: 12px;
+    color: var(--ink3);
+    margin-top: 6px;
+    letter-spacing: .06em;
+  }
+
+  .report-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--ink3);
+    line-height: 1.8;
+  }
+
+  /* ── ASSUMPTION BOX ── */
+  .assumption-box {
+    background: var(--gold-light);
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    margin-bottom: 2rem;
+    font-size: 12px;
+    color: #6b4d10;
+    line-height: 1.7;
+  }
+  .assumption-box strong { color: #4a3208; }
+
+  /* ── MAIN TABLE ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-bottom: 2rem;
+    table-layout: fixed;
+  }
+
+  thead th {
+    padding: 10px 12px;
+    text-align: center;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 2px solid var(--ink);
+    border-top: 1px solid var(--border);
+    background: #f5f3ee;
+  }
+
+  thead th:first-child { text-align: left; width: 130px; background: transparent; border-top: none; border-bottom: 2px solid var(--ink); }
+  thead th.rec-col { background: var(--blue-light); color: var(--blue); }
+
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: 2px solid var(--ink); }
+
+  td {
+    padding: 10px 12px;
+    vertical-align: top;
+    line-height: 1.6;
+    color: var(--ink2);
+  }
+
+  td:first-child {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    background: #faf8f4;
+    border-right: 1px solid var(--border);
+  }
+
+  td.rec-col { background: #f5f9ff; }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 500;
+    margin-bottom: 3px;
+    letter-spacing: .02em;
+  }
+  .tg { background: var(--teal-light); color: var(--teal); }
+  .ta { background: var(--gold-light); color: #7a4f0a; }
+  .tr { background: var(--red-light); color: var(--red); }
+  .tb { background: var(--blue-light); color: var(--blue); }
+
+  .score-row td { font-weight: 500; font-size: 13px; padding: 12px; background: #f5f3ee; }
+  .score-row td.rec-col { background: var(--blue-light); color: var(--blue); }
+  .score-row td:first-child { background: #ece9e2; }
+
+  /* ── TAX SECTION ── */
+  .tax-section { margin-bottom: 2rem; }
+
+  .tax-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .tax-card {
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+  }
+
+  .tax-card.highlight {
+    border: 2px solid var(--blue);
+  }
+
+  .tax-year {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 4px;
+  }
+
+  .tax-scenario {
+    font-size: 11px;
+    color: var(--ink3);
+    margin-bottom: 10px;
+    line-height: 1.5;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tax-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    padding: 4px 0;
+    border-bottom: 1px solid #f0ece4;
+    color: var(--ink2);
+  }
+
+  .tax-row:last-child {
+    border-bottom: none;
+    font-weight: 500;
+    font-size: 12.5px;
+    padding-top: 8px;
+    color: var(--blue);
+  }
+
+  .tax-row span:first-child { color: var(--ink3); font-size: 11px; }
+  .tax-row:last-child span:first-child { color: var(--ink2); font-size: 12px; }
+
+  /* ── VERDICT ── */
+  .verdict {
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    background: #faf8f4;
+    margin-bottom: 2rem;
+  }
+
+  .verdict-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .verdict-item {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--ink2);
+    border-bottom: 1px solid #f0ece4;
+  }
+
+  .verdict-item:last-child { border-bottom: none; }
+
+  .verdict-num {
+    min-width: 20px;
+    height: 20px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── PENDING ── */
+  .pending-box {
+    background: #fff8ec;
+    border: 1px solid #e8c97a;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #6b4d10;
+    line-height: 1.7;
+  }
+
+  .pending-box strong { display: block; margin-bottom: 4px; color: #4a3208; font-size: 12px; letter-spacing: .04em; }
+
+  .report-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--ink3);
+    letter-spacing: .04em;
+  }
+</style>
+</head>
+<body>
+
+<button id="download-btn" onclick="downloadImage()">下载为图片</button>
+
+<div id="report">
+
+  <div class="report-header">
+    <div>
+      <div class="report-title">企业注册地三地对比分析</div>
+      <div class="report-sub">深圳前海 · 上海浦东 · 广州南沙 — 植物提取物外贸出口公司</div>
+    </div>
+    <div class="report-meta">
+      版本 v2.0<br>
+      2026年6月<br>
+      含所得税情景测算
+    </div>
+  </div>
+
+  <div class="assumption-box">
+    <strong>核心假设（待核实）：</strong>深圳前海可通过代理机构完成驻场配合，费用约1,500元/月；前海15%企业所得税覆盖外贸类经营范围（植物提取物进出口）。两项假设需向代理机构书面确认后，本分析方为完整。
+  </div>
+
+  <div class="section-label">01 · 综合维度对比</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>深圳前海</th>
+        <th class="rec-col">上海浦东 ★ 现推荐</th>
+        <th>广州南沙</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>企业所得税</td>
+        <td><span class="tag tg">15%</span><br>需符合产业目录<br>外贸公司适用性待核实</td>
+        <td class="rec-col"><span class="tag ta">25%</span><br>普通外贸公司标准税率<br>高新技术企业才可享15%</td>
+        <td><span class="tag tg">15%</span><br>同样需符合产业目录<br>外贸公司适用性待核实</td>
+      </tr>
+      <tr>
+        <td>增值税退税</td>
+        <td><span class="tag tg">24小时极速</span><br>货物离境即退<br>资金回流最快</td>
+        <td class="rec-col"><span class="tag tg">正常退税</span><br>进出口额≥500万<br>享增值税地方留存返还</td>
+        <td><span class="tag tg">1–3天</span><br>效率较快<br>不影响退税资格</td>
+      </tr>
+      <tr>
+        <td>驻场要求</td>
+        <td><span class="tag ta">需真实驻场</span><br>代理机构可配合处理<br>约1,500元/月（待确认）</td>
+        <td class="rec-col"><span class="tag tg">需驻场</span><br>免费场地已解决<br>第一天即成立</td>
+        <td><span class="tag tg">无需驻场</span><br>集群挂靠注册<br>1,500–3,500元/月</td>
+      </tr>
+      <tr>
+        <td>香港账户便利</td>
+        <td><span class="tag tg">最强</span><br>深港半天可办理<br>欧元/美元直接持有</td>
+        <td class="rec-col"><span class="tag ta">可操作</span><br>飞港约2小时<br>无法律障碍但不便捷</td>
+        <td><span class="tag ta">一般</span><br>距香港较远<br>优势不及前海</td>
+      </tr>
+      <tr>
+        <td>全球市场形象</td>
+        <td><span class="tag tg">强</span><br>深圳国际认知度高<br>欧美中东买家均熟悉</td>
+        <td class="rec-col"><span class="tag tg">最强</span><br>上海全球认可度第一<br>法语/英语/阿语市场通用</td>
+        <td><span class="tag tr">弱</span><br>南沙知名度低<br>对海外买家背书有限</td>
+      </tr>
+      <tr>
+        <td>外汇便利性</td>
+        <td><span class="tag tg">最强</span><br>外资银行密集<br>境外账户开设最便捷</td>
+        <td class="rec-col"><span class="tag tg">强</span><br>上海金融中心<br>多币种操作成熟</td>
+        <td><span class="tag ta">一般</span><br>靠近港口<br>外汇便利度弱于深沪</td>
+      </tr>
+      <tr>
+        <td>外贸专项补贴</td>
+        <td>无针对普通外贸<br>公司的专项补贴</td>
+        <td class="rec-col"><span class="tag tg">有</span><br>500万+享留存返还<br>外贸综合服务补贴</td>
+        <td><span class="tag tg">有</span><br>补贴种类最多<br>但主要面向生产型企业</td>
+      </tr>
+      <tr>
+        <td>全年办公成本</td>
+        <td>约1.8万元/年<br>（1,500元/月，待确认）</td>
+        <td class="rec-col"><span class="tag tg">免费</span><br>零租金<br>确定成立</td>
+        <td>1.8–4.2万元/年<br>（1,500–3,500元/月）</td>
+      </tr>
+      <tr class="score-row">
+        <td>综合评分</td>
+        <td>★★★★☆<br>假设核实后强力候选</td>
+        <td class="rec-col">★★★★☆<br>现阶段最优解<br>零成本即时成立</td>
+        <td>★★★☆☆<br>备选方案<br>城市形象过弱</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tax-section">
+    <div class="section-label">02 · 所得税差额情景测算（全品类 · 全球市场）</div>
+    <div class="tax-grid">
+      <div class="tax-card">
+        <div class="tax-year">第1年</div>
+        <div class="tax-scenario">出口额 50–80万元<br>净利润率约 20–25%</div>
+        <div class="tax-row"><span>估算净利润</span><span>10–20万元</span></div>
+        <div class="tax-row"><span>浦东 25% 税额</span><span>2.5–5万元</span></div>
+        <div class="tax-row"><span>前海 15% 税额</span><span>1.5–3万元</span></div>
+        <div class="tax-row"><span>所得税差额</span><span>约 1–2万元</span></div>
+        <div class="tax-row"><span>抵消办公成本差后净差额</span><span>约 −0.8至0万元</span></div>
+      </div>
+      <div class="tax-card">
+        <div class="tax-year">第2年</div>
+        <div class="tax-scenario">出口额 150–300万元<br>净利润率约 25–30%</div>
+        <div class="tax-row"><span>估算净利润</span><span>40–90万元</span></div>
+        <div class="tax-row"><span>浦东 25% 税额</span><span>10–22万元</span></div>
+        <div class="tax-row"><span>前海 15% 税额</span><span>6–13万元</span></div>
+        <div class="tax-row"><span>所得税差额</span><span>约 4–9万元</span></div>
+        <div class="tax-row"><span>抵消办公成本差后净差额</span><span>约 2–7万元</span></div>
+      </div>
+      <div class="tax-card highlight">
+        <div class="tax-year">第3年起</div>
+        <div class="tax-scenario">出口额 500万元以上<br>净利润率约 30%</div>
+        <div class="tax-row"><span>估算净利润</span><span>150万元以上</span></div>
+        <div class="tax-row"><span>浦东 25% 税额</span><span>37万元以上</span></div>
+        <div class="tax-row"><span>前海 15% 税额</span><span>22万元以上</span></div>
+        <div class="tax-row"><span>所得税差额</span><span>15万元以上</span></div>
+        <div class="tax-row"><span>同时触发浦东留存返还</span><span>部分抵消</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-title">综合结论</div>
+    <div class="verdict-item">
+      <div class="verdict-num">1</div>
+      <div>第1年所得税差额（1–2万）被前海办公成本（1.8万）基本抵消，两地实际净成本相近，浦东因免费场地略优。</div>
+    </div>
+    <div class="verdict-item">
+      <div class="verdict-num">2</div>
+      <div>第2年起前海所得税优势开始显现（净差额2–7万），叠加香港账户便利和24小时退税，前海竞争力明显上升。</div>
+    </div>
+    <div class="verdict-item">
+      <div class="verdict-num">3</div>
+      <div>第3年出口额500万+后，前海每年净节税15万+，同时浦东触发留存返还政策可部分抵消，两者差距仍以前海为优。</div>
+    </div>
+    <div class="verdict-item">
+      <div class="verdict-num">4</div>
+      <div>上海城市形象对全球买家（法语/英语/阿语市场）的背书价值略高于深圳，但不构成决定性优势，不应为此牺牲税务效益。</div>
+    </div>
+    <div class="verdict-item">
+      <div class="verdict-num">5</div>
+      <div>南沙因城市形象过弱、香港账户优势缺失，在前海驻场问题解决后已无明显优势，退出候选。</div>
+    </div>
+  </div>
+
+  <div class="pending-box">
+    <strong>待确认事项（决策前必须核实）</strong>
+    ① 前海代理机构驻场配合服务：费用是否确实约1,500元/月，是否能通过工商及税务检查<br>
+    ② 前海15%企业所得税：植物提取物进出口外贸公司是否在产业优惠目录内，需要代理机构提供书面确认<br>
+    ③ 如两项均核实为真，建议优先选择深圳前海注册
+  </div>
+
+  <div class="report-footer">
+    <span>植物提取物B2B外贸出口项目 · 内部决策参考</span>
+    <span>数据来源：企业注册属地政策对比分析报告 + 项目战略手册 · AI辅助生成，仅供参考</span>
+  </div>
+
+</div>
+
+<script>
+function downloadImage() {
+  const btn = document.getElementById('download-btn');
+  btn.textContent = '生成中...';
+  btn.disabled = true;
+
+  html2canvas(document.getElementById('report'), {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#ffffff',
+    logging: false
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = '注册地对比分析.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    btn.textContent = '下载为图片';
+    btn.disabled = false;
+  }).catch(() => {
+    btn.textContent = '下载为图片';
+    btn.disabled = false;
+  });
+}
+</script>
+</body>
+</html>

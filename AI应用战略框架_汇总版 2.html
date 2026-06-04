@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 应用战略框架 · 植物提取物外贸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f3ee;
+  --bg2: #ffffff;
+  --bg3: #edeae3;
+  --bg4: #dedad0;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --text: #1e1d19;
+  --text2: #5a5850;
+  --text3: #9a9890;
+  --gold: #8c6e1a;
+  --gold2: #6a5010;
+  --gold-dim: rgba(140,110,26,0.10);
+  --gold-pale: rgba(140,110,26,0.05);
+  --green: #2a7040;
+  --green-dim: rgba(42,112,64,0.10);
+  --amber: #9a5a10;
+  --amber-dim: rgba(154,90,16,0.10);
+  --blue: #2a5a8c;
+  --blue-dim: rgba(42,90,140,0.10);
+  --teal: #1e6e6e;
+  --teal-dim: rgba(30,110,110,0.10);
+  --red: #8c2c2c;
+  --red-dim: rgba(140,44,44,0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 13px;
+}
+
+/* ── TOOLBAR ── */
+.toolbar {
+  position: fixed;
+  top: 18px; right: 22px;
+  z-index: 300;
+  display: flex; gap: 8px;
+}
+.tbtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  color: var(--text2);
+  font-family: 'Jost', sans-serif;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.tbtn:hover { background: var(--gold-dim); color: var(--gold); border-color: rgba(196,164,72,.35); }
+.tbtn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ── DOCUMENT ── */
+#doc {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 52px 80px;
+}
+
+/* ── BLOCK DIVIDER — full-width band separating major blocks ── */
+.block-divider {
+  margin: 0 -52px 0;
+  padding: 28px 52px;
+  background: var(--bg3);
+  border-top: 2px solid var(--border2);
+  border-bottom: 2px solid var(--border2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.bd-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.bd-text {}
+.bd-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3px;
+  opacity: .7;
+}
+.bd-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.1;
+}
+.bd-title em { font-style: italic; color: var(--gold); }
+.bd-desc {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 3px;
+  font-weight: 300;
+}
+
+/* ── BLOCK WRAPPER ── */
+.block { margin-bottom: 0; }
+
+/* ── COVER ── */
+.cover {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+  margin-bottom: 56px;
+  border-bottom: 1px solid var(--border2);
+  position: relative;
+}
+.cover-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.cover-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.cover-title em { font-style: italic; color: var(--gold); }
+.cover-sub {
+  font-size: 14px;
+  color: var(--text2);
+  font-weight: 300;
+  letter-spacing: .04em;
+  margin-bottom: 28px;
+}
+.cover-meta {
+  display: flex; gap: 24px; flex-wrap: wrap;
+}
+.cm-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: .06em;
+}
+.cm-item strong { color: var(--text2); font-weight: 400; }
+.cover-number {
+  position: absolute;
+  top: 0; right: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px;
+  font-weight: 400;
+  color: var(--bg4);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── SECTION HEADERS ── */
+.sec-header {
+  display: flex; align-items: flex-end; gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: var(--bg4);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.sec-text {}
+.sec-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2.8vw, 30px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.1;
+}
+.sec-title em { font-style: italic; color: var(--gold); }
+.sec-desc {
+  font-size: 12.5px;
+  color: var(--text2);
+  margin-top: 4px;
+  font-weight: 300;
+}
+
+/* ── SECTION SPACING ── */
+.section { margin-bottom: 64px; }
+
+/* ── FOUNDATION BOX ── */
+.foundation {
+  background: var(--gold-pale);
+  border: 1px solid rgba(196,164,72,.2);
+  border-radius: 6px;
+  padding: 22px 26px;
+  margin-bottom: 28px;
+}
+.fnd-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 10px;
+}
+.fnd-title::before {
+  content: '◆';
+  font-size: 10px;
+  color: var(--gold);
+}
+.fnd-desc {
+  font-size: 12.5px;
+  color: var(--text2);
+  margin-bottom: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.fnd-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.fnd-col-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.fnd-list { list-style: none; }
+.fnd-list li {
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 7px;
+  display: flex; gap: 8px;
+  line-height: 1.55;
+}
+.fnd-list li::before {
+  content: '—';
+  color: var(--text3);
+  flex-shrink: 0;
+  font-size: 10px;
+  margin-top: 1px;
+}
+
+/* ── WHO BADGES ── */
+.who {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .06em;
+  padding: 2px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.who-a { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(72,120,168,.2); }
+.who-b { background: var(--green-dim); color: var(--green); border: 1px solid rgba(74,144,96,.2); }
+.who-ab { background: rgba(255,255,255,.04); color: var(--text3); border: 1px solid var(--border); }
+.who-c { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(196,120,40,.2); }
+.who-new { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(56,144,144,.2); }
+
+/* ── CARD GRIDS ── */
+.card-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 16px 18px;
+}
+.card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+.card-subtitle {
+  font-size: 10px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .06em;
+  margin-top: 3px;
+}
+
+.ai-item {
+  display: flex; gap: 8px;
+  margin-bottom: 8px;
+}
+.ai-item:last-child { margin-bottom: 0; }
+.ai-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.dot-blue { background: var(--blue); }
+.dot-green { background: var(--green); }
+.dot-amber { background: var(--amber); }
+.dot-gold { background: var(--gold); }
+.dot-teal { background: var(--teal); }
+
+.ai-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.ai-desc {
+  font-size: 11.5px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.new-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .06em;
+  padding: 1px 5px;
+  background: var(--teal-dim);
+  color: var(--teal);
+  border: 1px solid rgba(56,144,144,.2);
+  border-radius: 2px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+/* ── CORE INSIGHT ── */
+.insight {
+  margin-top: 20px;
+  padding: 18px 22px;
+  background: var(--bg3);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 5px 5px 0;
+}
+.insight-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--text);
+  line-height: 1.6;
+}
+.insight-text strong {
+  font-style: normal;
+  color: var(--gold2);
+  font-weight: 600;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 28px 0;
+}
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), var(--border), var(--border), rgba(255,255,255,0));
+}
+
+.tl-phase { margin-bottom: 40px; position: relative; }
+.tl-phase:last-child { margin-bottom: 0; }
+
+.tl-dot {
+  position: absolute;
+  left: -29px; top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  background: var(--bg);
+}
+.tl-dot-now { border-color: var(--green); background: var(--green-dim); }
+.tl-dot-mid { border-color: var(--amber); background: var(--amber-dim); }
+.tl-dot-later { border-color: var(--text3); background: var(--bg3); }
+
+.tl-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.tl-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 2px;
+}
+.tb-now { background: var(--green-dim); color: var(--green); border: 1px solid rgba(74,144,96,.2); }
+.tb-mid { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(196,120,40,.2); }
+.tb-later { background: rgba(255,255,255,.04); color: var(--text3); border: 1px solid var(--border); }
+.tl-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+.tl-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: .06em;
+  margin-left: auto;
+}
+
+.tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tl-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+}
+.tl-item-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 6px; gap: 6px;
+}
+.tl-item-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.35;
+}
+.tl-ai {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.tl-ai-label {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: .06em;
+  margin-right: 4px;
+}
+
+.tl-milestone {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg3);
+  border-radius: 4px;
+  margin-top: 10px;
+  border: 1px solid var(--border);
+}
+.tlm-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  padding-top: 1px;
+}
+.tlm-text {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.tlm-text strong { color: var(--text); font-weight: 500; }
+
+/* ── LEGEND ── */
+.legend {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  padding: 12px 18px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 28px;
+  align-items: center;
+}
+.legend-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-right: 4px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); }
+.ldot { width: 7px; height: 7px; border-radius: 50%; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-text { font-size: 11px; color: var(--text3); line-height: 1.8; max-width: 560px; }
+.footer-stamp {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--text3);
+  text-align: right;
+  letter-spacing: .06em;
+  line-height: 1.8;
+}
+
+/* ── PRINT / PDF ── */
+@media print {
+  @page { margin: 14mm 12mm; size: A4; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  html, body { background: #f5f3ee !important; color: #1e1d19 !important; }
+  .toolbar { display: none !important; }
+
+  /* Prevent breaks inside atomic units */
+  .card, .tl-item, .tl-phase, .foundation,
+  .insight, .tl-milestone, .ai-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Keep section headers with their first content */
+  .sec-header { page-break-after: avoid; break-after: avoid; }
+
+  /* Keep card grids together */
+  .card-grid-2, .card-grid-3, .tl-grid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Never break mid-section — prefer before section starts */
+  .section {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  /* Smooth transitions: no orphan headers */
+  .sec-header + * { page-break-before: avoid; break-before: avoid; }
+
+  /* Force new page cleanly at block dividers */
+  .block-divider { page-break-before: always; break-before: page; margin: 0 -28px 40px; padding: 20px 28px; }
+  .section:nth-child(3) { page-break-before: avoid; break-before: avoid; }
+  .section:nth-child(5) { page-break-before: avoid; break-before: avoid; }
+
+  /* Padding and spacing tighten slightly for print */
+  #doc { padding: 32px 28px 40px; max-width: 100%; }
+  .section { margin-bottom: 40px; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #doc { padding: 40px 24px 56px; }
+  .card-grid-2, .card-grid-3, .fnd-cols, .tl-grid { grid-template-columns: 1fr; }
+  .block-divider { margin: 0 -24px 40px; padding: 20px 24px; }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="tbtn" id="dlBtn" onclick="downloadImage()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    下载图片
+  </button>
+  <button class="tbtn" onclick="printDoc()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    导出 PDF
+  </button>
+</div>
+
+<div id="doc">
+
+  <!-- ══ COVER ══ -->
+  <div class="cover">
+    <div class="cover-number">AI</div>
+    <div class="cover-kicker">内部战略文件 · Internal Strategy Document</div>
+    <h1 class="cover-title">AI 应用<br><em>战略框架</em></h1>
+    <div class="cover-sub">植物提取物外贸创业 · 汇总版</div>
+    <div class="cover-meta">
+      <div class="cm-item"><strong>商业模式</strong> B2B 出口 · OEM 起步</div>
+      <div class="cm-item"><strong>目标市场</strong> 法语欧洲 · 中东 UAE</div>
+      <div class="cm-item"><strong>核心品类</strong> 功能性蘑菇 · Adaptogen</div>
+      <div class="cm-item"><strong>文件版本</strong> 2026 完整版</div>
+    </div>
+  </div>
+
+  <!-- ══ BLOCK DIVIDER 0 ══ -->
+  <div class="block-divider">
+    <div class="bd-number">◆</div>
+    <div class="bd-text">
+      <div class="bd-label">Foundation · 核心基础设施</div>
+      <div class="bd-title">所有AI应用的<em>地基</em></div>
+      <div class="bd-desc">最优先建立，没有它其他工具都是空中楼阁</div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: AI框架总览 ══ -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num">01</div>
+      <div class="sec-text">
+        <div class="sec-eyebrow">Framework Overview</div>
+        <div class="sec-title">AI 应用<em>框架总览</em></div>
+        <div class="sec-desc">三个目标方向，一套协同体系</div>
+      </div>
+    </div>
+
+    <!-- Foundation -->
+    <div class="foundation">
+      <div class="fnd-title">核心基础设施 · 最优先建立</div>
+      <div class="fnd-desc">产品信息库是整个AI应用体系的地基。没有它，其他所有工具都是空中楼阁。A和B的工作通过信息库解耦——B不需要实时待命，A可以独立回复标准询盘。</div>
+      <div class="fnd-cols">
+        <div>
+          <div class="fnd-col-label" style="color:var(--green);">B 负责维护</div>
+          <ul class="fnd-list">
+            <li>每个品种的规格、价格区间、交货周期</li>
+            <li>COA文件和第三方检测报告归档</li>
+            <li>供应商变动和库存状态实时更新</li>
+            <li>常见买家问题标准答案库</li>
+          </ul>
+        </div>
+        <div>
+          <div class="fnd-col-label" style="color:var(--blue);">A 负责调用</div>
+          <ul class="fnd-list">
+            <li>收到询盘后直接从库里提取相关信息</li>
+            <li>AI生成英法双语专业回复草稿</li>
+            <li>目标：2小时内独立回复标准询盘</li>
+            <li>非标准问题才需要找B确认</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-text">AI让两个人的团队，提供过去需要<strong>配方师 + 合规顾问 + 市场分析师 + 采购专家</strong>才能提供的服务。A的法语是护城河，AI是放大器，产品信息库是地基。</div>
+    </div>
+  </div>
+
+  <!-- ══ BLOCK DIVIDER A ══ -->
+  <div class="block-divider">
+    <div class="bd-number">A</div>
+    <div class="bd-text">
+      <div class="bd-label">Three Directions · AI应用三个方向</div>
+      <div class="bd-title">AI 能为公司<em>做什么</em></div>
+      <div class="bd-desc">提升内部效率 · 吸引客户 · 未来产品化</div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: 提升内部效率 ══ -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num">02</div>
+      <div class="sec-text">
+        <div class="sec-eyebrow">Internal Efficiency</div>
+        <div class="sec-title">1） 提升内部<em>效率</em></div>
+        <div class="sec-desc">减少重复性工作，让A和B专注在真正需要人的事上</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-label">服务对象</span>
+      <div class="legend-item"><div class="ldot" style="background:var(--blue)"></div><span class="who who-a">A</span> 销售与客户开发</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--green)"></div><span class="who who-b">B</span> 供应链管理</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--text3)"></div><span class="who who-ab">A+B</span> 共同执行</div>
+    </div>
+
+    <div class="card-grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">客户沟通与开发</div><div class="card-subtitle">A 主导</div></div>
+          <span class="who who-a">A</span>
+        </div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-name">询盘质量筛选</div><div class="ai-desc">快速判断真实采购意向 vs 无效询盘，把时间集中在高价值客户上</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-name">询盘快速回复</div><div class="ai-desc">调用产品信息库，AI生成英法双语专业回复，目标2小时内响应</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-name">多语言润色</div><div class="ai-desc">法语/英语邮件实时检查，确保每封信专业水准</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-name">客户关系追踪</div><div class="ai-desc">自动提醒跟进节点，防止客户因未及时跟进而流失</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">供应链协作</div><div class="card-subtitle">B 主导 · AI 辅助</div></div>
+          <span class="who who-b">B</span>
+        </div>
+        <div class="ai-item"><div class="ai-dot dot-green"></div><div><div class="ai-name">报价单生成</div><div class="ai-desc">AI格式化标准报价单，B确认后发出，减少重复性文书工作</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-green"></div><div><div class="ai-name">COA文件归档管理</div><div class="ai-desc">自动整理和分类检测文件，按品种、批次、日期检索</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-green"></div><div><div class="ai-name">样品进度跟踪</div><div class="ai-desc">自动提醒样品发出状态、客户收货确认等关键节点</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-green"></div><div><div class="ai-name">产品信息库维护</div><div class="ai-desc">AI辅助格式化整理，B负责内容准确性和实时更新</div></div></div>
+      </div>
+    </div>
+
+    <div class="card-grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">对外存在感</div><div class="card-subtitle">A主导 · A+B协作</div></div>
+          <span class="who who-ab">A+B</span>
+        </div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-name">A的海外个人形象建立<span class="new-badge">新增</span></div><div class="ai-desc">AI辅助设计LinkedIn定位、英法双语简介、个人品牌叙事、头像与封面风格建议</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-name">产品宣传册设计与内容<span class="new-badge">新增</span></div><div class="ai-desc">AI生成英法双语内容框架、产品功效叙事、合规表述，A润色，B确认技术参数</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-name">独立站维护</div><div class="ai-desc">AI辅助生成和更新产品页面、SEO内容，保持网站信息准确</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-name">合规文件检查清单</div><div class="ai-desc">AI确保每次出货文件齐备，EU/UAE各市场不同要求自动提示</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">辅助功能</div><div class="card-subtitle">次优先 · 财务与法务</div></div>
+          <span class="who who-ab">辅助</span>
+        </div>
+        <div class="ai-item"><div class="ai-dot dot-gold"></div><div><div class="ai-name">利润追踪</div><div class="ai-desc">每笔订单采购成本、运费、毛利率自动计算，辅助定价和选品决策</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-gold"></div><div><div class="ai-name">合同初审</div><div class="ai-desc">AI识别采购协议中付款条件、质量索赔、独家限制等不利条款，仅供参考</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: 吸引客户 ══ -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num">03</div>
+      <div class="sec-text">
+        <div class="sec-eyebrow">Client Acquisition</div>
+        <div class="sec-title">2） 用AI<em>吸引客户</em></div>
+        <div class="sec-desc">因为拥有AI，提供竞争对手无法复制的东西</div>
+      </div>
+    </div>
+
+    <div class="card-grid-3">
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">产品竞争力简报</div><div class="card-subtitle">点对点 · 48小时交付</div></div>
+          <span class="who who-c">面向买家</span>
+        </div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-desc">成分选项和科学依据</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-desc">欧盟合规状态和可用标签表述</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-desc">产品故事 / 消费者沟通语言</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-desc">竞品动向 / 市场雷达</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-amber"></div><div><div class="ai-desc">买家的买家洞察（消费者评论分析）</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">触达前研究</div><div class="card-subtitle">主动出击 · 联系前执行</div></div>
+          <span class="who who-a">A执行</span>
+        </div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-desc">扫描买家现有产品线和成分</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-desc">分析功效定位和目标人群</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-desc">发现隐性需求和产品空白</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-desc">生成定制化法语开发信草稿</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-blue"></div><div><div class="ai-desc">A用5分钟润色后发出</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">持续存在感</div><div class="card-subtitle">一对多 · 中长期布局</div></div>
+          <span class="who who-c">买家+潜在客户</span>
+        </div>
+        <div class="ai-item"><div class="ai-dot dot-teal"></div><div><div class="ai-name">市场信号Newsletter</div><div class="ai-desc">监测法语天然健康市场动态、欧盟监管变化、消费者趋势，定期推送客户</div></div></div>
+        <div class="ai-item"><div class="ai-dot dot-teal"></div><div><div class="ai-name">LinkedIn法语内容矩阵</div><div class="ai-desc">持续发布有价值行业内容，被动吸引买家，同步补充A的知识库</div></div></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-text">你们卖的不是原料，是<strong>"让买家的产品在法语市场更有竞争力"的能力</strong>。原料是交付载体，顾问服务是真正的差异化壁垒。</div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: AI服务外售 ══ -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num">04</div>
+      <div class="sec-text">
+        <div class="sec-eyebrow">Future Revenue</div>
+        <div class="sec-title">3） AI服务<em>产品化</em></div>
+        <div class="sec-desc">在1）2）验证有效之后，将AI流程打包出售给其他外贸公司</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div><div class="card-title">待讨论 · Phase 5 启动</div></div>
+        <span class="who who-ab">A+B</span>
+      </div>
+      <div class="ai-item"><div class="ai-dot dot-gold"></div><div><div class="ai-name">可打包的产品</div><div class="ai-desc">触达前研究 + 竞争力简报 + 市场信号监测 → 打包成面向外贸公司的订阅服务</div></div></div>
+      <div class="ai-item"><div class="ai-dot dot-gold"></div><div><div class="ai-name">验证条件</div><div class="ai-desc">先用自己的业务验证这套AI流程有效，积累至少2–3个真实成功案例，再考虑外售</div></div></div>
+    </div>
+  </div>
+
+  <!-- ══ BLOCK DIVIDER B ══ -->
+  <div class="block-divider">
+    <div class="bd-number">B</div>
+    <div class="bd-text">
+      <div class="bd-label">Execution Timeline · 执行时间轴</div>
+      <div class="bd-title">AI 何时<em>介入</em></div>
+      <div class="bd-desc">五个阶段，从地基建立到规模化</div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: 时间轴 ══ -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num">05</div>
+      <div class="sec-text">
+        <div class="sec-eyebrow">Execution Timeline</div>
+        <div class="sec-title">AI 介入<em>时间轴</em></div>
+        <div class="sec-desc">五个阶段，从地基建立到规模化</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-label">阶段状态</span>
+      <div class="legend-item"><div class="ldot" style="background:var(--green)"></div>立即启动</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--amber)"></div>有基础后启动</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--text3)"></div>验证后启动</div>
+    </div>
+
+    <div class="timeline">
+
+      <!-- Phase 1 -->
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-now"></div>
+        <div class="tl-head">
+          <span class="tl-badge tb-now">Phase 1</span>
+          <span class="tl-title">地基建立</span>
+          <span class="tl-time">建议：第 1–4 周</span>
+        </div>
+        <div class="tl-grid">
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">产品信息库搭建</span><span class="who who-b">B主导</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>辅助格式化整理，建立可检索的结构化文件体系</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">A的海外个人形象建立<span class="new-badge">新</span></span><span class="who who-a">A主导</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>设计LinkedIn定位、英法双语简介、个人品牌叙事、封面风格建议</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">产品宣传册初版<span class="new-badge">新</span></span><span class="who who-ab">A+B</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>生成英法双语内容框架和产品描述，A润色，B确认技术参数</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">COA文件归档</span><span class="who who-b">B主导</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>建立按品种/批次/日期分类的文件管理体系</div>
+          </div>
+        </div>
+        <div class="tl-milestone">
+          <span class="tlm-label">里程碑</span>
+          <div class="tlm-text">产品信息库可用，宣传册可发出，<strong>LinkedIn个人形象上线</strong>，文件体系建立完成</div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-now"></div>
+        <div class="tl-head">
+          <span class="tl-badge tb-now">Phase 2</span>
+          <span class="tl-title">主动触达，获取第一个对话</span>
+          <span class="tl-time">建议：第 1–3 个月</span>
+        </div>
+        <div class="tl-grid">
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">触达前研究</span><span class="who who-a">A执行</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>分析目标买家产品线，发现隐性需求，生成定制法语开发信草稿</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">询盘快速回复</span><span class="who who-a">A执行</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>调用产品信息库，生成双语专业回复，目标2小时内响应</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">社交内容持续发布</span><span class="who who-a">A主导</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>辅助生成每周法语LinkedIn内容，同步建立A的行业影响力和知识库</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">样品跟进</span><span class="who who-ab">A+B</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>自动提醒样品发出、客户收货、跟进关键节点</div>
+          </div>
+        </div>
+        <div class="tl-milestone">
+          <span class="tlm-label">里程碑</span>
+          <div class="tlm-text"><strong>10+ 有效对话，3+ 样品已寄出</strong>，第一笔小批量试单成交</div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-mid"></div>
+        <div class="tl-head">
+          <span class="tl-badge tb-mid">Phase 3</span>
+          <span class="tl-title">深化服务，建立复购</span>
+          <span class="tl-time">建议：第 2–4 个月</span>
+        </div>
+        <div class="tl-grid">
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">产品竞争力简报</span><span class="who who-c">面向买家</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>生成成分建议+合规状态+产品故事+竞品分析+消费者洞察，法语交付</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">市场信号监测</span><span class="who who-a">A主导</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>追踪法语天然健康市场动态、欧盟监管变化，定期推送给客户</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">客户关系追踪</span><span class="who who-a">A执行</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>自动提醒跟进周期，防止已有客户流失</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">利润追踪</span><span class="who who-ab">A+B</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>自动计算每笔订单成本和毛利率，辅助选品和定价决策</div>
+          </div>
+        </div>
+        <div class="tl-milestone">
+          <span class="tlm-label">里程碑</span>
+          <div class="tlm-text"><strong>2–3个活跃客户</strong>，第一批复购订单，现金流转正</div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-mid"></div>
+        <div class="tl-head">
+          <span class="tl-badge tb-mid">Phase 4</span>
+          <span class="tl-title">扩大存在感，参展验证</span>
+          <span class="tl-time">建议：第 3–6 个月</span>
+        </div>
+        <div class="tl-grid">
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">Newsletter发布</span><span class="who who-c">面向潜在客户</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>整合市场信号生成法语定期简报，被动吸引新买家订阅</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">参展服务支持</span><span class="who who-ab">A+B</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>辅助准备展会材料、目标买家研究、展前开发信、展后跟进流程</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">宣传册迭代</span><span class="who who-ab">A+B</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>根据真实客户反馈更新产品描述、功效叙事和合规表述</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">合同初审</span><span class="who who-a">A辅助</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>识别采购协议中的不利条款，重要合同仍需专业审核</div>
+          </div>
+        </div>
+        <div class="tl-milestone">
+          <span class="tlm-label">里程碑</span>
+          <div class="tlm-text">完成<strong>第一场展会</strong>（Vitafoods ME / Natexpo），Newsletter订阅者积累，宣传册完成迭代</div>
+        </div>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="tl-phase">
+        <div class="tl-dot tl-dot-later"></div>
+        <div class="tl-head">
+          <span class="tl-badge tb-later">Phase 5</span>
+          <span class="tl-title">规模化与第二条收入线</span>
+          <span class="tl-time">建议：验证后启动</span>
+        </div>
+        <div class="tl-grid">
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">AI服务产品化（3）</span><span class="who who-ab">A+B</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>将触达前研究+竞争力简报+市场信号监测打包成产品，向其他外贸公司销售</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-item-head"><span class="tl-item-name">持续参展与扩展</span><span class="who who-a">A主导</span></div>
+            <div class="tl-ai"><span class="tl-ai-label">AI →</span>多展会并行管理，买家名单研究，展后系统化跟进</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="doc-footer">
+    <div class="footer-text">本文件为内部战略规划参考，供合伙人讨论使用。AI工具建议以Claude为主，按需补充专项工具。所有AI生成内容须经人工判断后使用。</div>
+    <div class="footer-stamp">
+      AI应用战略框架 · 汇总版<br>
+      植物提取物外贸创业 · 2026
+    </div>
+  </div>
+
+</div><!-- /doc -->
+
+<script>
+function printDoc() {
+  window.print();
+}
+async function downloadImage() {
+  const btn = document.getElementById('dlBtn');
+  const toolbar = document.querySelector('.toolbar');
+  btn.textContent = '生成中...';
+  btn.style.opacity = '.6';
+  btn.style.pointerEvents = 'none';
+  toolbar.style.display = 'none';
+  try {
+    const el = document.getElementById('doc');
+    const canvas = await html2canvas(el, {
+      backgroundColor: '#f5f3ee',
+      scale: 2,
+      useCORS: true,
+      logging: false,
+    });
+    const link = document.createElement('a');
+    link.download = 'AI应用战略框架_汇总版.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('下载失败，请尝试导出PDF。');
+  } finally {
+    toolbar.style.display = 'flex';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 下载图片';
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  }
+}
+</script>
+
+</body>
+</html>

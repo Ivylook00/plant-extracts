@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 植物提取物行业展会一览表</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --bg: #0f110e;
+  --bg2: #161918;
+  --bg3: #1c1f1b;
+  --bg4: #242722;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e4e2d8;
+  --text2: #9a9890;
+  --text3: #5a5852;
+  --gold: #c8a84a;
+  --gold2: #e6c870;
+  --gold-dim: rgba(200,168,74,0.13);
+  --green: #4a9462;
+  --green-dim: rgba(74,148,98,0.13);
+  --amber: #c87c2a;
+  --amber-dim: rgba(200,124,42,0.13);
+  --red: #b84848;
+  --red-dim: rgba(184,72,72,0.13);
+  --blue: #4878a8;
+  --blue-dim: rgba(72,120,168,0.13);
+  --teal: #3a9090;
+  --teal-dim: rgba(58,144,144,0.10);
+  --purple: #7858c8;
+  --purple-dim: rgba(120,88,200,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ── TOOLBAR ── */
+.toolbar {
+  position: fixed;
+  top: 16px; right: 20px;
+  z-index: 200;
+  display: flex; gap: 8px;
+}
+.tbtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  color: var(--text2);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 12px; font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.tbtn:hover { background: var(--gold-dim); color: var(--gold); border-color: rgba(200,168,74,.4); }
+.tbtn svg { width: 13px; height: 13px; flex-shrink: 0; }
+.tbtn.loading { opacity: .6; pointer-events: none; }
+
+/* ── MAIN CONTAINER ── */
+#capture-area {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 48px 72px;
+}
+
+/* ── HEADER ── */
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border2);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+}
+.header-left {}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--gold);
+  opacity: .6;
+}
+.page-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.page-sub {
+  font-size: 13px;
+  color: var(--text3);
+  letter-spacing: .04em;
+}
+.header-right {
+  text-align: right;
+}
+.header-meta {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 2;
+}
+.header-meta strong { color: var(--text2); font-weight: 500; }
+.total-badge {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  color: var(--text3);
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  margin-bottom: 28px;
+  padding: 12px 18px;
+  background: var(--bg2);
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  align-items: center;
+}
+.legend-title {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text3);
+  margin-right: 4px;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text2);
+}
+.ldot {
+  width: 8px; height: 8px;
+  border-radius: 2px; flex-shrink: 0;
+}
+.sep { width: 1px; height: 14px; background: var(--border); }
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 36px 0 16px;
+}
+.sd-label {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text3);
+  white-space: nowrap;
+}
+.sd-line { flex: 1; height: 1px; background: var(--border); }
+
+/* ── TABLE ── */
+.show-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.show-table thead tr {
+  background: var(--bg3);
+}
+.show-table th {
+  padding: 10px 14px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+  white-space: nowrap;
+}
+
+.show-table tbody tr {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  transition: background .12s;
+}
+.show-table tbody tr:last-child { border-bottom: none; }
+.show-table tbody tr:hover { background: var(--bg3); }
+
+.show-table td {
+  padding: 14px 14px;
+  vertical-align: top;
+}
+
+/* Date cell */
+.date-cell {
+  white-space: nowrap;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text2);
+  min-width: 90px;
+}
+.date-main { color: var(--text); font-size: 12px; }
+.date-year { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+/* Name cell */
+.name-cell { min-width: 200px; max-width: 240px; }
+.show-name {
+  font-size: 13px; font-weight: 500;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+.show-name-en {
+  font-size: 11px; color: var(--text3);
+  line-height: 1.4;
+}
+.new-badge {
+  display: inline-block;
+  font-size: 9px; font-weight: 500;
+  padding: 1px 6px;
+  background: var(--teal-dim);
+  color: var(--teal);
+  border: 1px solid rgba(58,144,144,.25);
+  border-radius: 2px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: .04em;
+}
+.corrected-badge {
+  display: inline-block;
+  font-size: 9px; font-weight: 500;
+  padding: 1px 6px;
+  background: var(--amber-dim);
+  color: var(--amber);
+  border: 1px solid rgba(200,124,42,.25);
+  border-radius: 2px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* Location cell */
+.loc-cell { min-width: 130px; max-width: 150px; }
+.loc-flag { font-size: 15px; margin-bottom: 3px; }
+.loc-city { font-size: 12px; color: var(--text); font-weight: 500; }
+.loc-venue { font-size: 11px; color: var(--text3); margin-top: 1px; line-height: 1.4; }
+
+/* Tags + description cell */
+.desc-cell { min-width: 300px; }
+.tag-row { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+.tag {
+  font-size: 10px; font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.t-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(200,168,74,.2); }
+.t-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(74,148,98,.2); }
+.t-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(200,124,42,.2); }
+.t-red { background: var(--red-dim); color: var(--red); border: 1px solid rgba(184,72,72,.2); }
+.t-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(72,120,168,.2); }
+.t-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(58,144,144,.2); }
+.t-purple { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(120,88,200,.2); }
+.t-dim { background: rgba(255,255,255,.04); color: var(--text3); border: 1px solid var(--border); }
+
+.desc-text {
+  font-size: 12px; color: var(--text2);
+  line-height: 1.65;
+}
+.desc-text strong { color: var(--text); font-weight: 500; }
+
+/* Priority cell */
+.pri-cell {
+  min-width: 88px;
+  text-align: center;
+}
+.pri-badge {
+  display: inline-block;
+  font-size: 10px; font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 3px;
+  line-height: 1.4;
+  text-align: center;
+}
+.pri-now { background: var(--green-dim); color: var(--green); border: 1px solid rgba(74,148,98,.25); }
+.pri-plan { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(200,168,74,.25); }
+.pri-watch { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(72,120,168,.25); }
+.pri-skip { background: rgba(255,255,255,.04); color: var(--text3); border: 1px solid var(--border); }
+.pri-gone { background: var(--red-dim); color: var(--red); border: 1px solid rgba(184,72,72,.25); }
+
+/* URL cell */
+.url-cell { min-width: 120px; }
+.url-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  word-break: break-all;
+  line-height: 1.6;
+  text-decoration: none;
+}
+.url-link:hover { color: var(--gold); }
+
+/* Strikethrough row for stopped shows */
+.stopped-row { opacity: .5; }
+.stopped-row .show-name { text-decoration: line-through; color: var(--text3); }
+
+/* ── NOTES ── */
+.note-row {
+  display: flex; gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+.note-icon { flex-shrink: 0; font-size: 13px; }
+.note-warn { border-color: rgba(200,124,42,.25); background: var(--amber-dim); color: var(--amber); }
+.note-info { border-color: rgba(72,120,168,.25); background: var(--blue-dim); color: var(--blue); }
+.note-tip { border-color: rgba(74,148,98,.25); background: var(--green-dim); color: var(--green); }
+
+/* ── COLOR LEGEND ── */
+.color-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 6px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.cl-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text3);
+}
+.cl-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+.doc-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-note {
+  font-size: 11px; color: var(--text3);
+  line-height: 1.8;
+  max-width: 640px;
+}
+.footer-stamp {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--text3);
+  text-align: right;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #capture-area { padding: 40px 20px 56px; }
+  .page-header { grid-template-columns: 1fr; }
+  .header-right { text-align: left; }
+  .show-table { font-size: 12px; }
+  .show-table th, .show-table td { padding: 10px 10px; }
+  .toolbar { top: 10px; right: 10px; }
+}
+
+@media print {
+  .toolbar { display: none; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  html, body { background: #0f110e !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="tbtn" onclick="downloadImage()" id="dlBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    下载图片
+  </button>
+  <button class="tbtn" onclick="window.print()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    导出 PDF
+  </button>
+</div>
+
+<div id="capture-area">
+
+  <!-- ── HEADER ── -->
+  <header class="page-header">
+    <div class="header-left">
+      <div class="eyebrow">全球展会导览 · Global Exhibition Guide</div>
+      <h1 class="page-title">2026 植物提取物行业展会一览表</h1>
+      <div class="page-sub">6月起 · 完整版（国内 + 国际） · 含数据核实与修订说明</div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <strong>覆盖地区</strong> 中国 · 东南亚 · 欧洲 · 北美 · 中东 · 印度<br>
+        <strong>数据截至</strong> 2026年5月<br>
+        <strong>适用方向</strong> 植物提取物 B2B 出口 · OEM · 原料采购
+      </div>
+      <div class="total-badge">共 16 场展会</div>
+    </div>
+  </header>
+
+  <!-- ── LEGEND ── -->
+  <div class="legend">
+    <span class="legend-title">优先级</span>
+    <div class="legend-item"><div class="ldot" style="background:var(--green)"></div>立即行动</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--gold)"></div>规划中</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--blue)"></div>持续关注</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--text3)"></div>暂缓</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--red)"></div>已结束/停办</div>
+    <div class="sep"></div>
+    <span class="legend-title">标注</span>
+    <div class="legend-item"><span class="tag t-teal" style="font-size:10px;">新增</span>本次新加入</div>
+    <div class="legend-item"><span class="tag t-amber" style="font-size:10px;">修订</span>数据有变动</div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       国内展会
+  ═══════════════════════════════ -->
+  <div class="section-divider">
+    <span class="sd-label">🇨🇳 国内展会</span>
+    <div class="sd-line"></div>
+    <span class="sd-label">China</span>
+  </div>
+
+  <table class="show-table">
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>展会名称</th>
+        <th>地点</th>
+        <th>核心看点 / 与植物提取物的关联</th>
+        <th>优先级</th>
+        <th>官方网站</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">6.16–18</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">CPHI China 2026</div>
+          <div class="show-name-en">世界制药原料中国展（第24届）</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇨🇳</div>
+          <div class="loc-city">上海</div>
+          <div class="loc-venue">上海新国际博览中心</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-gold">天然产物展区</span>
+            <span class="tag t-dim">500+龙头企业</span>
+            <span class="tag t-dim">进出口贸易政策</span>
+          </div>
+          <div class="desc-text">亚洲制药原料风向标。天然产物展区汇聚500+龙头企业，设第十九届天然提取物创新与发展交流会，解读植物提取物进出口贸易等关键议题。<strong>已核实：日期、地点均准确。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-plan">规划参观</div></td>
+        <td class="url-cell"><a class="url-link" href="https://cphi-china.cn" target="_blank">cphi-china.cn</a></td>
+      </tr>
+
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">7.29–31</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">贵州植物提取物、健康天然原料展</div>
+          <div class="show-name-en">区域特色展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇨🇳</div>
+          <div class="loc-city">贵阳</div>
+          <div class="loc-venue">贵阳国际会议展览中心</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-amber">区域特色</span>
+            <span class="tag t-dim">刺梨/天麻/杜仲</span>
+          </div>
+          <div class="desc-text">区域特色新展。依托西南丰富的植物资源（刺梨、天麻、杜仲等），适合关注特色原料和国内市场下沉的企业。<strong>注：请搜索"贵州植物提取物展"确认最新信息。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-watch">关注</div></td>
+        <td class="url-cell"><a class="url-link" href="#" target="_blank">搜索"贵州植物提取物展"</a></td>
+      </tr>
+
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">8.06–08</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">上海有机植养功能食品展</div>
+          <div class="show-name-en">功能食品 · 植物基</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇨🇳</div>
+          <div class="loc-city">上海</div>
+          <div class="loc-venue">上海新国际博览中心</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-gold">药食同源</span>
+            <span class="tag t-dim">植物基</span>
+            <span class="tag t-dim">1200+品牌</span>
+          </div>
+          <div class="desc-text">聚焦终端消费趋势，重点关注药食同源、植物基、功能性食品，预计1200+品牌、60000+采购商。了解下游终端需求的重要窗口。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-watch">关注</div></td>
+        <td class="url-cell"><a class="url-link" href="#" target="_blank">搜索"上海有机植养功能食品展"</a></td>
+      </tr>
+
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">8.24–26</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">WPE&WHPE 2026</div>
+          <div class="show-name-en">天然健康原料世界博览会（第六届）</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇨🇳</div>
+          <div class="loc-city">西安</div>
+          <div class="loc-venue">西安国际会展中心</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-gold">旗舰展</span>
+            <span class="tag t-dim">40,000㎡</span>
+            <span class="tag t-dim">700+展商</span>
+            <span class="tag t-amber">修订</span>
+          </div>
+          <div class="desc-text">全球植提产业心脏地带的旗舰展。西安是中国最大植提产业集群，规模升级至40,000㎡，700+展商，覆盖从原料到成品的全产业链。<strong>已核实：2026年8月24–26日，西安，日期有调整（原版8.24–26正确）。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-now">必须参加</div></td>
+        <td class="url-cell"><a class="url-link" href="https://wpe-whpe.com" target="_blank">wpe-whpe.com</a></td>
+      </tr>
+
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">9.16–18</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">CPHI & PMEC Shenzhen 2026</div>
+          <div class="show-name-en">制药工业展（深圳）</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇨🇳</div>
+          <div class="loc-city">深圳</div>
+          <div class="loc-venue">深圳会议中心（福田）</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-teal">华南核心</span>
+            <span class="tag t-dim">天然提取专区</span>
+            <span class="tag t-dim">东南亚辐射</span>
+          </div>
+          <div class="desc-text">粤港澳大湾区核心展，设天然产物展区，辐射东南亚及"一带一路"市场，规模30000㎡。适合了解华南产业链和东南亚市场动向。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-watch">关注</div></td>
+        <td class="url-cell"><a class="url-link" href="https://cphi-china.cn/shenzhen" target="_blank">cphi-china.cn/shenzhen</a></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════
+       海外展会
+  ═══════════════════════════════ -->
+  <div class="section-divider">
+    <span class="sd-label">🌍 海外展会</span>
+    <div class="sd-line"></div>
+    <span class="sd-label">International</span>
+  </div>
+
+  <table class="show-table">
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>展会名称</th>
+        <th>地点</th>
+        <th>核心看点 / 与植物提取物的关联</th>
+        <th>优先级</th>
+        <th>官方网站</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Vitafoods Europe 2026 - PASSED -->
+      <tr class="stopped-row">
+        <td class="date-cell">
+          <div class="date-main">5.05–07</div>
+          <div class="date-year">2026 · 已过</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">Vitafoods Europe 2026</div>
+          <div class="show-name-en">欧洲营养保健食品展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇪🇸</div>
+          <div class="loc-city">巴塞罗那</div>
+          <div class="loc-venue">Fira Barcelona Gran Via</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-red">今年已过</span>
+            <span class="tag t-dim">首迁巴塞罗那</span>
+            <span class="tag t-dim">1600+展商</span>
+          </div>
+          <div class="desc-text">全球最重要的营养原料B2B展，今年首次从日内瓦迁至巴塞罗那。1600+展商，30000+访客，135+国家。<strong>2027年：5月18–20日，巴塞罗那，可列为明年计划。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-gone">今年已过</div></td>
+        <td class="url-cell"><a class="url-link" href="https://vitafoodsglobal.com" target="_blank">vitafoodsglobal.com</a></td>
+      </tr>
+
+      <!-- BIO International -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">6.22–25</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">BIO International Convention</div>
+          <div class="show-name-en">美国生物技术大会</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇺🇸</div>
+          <div class="loc-city">美国</div>
+          <div class="loc-venue">具体城市待定</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-dim">生物合成</span>
+            <span class="tag t-dim">合成生物学</span>
+          </div>
+          <div class="desc-text">全球最大生物技术盛会，覆盖天然产物生物合成、合成生物学等前沿领域，适合关注技术驱动型原料企业的动向。<strong>对初创外贸公司参考价值有限，可关注不必专程参加。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-skip">暂缓</div></td>
+        <td class="url-cell"><a class="url-link" href="https://bio.org" target="_blank">bio.org</a></td>
+      </tr>
+
+      <!-- WPE Vietnam -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">7.30–8.01</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">WPE&WHPE Vietnam</div>
+          <div class="show-name-en">越南天然健康原料展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇻🇳</div>
+          <div class="loc-city">胡志明市</div>
+          <div class="loc-venue">西贡国际会议中心</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-amber">东南亚门户</span>
+            <span class="tag t-dim">越南健康产业</span>
+          </div>
+          <div class="desc-text">东南亚市场门户。西安旗展的海外分站，连接中越健康产业供应链，适合试水东南亚市场。<strong>注意：东南亚不是你们的优先市场，法语优势无法发挥，如去以学习为主。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-skip">暂缓</div></td>
+        <td class="url-cell"><a class="url-link" href="#" target="_blank">搜索"WPE WHPE Vietnam"</a></td>
+      </tr>
+
+      <!-- CPHI Korea -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">8.25–27</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">CPHI Korea 2026</div>
+          <div class="show-name-en">国际医药原料韩国展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇰🇷</div>
+          <div class="loc-city">首尔</div>
+          <div class="loc-venue">韩国</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-dim">K-Beauty</span>
+            <span class="tag t-dim">K-Food</span>
+          </div>
+          <div class="desc-text">韩国是化妆品、保健品原料重要市场，聚焦K-Beauty、K-Food背后的原料供应链，适合拓展韩国及东北亚市场。对你们当前阶段价值有限，可作中期关注。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-skip">暂缓</div></td>
+        <td class="url-cell"><a class="url-link" href="#" target="_blank">搜索"CPHI Korea"</a></td>
+      </tr>
+
+      <!-- Vitafoods Asia -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">9.02–04</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">Vitafoods Asia 2026</div>
+          <div class="show-name-en">亚洲国际营养保健食品展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇹🇭</div>
+          <div class="loc-city">曼谷</div>
+          <div class="loc-venue">诗丽吉王后国家会议中心</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-gold">行业风向标</span>
+            <span class="tag t-dim">650家展商</span>
+            <span class="tag t-dim">亚太采购</span>
+          </div>
+          <div class="desc-text">亚洲营养保健食品行业风向标。2025年吸引650家展商、13460名观众，聚焦植物提取、功能性食品原料。<strong>已核实：日期准确，是了解亚太市场买家需求的重要窗口。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-watch">关注</div></td>
+        <td class="url-cell"><a class="url-link" href="https://vitafoodsasia.com" target="_blank">vitafoodsasia.com</a></td>
+      </tr>
+
+      <!-- Vitafoods Middle East ★ NEW -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">9.22–23</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">Vitafoods Middle East & Africa 2026<span class="new-badge">新增</span></div>
+          <div class="show-name-en">中东非洲营养保健食品展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇦🇪</div>
+          <div class="loc-city">迪拜</div>
+          <div class="loc-venue">UAE</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-green">中东验证市场</span>
+            <span class="tag t-teal">新增推荐</span>
+            <span class="tag t-gold">营养原料专属</span>
+          </div>
+          <div class="desc-text">替代已停办的SIAL Middle East，<strong>专注营养原料而非泛食品饮料，更精准</strong>。UAE是中东保健品集散地，Halal植物来源天然合规，英语沟通即可。距Natexpo 2026仅一周，可连续参加两场。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-now">优先参加</div></td>
+        <td class="url-cell"><a class="url-link" href="https://vitafoodsglobal.com" target="_blank">vitafoodsglobal.com</a></td>
+      </tr>
+
+      <!-- Bharat Nutraverse -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">9.07–09</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">Bharat Nutraverse Expo</div>
+          <div class="show-name-en">印度国家营养保健食品展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇮🇳</div>
+          <div class="loc-city">新德里</div>
+          <div class="loc-venue">Bharat Mandapam</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-dim">阿育吠陀</span>
+            <span class="tag t-dim">国际买家招待</span>
+          </div>
+          <div class="desc-text">印度首个国家级营养保健食品B2B平台，由印度政府主办，覆盖阿育吠陀植物提取物、功能性原料，设有国际买家招待计划（含机票住宿补贴）。了解印度竞争格局。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-skip">暂缓</div></td>
+        <td class="url-cell"><a class="url-link" href="#" target="_blank">搜索"Bharat Nutraverse Expo"</a></td>
+      </tr>
+
+      <!-- Natexpo 2026 ★ NEW + STAR -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">9.28–29</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">Natexpo 2026<span class="new-badge">新增</span></div>
+          <div class="show-name-en">法国有机天然产品专业展（第XX届）</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇫🇷</div>
+          <div class="loc-city">里昂</div>
+          <div class="loc-venue">Eurexpo Lyon</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-green">法语核心市场</span>
+            <span class="tag t-teal">新增推荐 ⭐</span>
+            <span class="tag t-gold">中小品牌决策人</span>
+            <span class="tag t-dim">7000+专业访客</span>
+          </div>
+          <div class="desc-text">法国有机与天然产品行业最重要专业展，<strong>参展商是法国中小天然健康品牌，创始人/产品负责人通常亲自在场</strong>。2025年630+参展商、10800+专业访客。里昂是A的大学城，有天然文化优势。距Vitafoods ME仅一周，可连续参加。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-now">最高优先级</div></td>
+        <td class="url-cell"><a class="url-link" href="https://natexpo.com" target="_blank">natexpo.com</a></td>
+      </tr>
+
+      <!-- CPHI Milan -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">10.06–08</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">CPHI Milan 2026<span class="corrected-badge">修订</span></div>
+          <div class="show-name-en">世界制药原料欧洲展（第35届）</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇮🇹</div>
+          <div class="loc-city">米兰</div>
+          <div class="loc-venue">Fiera Milano, Rho</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-gold">全球最大</span>
+            <span class="tag t-dim">2400+展商</span>
+            <span class="tag t-dim">62000+观众</span>
+          </div>
+          <div class="desc-text">全球制药原料行业规模最大、水准最高的展会。<strong>已核实：2026年10月6–8日，米兰Fiera Milano（原版写10.06–08正确）</strong>。2400+展商，62000+观众（含650家中国企业），天然提取物为核心展区。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-plan">中期规划</div></td>
+        <td class="url-cell"><a class="url-link" href="https://cphi.com/europe" target="_blank">cphi.com/europe</a></td>
+      </tr>
+
+      <!-- SupplySide Global -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">10.28–30</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">SupplySide Global 2026</div>
+          <div class="show-name-en">美国国际天然健康原料供应商展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇺🇸</div>
+          <div class="loc-city">拉斯维加斯</div>
+          <div class="loc-venue">Mandalay Bay Convention Center</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-dim">北美规模最大</span>
+            <span class="tag t-dim">1600+展商</span>
+            <span class="tag t-dim">20000+参与者</span>
+          </div>
+          <div class="desc-text">北美地区规模最大的健康原料B2B展。预计1600+展商、20000+参与者，覆盖膳食补充剂、食品饮料、个人护理等。<strong>北美是第二阶段目标市场，法语优势无法发挥，建议先跑通欧洲再考虑。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-skip">第二阶段</div></td>
+        <td class="url-cell"><a class="url-link" href="https://supplysideglobal.com" target="_blank">supplysideglobal.com</a></td>
+      </tr>
+
+      <!-- Fi Europe -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">11.17–19</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">Fi Europe 2026</div>
+          <div class="show-name-en">欧洲食品配料展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇩🇪</div>
+          <div class="loc-city">法兰克福</div>
+          <div class="loc-venue">德国</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-gold">全球顶级食品配料展</span>
+            <span class="tag t-dim">1500+展商</span>
+            <span class="tag t-dim">25000+观众</span>
+          </div>
+          <div class="desc-text">全球食品配料行业最具影响力展会，预计1500+展商、25000+观众，适合寻求国际合作和前沿技术交流。覆盖功能性食品原料，是欧洲买家了解新成分的重要平台。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-watch">关注</div></td>
+        <td class="url-cell"><a class="url-link" href="https://figlobal.com/europe" target="_blank">figlobal.com/europe</a></td>
+      </tr>
+
+      <!-- CPHI Middle East -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">12月</div>
+          <div class="date-year">2026</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">CPHI Middle East & Africa</div>
+          <div class="show-name-en">中东非洲制药原料展</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇸🇦</div>
+          <div class="loc-city">沙特阿拉伯</div>
+          <div class="loc-venue">中东</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-amber">新兴市场门户</span>
+            <span class="tag t-dim">生物医药本地化</span>
+          </div>
+          <div class="desc-text">中东非洲新兴市场门户。沙特正推进生物医药产业本地化，是开拓中东及伊斯兰市场的战略平台。<strong>注意：Vitafoods ME已先期于9月覆盖迪拜，此展作为补充了解沙特市场。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-watch">关注</div></td>
+        <td class="url-cell"><a class="url-link" href="#" target="_blank">搜索"CPHI Middle East Africa"</a></td>
+      </tr>
+
+      <!-- Vitafoods Europe 2027 -->
+      <tr>
+        <td class="date-cell">
+          <div class="date-main">5.18–20</div>
+          <div class="date-year">2027</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">Vitafoods Europe 2027</div>
+          <div class="show-name-en">欧洲营养保健食品展（明年）</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇪🇸</div>
+          <div class="loc-city">巴塞罗那</div>
+          <div class="loc-venue">Fira Barcelona Gran Via</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-blue">2027年目标</span>
+            <span class="tag t-dim">考虑参展身份</span>
+          </div>
+          <div class="desc-text">2027年Vitafoods Europe，建议在2026年Natexpo和Vitafoods ME以访客身份建立客户基础后，2027年考虑以<strong>参展商身份</strong>亮相。届时应已有2–3个稳定客户和完整文件体系。</div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-plan">2027年规划</div></td>
+        <td class="url-cell"><a class="url-link" href="https://vitafoodsglobal.com" target="_blank">vitafoodsglobal.com</a></td>
+      </tr>
+
+      <!-- SIAL Middle East STOPPED -->
+      <tr class="stopped-row">
+        <td class="date-cell">
+          <div class="date-main">已停办</div>
+          <div class="date-year">2022起</div>
+        </td>
+        <td class="name-cell">
+          <div class="show-name">SIAL Middle East</div>
+          <div class="show-name-en">原阿布扎比食品展（已停办）</div>
+        </td>
+        <td class="loc-cell">
+          <div class="loc-flag">🇦🇪</div>
+          <div class="loc-city">已停办</div>
+          <div class="loc-venue">原阿布扎比</div>
+        </td>
+        <td class="desc-cell">
+          <div class="tag-row">
+            <span class="tag t-red">已停办</span>
+            <span class="tag t-amber">原清单有误</span>
+          </div>
+          <div class="desc-text">自2022年起主办方已停办该展会。原清单推荐有误，已从推荐列表移除。<strong>替代：Vitafoods Middle East & Africa（9月，迪拜），专注营养原料，更精准。</strong></div>
+        </td>
+        <td class="pri-cell"><div class="pri-badge pri-gone">已停办</div></td>
+        <td class="url-cell"><span class="url-link">—</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- ── NOTES ── -->
+  <div class="note-row note-tip">
+    <span class="note-icon">⭐</span>
+    <div><strong>2026年最优路线：</strong>9月22–23日 Vitafoods Middle East（迪拜，UAE验证市场）→ 9月28–29日 Natexpo（里昂，法语欧洲核心买家）。两场间隔仅一周，可连续参加，以访客身份学习需求，不推销。里昂是A的大学城，有天然文化优势和亲切感。</div>
+  </div>
+  <div class="note-row note-warn">
+    <span class="note-icon">⚠️</span>
+    <div><strong>数据修订说明：</strong>原清单推荐的 SIAL Middle East 已于2022年停办，本版已替换为 Vitafoods Middle East & Africa。WPE&WHPE 2026日期核实为8月24–26日（原版正确）。CPHI Milan 10月6–8日已核实。贵州展、上海有机展等区域展会建议出发前搜索官方网站确认最新信息。</div>
+  </div>
+  <div class="note-row note-info">
+    <span class="note-icon">ℹ️</span>
+    <div><strong>参加策略：</strong>2026年所有展会建议以<strong>访客身份</strong>参加（目的：学习需求、建立对话）。2027年 Vitafoods Europe 可考虑以参展商身份亮相。东南亚展会（越南/韩国）暂缓，法语优势在此无法发挥，利润空间也远低于法语欧洲市场。</div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="doc-footer">
+    <div class="footer-note">
+      数据来源：各展会官方网站、Vitafoods Global、CPHI官方、Natexpo官网，截至2026年5月。部分区域性展会（贵州展、上海有机展等）信息以官方公告为准，参加前请自行核实最新日期。
+    </div>
+    <div class="footer-stamp">
+      植物提取物行业展会导览<br>
+      2026 · 完整修订版
+    </div>
+  </div>
+
+  <!-- Color legend -->
+  <div class="color-legend">
+    <div class="cl-item"><div class="cl-dot" style="background:var(--bg3);border:1px solid var(--border2);"></div>中国展会</div>
+    <div class="cl-item"><div class="cl-dot" style="background:var(--bg3);border:1px solid var(--border2);"></div>华南/大湾区</div>
+    <div class="cl-item"><div class="cl-dot" style="background:var(--bg3);border:1px solid var(--border2);"></div>东南亚</div>
+    <div class="cl-item"><div class="cl-dot" style="background:var(--bg3);border:1px solid var(--border2);"></div>北美</div>
+    <div class="cl-item"><div class="cl-dot" style="background:var(--bg3);border:1px solid var(--border2);"></div>旗舰/全球</div>
+    <div class="cl-item"><div class="cl-dot" style="background:var(--green);"></div>立即行动</div>
+    <div class="cl-item"><div class="cl-dot" style="background:var(--gold);"></div>规划中</div>
+    <div class="cl-item"><div class="cl-dot" style="background:var(--red);"></div>已过/停办</div>
+  </div>
+
+</div><!-- /capture-area -->
+
+<script>
+async function downloadImage() {
+  const btn = document.getElementById('dlBtn');
+  const toolbar = document.querySelector('.toolbar');
+  btn.classList.add('loading');
+  btn.textContent = '生成中...';
+  toolbar.style.display = 'none';
+
+  try {
+    const el = document.getElementById('capture-area');
+    const canvas = await html2canvas(el, {
+      backgroundColor: '#0f110e',
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      windowWidth: 1280,
+    });
+    const link = document.createElement('a');
+    link.download = '2026植物提取物行业展会一览表.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('下载失败，请尝试使用浏览器截图或导出PDF。');
+  } finally {
+    toolbar.style.display = 'flex';
+    btn.classList.remove('loading');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 下载图片';
+  }
+}
+</script>
+
+</body>
+</html>

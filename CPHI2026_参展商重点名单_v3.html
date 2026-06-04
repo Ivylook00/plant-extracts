@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPHI 2026 · 参展商名单</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans SC',sans-serif;background:#f5f4f0;color:#1a1917;font-size:14px;line-height:1.6;}
+
+/* TOOLBAR */
+.toolbar{position:fixed;top:14px;right:14px;z-index:200;display:flex;gap:8px;}
+.tbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;background:#1a1917;color:#f5f4f0;font-family:'Noto Sans SC',sans-serif;font-size:12px;font-weight:500;border:none;cursor:pointer;border-radius:2px;transition:opacity .15s;white-space:nowrap;}
+.tbtn:hover{opacity:.75;}
+.tbtn.loading{opacity:.4;pointer-events:none;}
+.tbtn svg{width:12px;height:12px;flex-shrink:0;}
+
+/* PAGE */
+#doc{max-width:680px;margin:0 auto;padding:48px 20px 64px;}
+
+/* HEADER */
+.hdr{padding-bottom:20px;border-bottom:3px solid #1a1917;margin-bottom:32px;}
+.hdr-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#8a6c18;margin-bottom:8px;}
+.hdr-title{font-family:'Noto Serif SC',serif;font-size:clamp(22px,5vw,32px);font-weight:700;color:#1a1917;line-height:1.15;margin-bottom:12px;}
+.hdr-meta{display:flex;flex-wrap:wrap;gap:8px 20px;}
+.hdr-meta-item{font-size:12px;color:#6a6860;}
+.hdr-meta-item strong{color:#1a1917;font-weight:500;}
+
+/* CHAPTER */
+.chapter{margin-bottom:36px;}
+.chapter-head{
+  display:flex;align-items:center;gap:12px;
+  background:#1a1917;color:#f5f4f0;
+  padding:10px 16px;
+  margin-bottom:0;
+}
+.ch-letter{font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;color:#c8a448;line-height:1;}
+.ch-title{font-size:14px;font-weight:700;flex:1;}
+.ch-note{font-size:11px;color:rgba(245,244,240,.55);font-weight:400;}
+
+/* SUPPLIER ROW */
+.s-row{border-bottom:1px solid #dedad2;background:#fff;}
+.s-row:first-of-type{border-top:none;}
+.s-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px 16px;cursor:pointer;user-select:none;}
+.s-head-left{flex:1;min-width:0;}
+.s-name{font-size:14px;font-weight:700;color:#1a1917;margin-bottom:2px;line-height:1.3;}
+.s-loc{font-size:11px;color:#9a9688;margin-bottom:7px;}
+.s-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.tag{font-size:11px;font-weight:500;padding:2px 8px;border-radius:2px;}
+.tg{background:#e8f2ec;color:#1a6832;}
+.ta{background:#fdf0e0;color:#8a5c08;}
+.ti{background:#e6eef8;color:#1a4878;}
+.td{background:#f0ede8;color:#6a6860;}
+.s-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:2px;white-space:nowrap;}
+.bstar{background:#1a6832;color:#fff;}
+.bmid{background:#8a5c08;color:#fff;}
+.bblue{background:#1a4878;color:#fff;}
+.bdim{background:#e0ddd6;color:#6a6860;}
+.chev{font-size:11px;color:#9a9688;transition:transform .2s;margin-top:2px;}
+.chev.open{transform:rotate(180deg);}
+
+/* EXPANDED */
+.s-body{display:none;padding:0 16px 16px;}
+.s-body.open{display:block;}
+.s-section{margin-bottom:12px;}
+.s-section:last-child{margin-bottom:0;}
+.s-sec-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#9a9688;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid #ece9e2;}
+.s-sec-text{font-size:13px;color:#4a4840;line-height:1.7;}
+.s-sec-text strong{color:#1a1917;font-weight:500;}
+.ask{display:flex;gap:8px;font-size:13px;color:#4a4840;margin-bottom:4px;line-height:1.5;}
+.ask::before{content:'→';color:#8a6c18;flex-shrink:0;margin-top:1px;}
+.callout{font-size:13px;line-height:1.6;padding:9px 12px;margin-top:8px;border-left:3px solid;}
+.cg{border-color:#1a6832;background:#e8f2ec;color:#1a6832;}
+.ca{border-color:#8a5c08;background:#fdf0e0;color:#8a5c08;}
+.cr{border-color:#8a2818;background:#fde8e4;color:#8a2818;}
+
+/* C SECTION */
+.id-box{background:#1a1917;color:#f5f4f0;padding:14px 16px;font-size:13px;line-height:1.7;}
+.id-box strong{color:#c8a448;}
+.id-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#c8a448;margin-bottom:7px;}
+
+/* NOTES */
+.note-block{background:#fff;border-bottom:1px solid #dedad2;}
+.note-block:last-child{border-bottom:none;}
+.nb-head{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;}
+.nb-num{font-size:16px;font-weight:700;color:#c8a448;font-family:'Noto Serif SC',serif;line-height:1;flex-shrink:0;}
+.nb-title{font-size:13px;font-weight:700;color:#1a1917;flex:1;}
+.nb-body{display:none;padding:0 16px 14px 44px;}
+.nb-body.open{display:block;}
+.nb-list{list-style:none;}
+.nb-list li{font-size:13px;color:#4a4840;margin-bottom:5px;line-height:1.55;display:flex;gap:8px;}
+.nb-list li::before{content:'·';color:#c8a448;font-size:18px;line-height:1;flex-shrink:0;}
+.nb-list li strong{color:#1a1917;font-weight:500;}
+
+/* FOOTER */
+.footer{margin-top:32px;padding-top:16px;border-top:2px solid #1a1917;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;}
+.fl{font-size:11px;color:#9a9688;line-height:1.8;}
+.fr{font-size:12px;color:#9a9688;text-align:right;}
+
+/* PRINT — portrait A4, mobile-readable */
+@media print{
+  @page{margin:10mm 8mm;size:A4 portrait;}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  html,body{background:#f5f4f0!important;}
+  .toolbar{display:none!important;}
+  .s-body,.nb-body{display:block!important;}
+  .chev{display:none!important;}
+  #doc{max-width:100%;padding:0;}
+  .s-row,.note-block,.id-box,.callout{page-break-inside:avoid;break-inside:avoid;}
+  .chapter-head{page-break-after:avoid;break-after:avoid;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="tbtn" id="imgBtn" onclick="dlImg()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    下载图片
+  </button>
+  <button class="tbtn" onclick="dlPDF()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    导出 PDF
+  </button>
+</div>
+
+<div id="doc">
+
+<div class="hdr">
+  <div class="hdr-label">展会准备材料 · CPHI China 2026</div>
+  <div class="hdr-title">参展商重点名单</div>
+  <div class="hdr-meta">
+    <div class="hdr-meta-item"><strong>日期</strong> 2026.06.16–18</div>
+    <div class="hdr-meta-item"><strong>地点</strong> 上海新国际博览中心</div>
+    <div class="hdr-meta-item"><strong>目标展区</strong> 天然产物展区</div>
+  </div>
+</div>
+
+<!-- ═══ A ═══ -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="ch-letter">A</div>
+    <div class="ch-title">行业龙头</div>
+    <div class="ch-note">了解市场标准，不谈合作</div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('a1')">
+      <div class="s-head-left">
+        <div class="s-name">晨光生物科技集团 <span style="font-size:11px;font-weight:400;color:#9a9688;">300138</span></div>
+        <div class="s-loc">河北邯郸 · A股上市</div>
+        <div class="s-tags"><span class="tag td">辣椒红全球第一</span><span class="tag td">叶黄素</span><span class="tag td">水飞蓟素</span><span class="tag td">番茄红素</span></div>
+      </div>
+      <div class="s-right"><span class="badge bdim">了解行情</span><span class="chev" id="c-a1">▼</span></div>
+    </div>
+    <div class="s-body" id="b-a1">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text">中国植提行业首家上市公司。<strong>辣椒红色素、叶黄素全球第一</strong>。2025年植提营收约31亿，辣椒红销量+27%，水飞蓟+66%。不涉及功能性蘑菇品类。</div></div>
+      <div class="s-section"><div class="s-sec-label">去展台的目的</div>
+        <div class="ask">了解大宗品出口规格标准和价格基准</div>
+        <div class="ask">观察今年主推哪些新品种</div>
+        <div class="ask">收集产品手册，不谈合作</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('a2')">
+      <div class="s-head-left">
+        <div class="s-name">莱茵生物科技 <span style="font-size:11px;font-weight:400;color:#9a9688;">002166</span></div>
+        <div class="s-loc">广西桂林 · A股上市</div>
+        <div class="s-tags"><span class="tag td">甜叶菊全球龙头</span><span class="tag td">罗汉果苷</span><span class="tag td">合成生物技术</span></div>
+      </div>
+      <div class="s-right"><span class="badge bdim">了解行情</span><span class="chev" id="c-a2">▼</span></div>
+    </div>
+    <div class="s-body" id="b-a2">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text">全球天然甜味剂龙头。2024年营收17.7亿，<strong>毛利率29.3%</strong>，归母净利+97.6%。2024年合成生物车间正式投产，代表行业技术转型方向。</div></div>
+      <div class="s-section"><div class="s-sec-label">去展台的目的</div>
+        <div class="ask">了解天然甜味剂赛道最新动向</div>
+        <div class="ask">了解合成生物技术对植提行业的影响</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('a3')">
+      <div class="s-head-left">
+        <div class="s-name">INDENA（意大利）/ Linnea（瑞士）</div>
+        <div class="s-loc">欧洲天然植物提取物龙头</div>
+        <div class="s-tags"><span class="tag ti">欧洲视角</span><span class="tag ti">欧盟最高品质标准</span></div>
+      </div>
+      <div class="s-right"><span class="badge bblue">欧洲视角</span><span class="chev" id="c-a3">▼</span></div>
+    </div>
+    <div class="s-body" id="b-a3">
+      <div class="s-section"><div class="s-sec-label">关注价值</div><div class="s-sec-text">他们的检测方法、规格书格式、合规文件体系，就是你们服务法语买家时需要对标的标准。</div></div>
+      <div class="s-section"><div class="s-sec-label">去展台的目的</div>
+        <div class="ask">了解欧洲买家对COA格式的具体要求</div>
+        <div class="ask">收集产品规格书作为参考标准</div>
+        <div class="ask">了解他们主推哪些功效赛道</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ B ═══ -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="ch-letter">B</div>
+    <div class="ch-title">中小OEM供应商</div>
+    <div class="ch-note">重点目标，B主导谈判</div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('b1')">
+      <div class="s-head-left">
+        <div class="s-name">威海百合生物技术股份 <span style="font-size:11px;font-weight:400;color:#9a9688;">603102</span></div>
+        <div class="s-loc">山东威海 · A股上市</div>
+        <div class="s-tags"><span class="tag tg">法国出口记录</span><span class="tag tg">OEM体系成熟</span><span class="tag tg">EU/FDA/BRC认证</span><span class="tag ti">10+剂型</span></div>
+      </div>
+      <div class="s-right"><span class="badge bstar">优先拜访 ★</span><span class="chev" id="c-b1">▼</span></div>
+    </div>
+    <div class="s-body" id="b-b1">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text">沪市主板保健品第一股。8大数字化智能工厂，4000余种产品。出口<strong>德国、英国、瑞士、法国</strong>等70个国家，累计出口1.4亿瓶。2024年营收8.01亿。</div></div>
+      <div class="s-section"><div class="s-sec-label">主打产品与OEM能力</div><div class="s-sec-text">软胶囊/硬胶囊/片剂/粉剂/口服液/软糖等10余种剂型，可定制配方。认证：FDA/BRCGS/HACCP/欧盟注册。</div></div>
+      <div class="s-section"><div class="s-sec-label">重点要问</div>
+        <div class="ask">功能性蘑菇品类有没有现成配方</div>
+        <div class="ask">服务法国/比利时客户的MOQ</div>
+        <div class="ask">英法双语COA能否提供</div>
+        <div class="ask">样品流程和交付周期</div>
+      </div>
+      <div class="callout cg">★ B类首选——有法国出口记录，OEM体系最成熟，认证最齐全，与目标市场高度匹配。</div>
+    </div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('b2')">
+      <div class="s-head-left">
+        <div class="s-name">浙江惠松制药</div>
+        <div class="s-loc">浙江杭州 · 国家高新技术企业</div>
+        <div class="s-tags"><span class="tag tg">EU Organic认证</span><span class="tag tg">USDA Organic</span><span class="tag tg">日本FDA</span><span class="tag ti">中药提取物</span></div>
+      </div>
+      <div class="s-right"><span class="badge bstar">优先拜访 ★</span><span class="chev" id="c-b2">▼</span></div>
+    </div>
+    <div class="s-body" id="b-b2">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text">1998年成立，外向型制药企业，日本/美国/印尼设有分公司，产品出口70余个国家。CNAS国家级实验室。</div></div>
+      <div class="s-section"><div class="s-sec-label">主打产品</div><div class="s-sec-text">天然植物提取物、中药配方颗粒、中药饮片。认证含 <strong>EU Organic / USDA Organic</strong>。有机认证可为法语高端市场带来30–50%溢价。</div></div>
+      <div class="s-section"><div class="s-sec-label">重点要问</div>
+        <div class="ask">情绪/睡眠类中药提取物品种清单</div>
+        <div class="ask">EU Organic认证具体涵盖哪些品种</div>
+        <div class="ask">小批量OEM的MOQ和交货周期</div>
+        <div class="ask">欧洲客户合规文件配合经验</div>
+      </div>
+      <div class="callout cg">★ EU Organic认证是法语高端市场关键加分项，本次展会最值得深聊的认证资质。</div>
+    </div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('b3')">
+      <div class="s-head-left">
+        <div class="s-name">陕西嘉禾生物科技股份 <span style="font-size:11px;font-weight:400;color:#9a9688;">JIAHERB</span></div>
+        <div class="s-loc">陕西杨凌 · 全国植提出口20强</div>
+        <div class="s-tags"><span class="tag tg">年出口7000万美元</span><span class="tag tg">BRCGS/CNAS/cGMP</span><span class="tag ti">5-HTP情绪赛道</span></div>
+      </div>
+      <div class="s-right"><span class="badge bstar">优先拜访 ★</span><span class="chev" id="c-b3">▼</span></div>
+    </div>
+    <div class="s-body" id="b-b3">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text"><strong>全国植提出口20强第4名</strong>，年出口额7000万美元量级。400+种生产工艺，年产值10亿，国内外客户2000家，参与USP美国药典标准制定。</div></div>
+      <div class="s-section"><div class="s-sec-label">主打产品</div><div class="s-sec-text"><strong>5-HTP（五羟基色氨酸）</strong>——情绪/睡眠赛道核心成分，欧洲认知度高，是前期分析未覆盖的潜力品种。白藜芦醇、黄芩苷。</div></div>
+      <div class="s-section"><div class="s-sec-label">重点要问</div>
+        <div class="ask">5-HTP规格和欧洲出口合规状态</div>
+        <div class="ask">功能性蘑菇品类是否涉及</div>
+        <div class="ask">小批量起订量</div>
+        <div class="ask">英文COA和第三方检测配合能力</div>
+      </div>
+      <div class="callout ca">⚠ 5-HTP在欧盟部分国家有剂量限制，需现场问清楚欧洲客户的合规处理方式。</div>
+    </div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('b4')">
+      <div class="s-head-left">
+        <div class="s-name">杨凌慈缘生物技术</div>
+        <div class="s-loc">陕西宝鸡 · CPHI创新奖得主</div>
+        <div class="s-tags"><span class="tag tg">FDA/Halal/KOSHER</span><span class="tag ti">食用菌多糖</span><span class="tag td">年产2000吨</span></div>
+      </div>
+      <div class="s-right"><span class="badge bmid">重点关注</span><span class="chev" id="c-b4">▼</span></div>
+    </div>
+    <div class="s-body" id="b-b4">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text">2009年成立，CPHI创新奖得主，注册资本1亿元，含博士5名。认证：ISO22000/FDA/Halal/KOSHER。</div></div>
+      <div class="s-section"><div class="s-sec-label">主打产品</div><div class="s-sec-text"><strong>食用菌多糖</strong>（与功能性蘑菇赛道直接相关）、红车轴草提取物、海藻提取物、黄芩提取物。</div></div>
+      <div class="s-section"><div class="s-sec-label">重点要问</div>
+        <div class="ask">食用菌多糖具体品种（灵芝/猴头菇？）</div>
+        <div class="ask">子实体 vs 菌丝体来源——欧盟合规关键</div>
+        <div class="ask">欧洲出口经验和文件支持能力</div>
+        <div class="ask">MOQ和样品安排</div>
+      </div>
+      <div class="callout cr">⚠ 必须确认：子实体=欧盟可直销，菌丝体=Novel Food需授权。</div>
+    </div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('b5')">
+      <div class="s-head-left">
+        <div class="s-name">西安天丰生物科技股份</div>
+        <div class="s-loc">陕西西安 · 20年营养健康原料</div>
+        <div class="s-tags"><span class="tag ti">酸枣仁</span><span class="tag ti">红景天</span><span class="tag ti">五味子</span><span class="tag td">质量稳·交付快</span></div>
+      </div>
+      <div class="s-right"><span class="badge bmid">重点关注</span><span class="chev" id="c-b5">▼</span></div>
+    </div>
+    <div class="s-body" id="b-b5">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text">2005年成立，以"用制药理念做营养健康原料"为定位，CPHI创新奖企业，口碑以<strong>"质量稳、交付快"</strong>著称。</div></div>
+      <div class="s-section"><div class="s-sec-label">主打产品</div><div class="s-sec-text">西安产区优势品种：<strong>酸枣仁提取物、红景天提取物、五味子提取物</strong>——三者均在情绪/睡眠/Adaptogen赛道。</div></div>
+      <div class="s-section"><div class="s-sec-label">重点要问</div>
+        <div class="ask">酸枣仁、红景天的标准化规格（含量指标）</div>
+        <div class="ask">出口认证和资质体系</div>
+        <div class="ask">OEM配合意愿和MOQ</div>
+        <div class="ask">英文COA配合能力</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-row">
+    <div class="s-head" onclick="tog('b6')">
+      <div class="s-head-left">
+        <div class="s-name">浩天药业（诸城）</div>
+        <div class="s-loc">山东诸城 · 全球天然甜味剂前七</div>
+        <div class="s-tags"><span class="tag td">甜菊糖苷</span><span class="tag td">黄芩苷</span><span class="tag td">PQQ</span><span class="tag ti">80+国出口经验</span></div>
+      </div>
+      <div class="s-right"><span class="badge bdim">参考了解</span><span class="chev" id="c-b6">▼</span></div>
+    </div>
+    <div class="s-body" id="b-b6">
+      <div class="s-section"><div class="s-sec-label">公司简介</div><div class="s-sec-text">1999年成立，全球天然甜味剂前七唯一民族企业，服务80+国家，上海/青岛/纽约设有分公司，有EU Organic认证。</div></div>
+      <div class="s-section"><div class="s-sec-label">去展台的目的</div>
+        <div class="ask">了解其服务欧洲客户的文件体系（参考学习）</div>
+        <div class="ask">了解黄芩苷在欧洲保健品市场的应用</div>
+        <div class="ask">不做深度合作谈判</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ C ═══ -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="ch-letter">C</div>
+    <div class="ch-title">竞争对手</div>
+    <div class="ch-note">A单独行动，B不同行</div>
+  </div>
+  <div class="id-box">
+    <div class="id-label">身份设定</div>
+    以<strong>"亚马逊BA出来创业，想做大健康产品"</strong>的买家身份进入。说<strong>"懂消费者和市场，但不熟悉供应链和原料"</strong>——不要说"完全不懂"。
+  </div>
+  <div class="s-row">
+    <div class="s-head" onclick="tog('c1')">
+      <div class="s-head-left">
+        <div class="s-name">如何识别 + 要打听什么</div>
+        <div class="s-loc">在天然产物供应链/OEM展区重点寻找</div>
+      </div>
+      <div class="s-right"><span class="chev" id="c-c1">▼</span></div>
+    </div>
+    <div class="s-body" id="b-c1">
+      <div class="s-section"><div class="s-sec-label">如何识别竞争对手展位</div>
+        <div class="ask">展台有英文/法文等多语言宣传材料</div>
+        <div class="ask">展板强调"出口服务"而非生产能力</div>
+        <div class="ask">不是纯工厂，主打方案型服务</div>
+      </div>
+      <div class="s-section"><div class="s-sec-label">用买家身份要打听的信息</div>
+        <div class="ask">你们主要服务哪些市场的客户？</div>
+        <div class="ask">最小起订量是多少？能做小批量吗？</div>
+        <div class="ask">除了发货，还能提供什么服务？</div>
+        <div class="ask">有没有配合过欧盟合规文件？</div>
+        <div class="ask">服务过法语市场的客户吗？</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NOTES ═══ -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="ch-letter" style="color:#fff;">!</div>
+    <div class="ch-title">注意事项</div>
+    <div class="ch-note">点击展开</div>
+  </div>
+
+  <div class="note-block">
+    <div class="nb-head" onclick="togN('n1')">
+      <div class="nb-num">01</div>
+      <div class="nb-title">展前必做（今天）</div>
+      <span class="chev" id="c-n1">▼</span>
+    </div>
+    <div class="nb-body" id="b-n1">
+      <ul class="nb-list">
+        <li>去 <strong>exhibitors.cphi-china.cn/shanghai</strong> 注册，搜索公司名查展位号</li>
+        <li>去 <strong>reg.cphi-china.cn</strong> 免费预登记观众门票</li>
+        <li>手机备好市场情报收集表</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note-block">
+    <div class="nb-head" onclick="togN('n2')">
+      <div class="nb-num">02</div>
+      <div class="nb-title">当天分工</div>
+      <span class="chev" id="c-n2">▼</span>
+    </div>
+    <div class="nb-body" id="b-n2">
+      <ul class="nb-list">
+        <li>到场第一件事：领展会手册，找天然产物展区平面图</li>
+        <li>B主导技术谈判，A在旁边<strong>记录+学习</strong></li>
+        <li>听不懂的专业词，当场小声问B或展后立刻问</li>
+        <li>A单独去C类竞争对手展位，B不同行</li>
+        <li>每家谈完立刻记录，不要积压</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note-block">
+    <div class="nb-head" onclick="togN('n3')">
+      <div class="nb-num">03</div>
+      <div class="nb-title">每家必问三个问题</div>
+      <span class="chev" id="c-n3">▼</span>
+    </div>
+    <div class="nb-body" id="b-n3">
+      <ul class="nb-list">
+        <li>最近欧洲客户问最多的是哪些品种？</li>
+        <li>有没有提供英文COA和第三方检测报告？</li>
+        <li>最小起订量和样品怎么安排？</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note-block">
+    <div class="nb-head" onclick="togN('n4')">
+      <div class="nb-num">04</div>
+      <div class="nb-title">特别关注：首秀品牌孵化专区</div>
+      <span class="chev" id="c-n4">▼</span>
+    </div>
+    <div class="nb-body" id="b-n4">
+      <ul class="nb-list">
+        <li>首次参展的新兴品牌聚集地，过去两年已有23家品牌首秀</li>
+        <li>通常MOQ低、合作意愿强、对出口需求灵活</li>
+        <li>发现黑马OEM供应商的最佳区域，不要忽略</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="fl">CPHI China 2026 · 上海新国际博览中心<br>展位号查询：exhibitors.cphi-china.cn/shanghai</div>
+  <div class="fr">参展商重点名单<br>访客身份</div>
+</div>
+
+</div>
+
+<script>
+function tog(id){
+  var b=document.getElementById('b-'+id);
+  var c=document.getElementById('c-'+id);
+  if(!b)return;
+  var o=b.classList.toggle('open');
+  if(c)c.classList.toggle('open',o);
+}
+function togN(id){
+  var b=document.getElementById('b-'+id);
+  var c=document.getElementById('c-'+id);
+  if(!b)return;
+  var o=b.classList.toggle('open');
+  if(c)c.classList.toggle('open',o);
+}
+function expandAll(){
+  document.querySelectorAll('.s-body,.nb-body').forEach(function(b){b.classList.add('open');});
+  document.querySelectorAll('.chev').forEach(function(c){c.classList.add('open');});
+}
+function collapseAll(was){
+  document.querySelectorAll('.s-body,.nb-body').forEach(function(b,i){if(!was[i])b.classList.remove('open');});
+  document.querySelectorAll('.chev').forEach(function(c){c.classList.remove('open');});
+}
+function dlPDF(){
+  var all=[].slice.call(document.querySelectorAll('.s-body,.nb-body'));
+  var was=all.map(function(b){return b.classList.contains('open');});
+  expandAll();
+  window.print();
+  setTimeout(function(){collapseAll(was);},1000);
+}
+async function dlImg(){
+  var btn=document.getElementById('imgBtn');
+  var tb=document.querySelector('.toolbar');
+  var all=[].slice.call(document.querySelectorAll('.s-body,.nb-body'));
+  var was=all.map(function(b){return b.classList.contains('open');});
+  expandAll();
+  btn.textContent='生成中...';btn.classList.add('loading');tb.style.display='none';
+  try{
+    var canvas=await html2canvas(document.getElementById('doc'),{
+      backgroundColor:'#f5f4f0',scale:2.5,useCORS:true,logging:false,
+      windowWidth:680
+    });
+    var a=document.createElement('a');
+    a.download='CPHI2026_参展商名单.png';
+    a.href=canvas.toDataURL('image/png');a.click();
+  }catch(e){alert('下载失败，请尝试导出PDF。');}
+  finally{
+    tb.style.display='flex';
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 下载图片';
+    btn.classList.remove('loading');
+    collapseAll(was);
+  }
+}
+</script>
+</body>
+</html>
