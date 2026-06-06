@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>外贸运营流程图</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F7F3EE;
+  --ink:#18140F;
+  --ink-mid:#4A3F35;
+  --ink-faint:#8C7E72;
+  --rule:rgba(24,20,15,.1);
+  --a:#7A3B0A;--a-bg:#F5E8D8;--a-line:#C4723A;
+  --b:#0A5C3A;--b-bg:#D8F0E5;--b-line:#2E9A6A;
+  --ab:#2D2C7A;--ab-bg:#E2E2F8;--ab-line:#6A69CC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:'DM Mono',monospace;min-height:100vh}
+
+/* HEADER */
+header{padding:3rem 3rem 2rem;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}
+.header-title{font-family:'Spectral',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:500;line-height:1.1;letter-spacing:-.02em}
+.header-title em{font-style:italic;color:var(--a)}
+.header-meta{text-align:right;font-size:10px;color:var(--ink-faint);letter-spacing:.1em;text-transform:uppercase;line-height:2;flex-shrink:0}
+
+/* LEGEND */
+.legend{padding:1rem 3rem;background:var(--ink);display:flex;gap:2rem;flex-wrap:wrap;align-items:center}
+.leg{display:flex;align-items:center;gap:6px;font-size:10px;color:rgba(247,243,238,.6);letter-spacing:.06em}
+.leg-pip{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pip-a{background:var(--a-line)}
+.pip-b{background:var(--b-line)}
+.pip-ab{background:var(--ab-line)}
+.leg-tag{font-size:9px;padding:1px 6px;border-radius:2px;letter-spacing:.04em}
+.lt-a{background:var(--a-bg);color:var(--a)}
+.lt-b{background:var(--b-bg);color:var(--b)}
+
+/* MAIN */
+main{padding:0 3rem 4rem;max-width:900px;margin:0 auto}
+
+/* PHASE */
+.phase{margin-top:3rem}
+.phase-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1.5px solid var(--ink)}
+.phase-num{font-family:'Spectral',serif;font-size:3rem;color:var(--rule);line-height:1;flex-shrink:0;font-weight:400}
+.phase-label{font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:2px;white-space:nowrap}
+.pl-1{background:var(--a-bg);color:var(--a);border:.5px solid var(--a-line)}
+.pl-2{background:#FBF0DC;color:#6B4A10;border:.5px solid #D4A055}
+.pl-3{background:var(--ab-bg);color:var(--ab);border:.5px solid var(--ab-line)}
+.pl-4{background:var(--b-bg);color:var(--b);border:.5px solid var(--b-line)}
+.pl-5{background:#E8F5E8;color:#1A5C2A;border:.5px solid #4A9A5A}
+.phase-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:500;color:var(--ink)}
+
+/* SUMMARY */
+.phase-summary{font-size:11.5px;color:var(--ink-mid);line-height:1.8;padding:1rem 1.25rem;border-left:2px solid var(--rule);margin-bottom:1.25rem;font-family:'Noto Serif SC',serif}
+.phase-summary strong{color:var(--ink)}
+
+/* NODES */
+.nodes{display:flex;flex-direction:column;gap:0;border-left:1.5px solid var(--rule);margin-left:16px}
+.node{display:flex;gap:0;position:relative;padding:.9rem 0 .9rem 1.5rem;border-bottom:.5px solid var(--rule)}
+.node:last-child{border-bottom:none}
+.node::before{content:'';position:absolute;left:-5px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:var(--cream);border:1.5px solid var(--rule)}
+.node.node-a::before{border-color:var(--a-line);background:var(--a-bg)}
+.node.node-b::before{border-color:var(--b-line);background:var(--b-bg)}
+.node.node-ab::before{border-color:var(--ab-line);background:var(--ab-bg)}
+
+.node-body{flex:1}
+.node-title{font-size:13px;font-weight:500;color:var(--ink);font-family:'Noto Serif SC',serif;margin-bottom:4px;display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+.role{font-size:9px;font-weight:500;padding:2px 7px;border-radius:2px;white-space:nowrap;letter-spacing:.04em;font-family:'DM Mono',monospace}
+.r-a{background:var(--a-bg);color:var(--a);border:.5px solid var(--a-line)}
+.r-b{background:var(--b-bg);color:var(--b);border:.5px solid var(--b-line)}
+.r-ab{background:var(--ab-bg);color:var(--ab);border:.5px solid var(--ab-line)}
+.r-amain{background:var(--a-bg);color:var(--a)}
+.r-bmain{background:var(--b-bg);color:var(--b)}
+.r-sub{background:rgba(24,20,15,.06);color:var(--ink-faint);font-size:8.5px}
+.node-desc{font-size:11px;color:var(--ink-mid);line-height:1.6}
+.blocker{font-size:8.5px;color:#8B1A1A;background:#F5E4E4;border:.5px solid #C45A4A;padding:1px 5px;border-radius:2px;font-family:'DM Mono',monospace}
+
+/* CONNECTOR */
+.connector{display:flex;align-items:center;gap:.75rem;padding:.75rem 0 .75rem 1.5rem;margin-left:16px}
+.conn-line{width:1.5px;height:24px;background:var(--rule);flex-shrink:0;margin-left:-1.5px}
+.conn-arrow-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.conn-arrow{font-size:11px;color:var(--ink-faint)}
+.conn-text{font-size:10px;color:var(--ink-faint);letter-spacing:.04em;font-style:italic}
+
+/* FOOTER */
+footer{margin-top:3rem;padding:1.5rem 3rem;border-top:1px solid var(--rule);font-size:10px;color:var(--ink-faint);letter-spacing:.06em;display:flex;justify-content:space-between}
+
+@media(max-width:600px){
+  header{padding:1.5rem;flex-direction:column;align-items:flex-start}
+  .header-meta{text-align:left}
+  .legend{padding:.75rem 1.5rem;gap:1rem}
+  main{padding:0 1.5rem 3rem}
+  footer{padding:1rem 1.5rem;flex-direction:column;gap:.5rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">外贸运营<br><em>流程图</em></div>
+  <div class="header-meta">
+    植物提取物 B2B 出口<br>
+    OEM 模式起步<br>
+    时间轴 · 职责版
+  </div>
+</header>
+
+<div class="legend">
+  <div class="leg"><span class="leg-pip pip-a"></span>A 负责</div>
+  <div class="leg"><span class="leg-pip pip-b"></span>B 负责</div>
+  <div class="leg"><span class="leg-pip pip-ab"></span>A+B 共同</div>
+  <div class="leg"><span class="leg-tag lt-a">A主</span>&nbsp;主导方标注</div>
+  <div class="leg"><span class="leg-tag lt-b">B主</span>&nbsp;主导方标注</div>
+</div>
+
+<main>
+
+<!-- ═══ 阶段一 ═══ -->
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">01</span>
+    <span class="phase-label pl-1">启动期</span>
+    <span class="phase-title">法务 · 注册 · 供应链准备</span>
+  </div>
+  <div class="phase-summary">
+    本阶段以法务和供应链准备为核心。<strong>B主导公司注册和供应商锁定</strong>，<strong>A主导协议框架输入和财务规则设计</strong>。两者必须在首笔客户触达前完成，是整个业务的地基。竞业条款确认是唯一的前置阻断项，需优先处理。
+  </div>
+  <div class="nodes">
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>确认竞业条款<span class="blocker">前置项</span></div>
+        <div class="node-desc">项目启动的法律前提。确认现雇主合同无相关竞业限制。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>公司注册 ＋ 对公账户</div>
+        <div class="node-desc">B为法定代表人，出资按股权比例。建议上海或深圳注册，对公账户为收款前提。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-ab">A+B</span>股东协议签署</div>
+        <div class="node-desc">股权、提成、退出、全职触发、新业务触发条款。律师起草，双方逐条确认签署。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-ab">A+B</span>财务记账体系搭建</div>
+        <div class="node-desc">毛利计算方式、提成规则、采购成本录入权限双方约定。首笔订单前必须明确到操作层面。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-bmain">B主</span><span class="role r-sub">A辅</span>核心供应商筛选</div>
+        <div class="node-desc">B凭行业经验评估供应商质量与合作意愿。A提供目标市场买家规格偏好等信息辅助判断。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>产品文件库搭建</div>
+        <div class="node-desc">COA、检测报告、规格、价格区间，实时更新。B负责内容准确性，供A调用。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>样品库备货</div>
+        <div class="node-desc">每品种备库，联系供应商索样，确认DHL/FedEx方案。目标7天内可寄出。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="connector">
+  <div class="conn-line"></div>
+  <div class="conn-arrow-wrap">
+    <span class="conn-arrow">↓</span>
+    <span class="conn-text">供应链就绪后进入获客期</span>
+  </div>
+</div>
+
+<!-- ═══ 阶段二 ═══ -->
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">02</span>
+    <span class="phase-label pl-2">获客期</span>
+    <span class="phase-title">品牌建设 · 主动触达 · 展会</span>
+  </div>
+  <div class="phase-summary">
+    本阶段以品牌建设和主动触达为核心，<strong>A承担绝大部分工作</strong>。AI工具链是A的核心杠杆，使2人团队具备约4-5人的服务能力。展会是A+B共同参与的重要节点，B在现场提供技术支持，A负责客户沟通和后续维护。<strong>法语市场是核心差异化优势</strong>，英语市场作为MVP验证并行推进。
+  </div>
+  <div class="nodes">
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>LinkedIn ＋ 多平台品牌建立</div>
+        <div class="node-desc">LinkedIn／X／INS／FB，内容同步发布。每周发布法语／英语行业内容，AI辅助生成，A审核发布。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-amain">A主</span><span class="role r-sub">B辅</span>独立站搭建</div>
+        <div class="node-desc">双语品牌展示页，供买家背调使用。B审核技术内容准确性。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>AI工具链搭建</div>
+        <div class="node-desc">询盘回复／文件生成／客户追踪／报价单／利润计算。可使约2人团队具备约4-5人的服务能力，持续迭代。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-amain">A主</span><span class="role r-sub">B辅</span>双语报价文件模板</div>
+        <div class="node-desc">搭建后按品类和目标市场持续更新。B提供技术参数，A完成双语格式化。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-amain">A主</span><span class="role r-sub">B辅</span>CPHI上海（6月）</div>
+        <div class="node-desc">A负责展会策略、外语沟通、竞品及赛道调研（约2/3）。B负责供应商技术判断（约1/3）。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-bmain">B主</span><span class="role r-sub">A辅</span>西安展会</div>
+        <div class="node-desc">B主导供应商技术判断（约2/3）。A负责市场信息支持（约1/3）。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-amain">A主</span><span class="role r-sub">B辅</span>Vitafoods ME 迪拜 ＋ Natexpo 里昂（9月）</div>
+        <div class="node-desc">A主导客户沟通及展后维护（约2/3）。B提供现场技术支持（约1/3）。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-ab">A+B</span>曼谷展会</div>
+        <div class="node-desc">行业趋势调研为主，双方共同参与，五五分摊。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>Cold Outreach · 法语市场</div>
+        <div class="node-desc">法语区中小天然健康品牌，主动触达与跟进。A的核心差异化能力，持续推进。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>Cold Outreach · 英语市场</div>
+        <div class="node-desc">英语区进口商与品牌，主动触达与跟进。MVP第一步，验证首笔履约，与法语市场并行。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="connector">
+  <div class="conn-line"></div>
+  <div class="conn-arrow-wrap">
+    <span class="conn-arrow">↓</span>
+    <span class="conn-text">有效询盘进入订单期</span>
+  </div>
+</div>
+
+<!-- ═══ 阶段三 ═══ -->
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">03</span>
+    <span class="phase-label pl-3">订单期</span>
+    <span class="phase-title">询盘 · 报价 · 样品 · 合同</span>
+  </div>
+  <div class="phase-summary">
+    本阶段是<strong>A主导、B支撑</strong>的协作节点。A负责所有客户沟通和文件生成，B在后台确认采购成本和供应链可行性。目标是48小时内完成标准询盘响应，7天内寄出样品。合同签署前需B确认货源和交货期，避免承诺超出供应链能力。
+  </div>
+  <div class="nodes">
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>询盘接收与筛选</div>
+        <div class="node-desc">AI辅助初步筛选，48小时内响应。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-amain">A主</span><span class="role r-sub">B辅</span>报价单生成与发送</div>
+        <div class="node-desc">A生成双语报价单，B确认采购成本和规格准确性。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-bmain">B主</span><span class="role r-sub">A辅</span>样品备货与寄送</div>
+        <div class="node-desc">B执行备货发货，A确认客户地址和跟进信息。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>样品跟进与谈判</div>
+        <div class="node-desc">收到样品后持续跟进，AI辅助追踪关键节点。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-amain">A主</span><span class="role r-sub">B辅</span>合同谈判与签署</div>
+        <div class="node-desc">A负责条款谈判，B确认供应链可行性和交货期。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="connector">
+  <div class="conn-line"></div>
+  <div class="conn-arrow-wrap">
+    <span class="conn-arrow">↓</span>
+    <span class="conn-text">合同签署后进入履约期</span>
+  </div>
+</div>
+
+<!-- ═══ 阶段四 ═══ -->
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">04</span>
+    <span class="phase-label pl-4">履约期</span>
+    <span class="phase-title">备货 · 质检 · 物流 · 回款</span>
+  </div>
+  <div class="phase-summary">
+    本阶段是<strong>B主导的执行阶段</strong>，覆盖从采购到交货的完整供应链流程。A的职责是对外——向客户同步物流进度、审核英文文件、处理客户沟通。货款结算和纠纷处理需双方配合。每笔订单完成后，毛利计算和A的提成结算随即触发。
+  </div>
+  <div class="nodes">
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>货源确认与采购下单</div>
+        <div class="node-desc">向供应商下单，锁定价格和交货期。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>生产跟单与质检验货</div>
+        <div class="node-desc">催货＋质量把关，前期通过第三方检测或实地验货确保产品质量。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-bmain">B主</span><span class="role r-sub">A审</span>出口报关文件准备</div>
+        <div class="node-desc">装箱单、商业发票、原产地证明。流程标准化，A审核英文版本准确性。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>货运代理对接与发货</div>
+        <div class="node-desc">对接货代，安排国际运输，发货后提供追踪信息。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>物流进度同步客户</div>
+        <div class="node-desc">B提供追踪号，A负责向客户同步物流状态。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-ab">A+B</span>货款结算与对账</div>
+        <div class="node-desc">收款确认，采购付款，毛利计算，A季度提成结算随即触发。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-ab">A+B</span>退货／质量纠纷处理 <span style="font-size:10px;color:var(--ink-faint)">低频</span></div>
+        <div class="node-desc">A负责客户沟通端，B负责供应链端交涉处理。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="connector">
+  <div class="conn-line"></div>
+  <div class="conn-arrow-wrap">
+    <span class="conn-arrow">↓</span>
+    <span class="conn-text">完成履约后进入维护期（循环）</span>
+  </div>
+</div>
+
+<!-- ═══ 阶段五 ═══ -->
+<div class="phase">
+  <div class="phase-head">
+    <span class="phase-num">05</span>
+    <span class="phase-label pl-5">维护期</span>
+    <span class="phase-title">客户关系 · 供应商维护 · 持续循环</span>
+  </div>
+  <div class="phase-summary">
+    本阶段是公司长期运营的常态。<strong>A持续驱动客户关系和品牌曝光</strong>，<strong>B持续维护供应商网络和产品文件库</strong>。新品类扩展是重大决策，需双方共同评估。展会在27年底前A+B同行，之后A单独参加，B专注供应链端。阶段五完成后重新进入阶段三，形成持续循环。
+  </div>
+  <div class="nodes">
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>长期客户维护</div>
+        <div class="node-desc">定期跟进所有来源客户，AI辅助追踪节点，引导复购。</div>
+      </div>
+    </div>
+
+    <div class="node node-a">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-a">A</span>社媒内容持续运营</div>
+        <div class="node-desc">每周发布法语／英语行业内容，维持行业可信度。</div>
+      </div>
+    </div>
+
+    <div class="node node-b">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-b">B</span>供应商关系持续维护</div>
+        <div class="node-desc">价格谈判、备用供应商管理、新产品跟踪，持续更新文件库。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-ab">A+B</span>新品类扩展决策</div>
+        <div class="node-desc">重大决策，双方同意。A负责市场面评估，B负责供应链面评估。</div>
+      </div>
+    </div>
+
+    <div class="node node-ab">
+      <div class="node-body">
+        <div class="node-title"><span class="role r-amain">A主</span><span class="role r-sub">B辅</span>展会持续参加（年度）</div>
+        <div class="node-desc">27年底前A+B同行，之后A单独参加。B全职后专注供应链端。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <span>植物提取物 B2B 出口 · 外贸运营流程图</span>
+  <span>阶段五完成后循环回阶段三 ↺</span>
+</footer>
+
+</body>
+</html>
