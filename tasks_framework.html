@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>任务与贡献框架</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5F0E8;
+  --ink: #1A1614;
+  --ink-light: #4A3F3A;
+  --ink-faint: #8A7D76;
+  --a-color: #8B4513;
+  --a-bg: #F2E8DE;
+  --a-line: #C4834A;
+  --b-color: #1A5C3A;
+  --b-bg: #DFF0E8;
+  --b-line: #3A9A6A;
+  --ab-color: #2D3A6B;
+  --ab-bg: #E4E8F5;
+  --ab-line: #5A6AAA;
+  --rule: rgba(26,22,20,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Mono', monospace;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 2px solid var(--ink);
+  padding: 2rem 3rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2rem;
+}
+.masthead-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.masthead-title em {
+  font-style: italic;
+  color: var(--a-color);
+}
+.masthead-meta {
+  text-align: right;
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+
+/* METHOD BAR */
+.method-bar {
+  background: var(--ink);
+  color: var(--cream);
+  padding: .75rem 3rem;
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.method-bar span { opacity: .55; }
+.method-bar strong { opacity: 1; font-weight: 500; }
+.method-sep { opacity: .2; }
+
+/* MAIN LAYOUT */
+.main {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 120px);
+}
+
+/* SIDEBAR */
+.sidebar {
+  border-right: 1px solid var(--rule);
+  padding: 2rem 0;
+  position: sticky;
+  top: 0;
+  height: fit-content;
+}
+.sidebar-section {
+  padding: .5rem 1.5rem;
+  margin-bottom: .25rem;
+}
+.sidebar-label {
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: .75rem;
+  padding-bottom: .5rem;
+  border-bottom: .5px solid var(--rule);
+}
+.sidebar-module {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: .5rem .75rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .15s;
+  margin-bottom: 2px;
+}
+.sidebar-module:hover { background: rgba(26,22,20,.05); }
+.sidebar-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-a { background: var(--a-line); }
+.dot-b { background: var(--b-line); }
+.dot-ab { background: var(--ab-line); }
+.dot-assist { background: var(--ink-faint); }
+.sidebar-module-name {
+  font-size: 11px;
+  color: var(--ink-light);
+  font-family: 'Noto Serif SC', serif;
+}
+.sidebar-score-block {
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+.sidebar-contrib {
+  margin-bottom: 1rem;
+}
+.sidebar-contrib-label {
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: .4rem;
+}
+.sidebar-contrib-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: .3rem;
+}
+.sidebar-contrib-name.col-a { color: var(--a-color); }
+.sidebar-contrib-name.col-b { color: var(--b-color); }
+.sidebar-bar-wrap {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+  margin-bottom: .3rem;
+}
+.sidebar-bar { height: 3px; border-radius: 2px; }
+.bar-a { background: var(--a-line); }
+.bar-b { background: var(--b-line); }
+.sidebar-contrib-sub {
+  font-size: 9px;
+  color: var(--ink-faint);
+  letter-spacing: .04em;
+}
+
+/* CONTENT */
+.content {
+  padding: 2rem 3rem;
+}
+
+/* MODULE HEADER */
+.module-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: .75rem;
+  border-bottom: 1.5px solid var(--ink);
+}
+.module-header:first-child { margin-top: 0; }
+.module-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--rule);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.module-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+.tag-a { background: var(--a-bg); color: var(--a-color); border: .5px solid var(--a-line); }
+.tag-b { background: var(--b-bg); color: var(--b-color); border: .5px solid var(--b-line); }
+.tag-ab { background: var(--ab-bg); color: var(--ab-color); border: .5px solid var(--ab-line); }
+.tag-assist { background: rgba(26,22,20,.06); color: var(--ink-faint); border: .5px solid var(--rule); }
+.module-title-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: var(--ink-light);
+}
+
+/* TASK ROWS */
+.task-grid {
+  display: grid;
+  gap: 0;
+}
+.task-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 80px 60px;
+  gap: 0;
+  border-bottom: .5px solid var(--rule);
+  padding: .9rem 0;
+  transition: background .1s;
+}
+.task-row:hover { background: rgba(26,22,20,.02); margin: 0 -3rem; padding: .9rem 3rem; }
+.task-row.header-row {
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: .4rem 0 .6rem;
+  border-bottom: .5px solid var(--ink);
+}
+.task-row.header-row:hover { background: none; margin: 0; padding: .4rem 0 .6rem; }
+
+.task-name-col {}
+.task-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.task-note {
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  line-height: 1.5;
+}
+.task-note-desc {
+  font-size: 10.5px;
+  color: var(--ink-light);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+.nat-pill {
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.nat-heavy { background: var(--a-bg); color: var(--a-color); }
+.nat-light { background: var(--ab-bg); color: var(--ab-color); }
+.nat-once { background: rgba(26,22,20,.06); color: var(--ink-faint); }
+
+.effort-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3px;
+  padding-left: .5rem;
+}
+.dots-row { display: flex; gap: 2px; }
+.d { width: 5px; height: 5px; border-radius: 50%; background: var(--rule); }
+.d.on { background: var(--ink-faint); }
+.effort-num { font-size: 9px; color: var(--ink-faint); }
+
+.score-col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  padding-right: .5rem;
+}
+.score-col.col-a { color: var(--a-color); }
+.score-col.col-b { color: var(--b-color); }
+.score-col.col-ab { color: var(--ab-color); }
+.score-col.col-assist { color: var(--ink-faint); }
+
+/* split scores for shared tasks */
+.split-scores {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+.split-score {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+}
+.split-score.s-a { color: var(--a-color); }
+.split-score.s-b { color: var(--b-color); }
+
+.blocker-tag {
+  font-size: 8.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #8B1A1A;
+  background: #F5E4E4;
+  border: .5px solid #C4534A;
+  padding: 1px 5px;
+  border-radius: 2px;
+  margin-left: 6px;
+}
+.equiv-tag {
+  font-size: 8.5px;
+  letter-spacing: .04em;
+  color: var(--ab-color);
+  background: var(--ab-bg);
+  border: .5px solid var(--ab-line);
+  padding: 1px 5px;
+  border-radius: 2px;
+  margin-left: 6px;
+}
+
+.subtotal-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  padding: .6rem 0;
+  border-top: .5px solid var(--ink);
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.subtotal-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  line-height: 1;
+}
+.subtotal-val.col-a { color: var(--a-color); }
+.subtotal-val.col-b { color: var(--b-color); }
+
+/* FINAL RATIO */
+.ratio-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--ink);
+}
+.ratio-headline {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+}
+.ratio-headline .pct-a { color: var(--a-color); }
+.ratio-headline .pct-b { color: var(--b-color); }
+.ratio-headline .divider { color: var(--rule); font-size: 1.5em; }
+
+.ratio-bar-outer {
+  height: 8px;
+  border-radius: 1px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 1rem;
+}
+.ratio-bar-a { background: var(--a-line); }
+.ratio-bar-b { background: var(--b-line); }
+
+.ratio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.ratio-card {
+  border: .5px solid var(--rule);
+  padding: 1rem 1.25rem;
+}
+.ratio-card-label {
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: .4rem;
+}
+.ratio-card-total {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: .4rem;
+}
+.ratio-card-breakdown {
+  font-size: 10px;
+  color: var(--ink-faint);
+  line-height: 1.7;
+}
+.ratio-card-breakdown b { color: var(--ink-light); font-weight: 500; }
+
+.note-block {
+  border-left: 2px solid var(--ink);
+  padding: 1rem 1.5rem;
+  font-size: 11.5px;
+  color: var(--ink-light);
+  line-height: 1.8;
+  font-family: 'Noto Serif SC', serif;
+}
+.note-block strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
+  .sidebar { position: static; border-right: none; border-bottom: 1px solid var(--rule); }
+  .masthead { padding: 1.5rem; }
+  .content { padding: 1.5rem; }
+  .method-bar { padding: .75rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-title">
+    任务框架<br><em>&amp;</em> 贡献分析
+  </div>
+  <div class="masthead-meta">
+    版本 A · 2026<br>
+    植物提取物出口<br>
+    B2B · OEM起步
+  </div>
+</div>
+
+<div class="method-bar">
+  <span>计分规则</span>
+  <strong>重度持续 ×2.0</strong>
+  <span class="method-sep">|</span>
+  <strong>轻量持续 ×1.5</strong>
+  <span class="method-sep">|</span>
+  <strong>一次性 ×1.0</strong>
+  <span class="method-sep">|</span>
+  <span>共同任务按实际分工比例分摊</span>
+  <span class="method-sep">|</span>
+  <span>辅助参与按实际估算</span>
+</div>
+
+<div class="main">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">模块</div>
+    <div class="sidebar-module">
+      <span class="sidebar-dot dot-a"></span>
+      <span class="sidebar-module-name">A 独立主导</span>
+    </div>
+    <div class="sidebar-module">
+      <span class="sidebar-dot dot-b"></span>
+      <span class="sidebar-module-name">B 独立主导</span>
+    </div>
+    <div class="sidebar-module">
+      <span class="sidebar-dot dot-ab"></span>
+      <span class="sidebar-module-name">A+B 共同</span>
+    </div>
+    <div class="sidebar-module">
+      <span class="sidebar-dot dot-assist"></span>
+      <span class="sidebar-module-name">辅助参与</span>
+    </div>
+  </div>
+
+  <div class="sidebar-score-block">
+    <div class="sidebar-label">加权总分</div>
+    <div class="sidebar-contrib">
+      <div class="sidebar-contrib-label">合伙人 A</div>
+      <div class="sidebar-contrib-name col-a">72.1</div>
+      <div class="sidebar-bar-wrap">
+        <div class="sidebar-bar bar-a" style="width:100%"></div>
+      </div>
+      <div class="sidebar-contrib-sub">60.4% 贡献比</div>
+    </div>
+    <div class="sidebar-contrib">
+      <div class="sidebar-contrib-label">合伙人 B</div>
+      <div class="sidebar-contrib-name col-b">47.3</div>
+      <div class="sidebar-bar-wrap">
+        <div class="sidebar-bar bar-b" style="width:66%"></div>
+      </div>
+      <div class="sidebar-contrib-sub">39.6% 贡献比</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- ═══ MODULE A ═══ -->
+<div class="module-header">
+  <span class="module-number">01</span>
+  <span class="module-tag tag-a">A 独立主导</span>
+  <span class="module-title-text">对外事务 · 品牌 · AI · 客户开发</span>
+</div>
+
+<div class="task-grid">
+  <div class="task-row header-row">
+    <div>任务</div>
+    <div>性质</div>
+    <div>Effort</div>
+    <div style="text-align:right;padding-right:.5rem">加权分</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">AI工具链搭建与持续迭代 <span class="equiv-tag">约等于销售助理＋合规专员</span></div>
+      <div class="task-note">询盘回复／文件生成／客户追踪／报价单／利润计算</div>
+      <div class="task-note-desc">可使约2人团队具备约4-5人的服务能力。持续迭代，是核心效率资产。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-heavy">重度持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span></div>
+      <div class="effort-num">5</div>
+    </div>
+    <div class="score-col col-a">10.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">法语市场客户开发</div>
+      <div class="task-note">法语区中小天然健康品牌，主动触达与跟进</div>
+      <div class="task-note-desc">A的核心差异化能力。法语沟通在中国植提供应商中具有稀缺性。持续推进。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-heavy">重度持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span></div>
+      <div class="effort-num">4</div>
+    </div>
+    <div class="score-col col-a">8.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">英语市场客户开发</div>
+      <div class="task-note">英语区进口商与品牌，主动触达与跟进</div>
+      <div class="task-note-desc">MVP第一步，验证首笔履约。与法语市场并行推进。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-heavy">重度持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span></div>
+      <div class="effort-num">4</div>
+    </div>
+    <div class="score-col col-a">8.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">长期客户维护</div>
+      <div class="task-note">所有渠道客户定期跟进，关系管理</div>
+      <div class="task-note-desc">覆盖所有来源客户。AI辅助追踪跟进节点。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-heavy">重度持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span></div>
+      <div class="effort-num">4</div>
+    </div>
+    <div class="score-col col-a">8.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">社媒多平台运营</div>
+      <div class="task-note">LinkedIn／X／INS／FB，内容同步发布</div>
+      <div class="task-note-desc">每周发布法语／英语行业内容。AI辅助生成，A审核发布。建立行业可信度。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-heavy">重度持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col col-a">6.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">目标市场合规研究</div>
+      <div class="task-note">各目标市场法规要求，对接买家合规需求</div>
+      <div class="task-note-desc">A主导，覆盖各目标市场监管要求及买家合规文件需求。按需更新。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col col-a">3.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">独立站搭建与持续维护</div>
+      <div class="task-note">双语品牌展示页，后期轻量迭代</div>
+      <div class="task-note-desc">供买家背调使用。双语呈现，含品类介绍与合规能力说明。B辅助审核技术内容。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col col-a">4.5</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">双语报价／文件模板体系</div>
+      <div class="task-note">规格表、COA格式、合规文件包，按需迭代</div>
+      <div class="task-note-desc">搭建后按品类和目标市场持续更新。B提供技术参数，A完成双语格式化。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col col-a">4.5</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">B2B平台上线与维护</div>
+      <div class="task-note">主要B2B平台，补充被动引流</div>
+      <div class="task-note-desc">文件齐备后上线，基础维护。作为主动开发的补充渠道。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col col-a">2.0</div>
+  </div>
+
+  <div class="subtotal-row">
+    <span>模块A小计</span>
+    <span class="subtotal-val col-a">54.0</span>
+  </div>
+</div>
+
+<!-- ═══ MODULE B ═══ -->
+<div class="module-header">
+  <span class="module-number">02</span>
+  <span class="module-tag tag-b">B 独立主导</span>
+  <span class="module-title-text">供应链 · 注册 · 质检 · 物流</span>
+</div>
+
+<div class="task-grid">
+  <div class="task-row header-row">
+    <div>任务</div>
+    <div>性质</div>
+    <div>Effort</div>
+    <div style="text-align:right;padding-right:.5rem">加权分</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">确认竞业条款 <span class="blocker-tag">前置项</span></div>
+      <div class="task-note-desc">项目启动的法律前提。确认现雇主合同无相关竞业限制。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">1</div>
+    </div>
+    <div class="score-col col-b">1.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">公司注册 ＋ 对公账户</div>
+      <div class="task-note">B为法定代表人，出资按股权比例</div>
+      <div class="task-note-desc">B负责注册执行。建议上海或深圳注册。对公账户为收款前提。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col col-b">2.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">供应商开发、筛选与持续维护</div>
+      <div class="task-note">询价、比价、关系维护、备用供应商管理</div>
+      <div class="task-note-desc">B凭行业经验评估供应商质量与合作意愿。锁定核心供应商及备用方案。持续维护。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-heavy">重度持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span></div>
+      <div class="effort-num">4</div>
+    </div>
+    <div class="score-col col-b">8.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">产品文件库归档与维护</div>
+      <div class="task-note">COA、检测报告、规格、价格区间，实时更新</div>
+      <div class="task-note-desc">B负责内容准确性和实时更新，供A调用。是快速响应客户询盘的基础。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col col-b">3.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">生产跟单与质检／验货</div>
+      <div class="task-note">催货、质量把关，前期自行检测或实地验货</div>
+      <div class="task-note-desc">每笔订单执行。前期通过第三方检测或实地验货确保产品质量。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col col-b">4.5</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">样品备货与国际寄送</div>
+      <div class="task-note">联系供应商索样、打包、对接国际快递</div>
+      <div class="task-note-desc">目标7天内可寄出。A确认客户信息，B执行备货和发货。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">1</div>
+    </div>
+    <div class="score-col col-b">1.5</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">出口报关文件准备</div>
+      <div class="task-note">商业发票、装箱单、原产地证明</div>
+      <div class="task-note-desc">每笔订单执行。流程标准化，前期配合货代操作，后期可自行处理。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col col-b">3.0</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">货运代理对接与物流跟踪</div>
+      <div class="task-note-desc">发货后提供追踪信息，跟进物流状态，到港后通知A。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">1</div>
+    </div>
+    <div class="score-col col-b">1.5</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">货款结算与采购对账</div>
+      <div class="task-note-desc">采购付款及供应商对账。与财务记账体系联动，双方可见。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col col-b">3.0</div>
+  </div>
+
+  <div class="subtotal-row">
+    <span>模块B小计</span>
+    <span class="subtotal-val col-b">27.5</span>
+  </div>
+</div>
+
+<!-- ═══ MODULE A+B ═══ -->
+<div class="module-header">
+  <span class="module-number">03</span>
+  <span class="module-tag tag-ab">A+B 共同</span>
+  <span class="module-title-text">法务 · 展会 · 履约 · 决策</span>
+</div>
+
+<div class="task-grid">
+  <div class="task-row header-row">
+    <div>任务</div>
+    <div>性质</div>
+    <div>Effort</div>
+    <div style="text-align:right;padding-right:.5rem">A / B 得分</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">股东协议起草与签署</div>
+      <div class="task-note">股权／提成／退出／全职触发／新业务触发条款</div>
+      <div class="task-note-desc">双方共同参与，各占50%。律师起草，双方逐条确认签署。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 1.5</span>
+        <span class="split-score s-b">B 1.5</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">财务记账体系搭建</div>
+      <div class="task-note">毛利计算、提成规则、采购成本录入、双方可见</div>
+      <div class="task-note-desc">首笔订单前明确到操作层面。采购成本录入权限双方约定。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 1.0</span>
+        <span class="split-score s-b">B 1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">CPHI上海（6月）</div>
+      <div class="task-note">供应链情报／高潜力赛道调研／供应商筛选</div>
+      <div class="task-note-desc">A主导展会策略、外语沟通、竞品及赛道调研（约2/3）。B负责供应商技术判断（约1/3）。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 1.33</span>
+        <span class="split-score s-b">B 0.67</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">西安展会</div>
+      <div class="task-note">植提专项展，供应商筛选为主</div>
+      <div class="task-note-desc">B主导供应商技术判断（约2/3）。A负责市场信息支持（约1/3）。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 0.67</span>
+        <span class="split-score s-b">B 1.33</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">Vitafoods ME 迪拜 ＋ Natexpo 里昂（9月）</div>
+      <div class="task-note">客户开发为主，两场连续参加</div>
+      <div class="task-note-desc">A主导客户沟通及展后维护（约2/3）。B提供现场技术支持（约1/3）。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 2.0</span>
+        <span class="split-score s-b">B 1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">曼谷展会</div>
+      <div class="task-note">行业趋势调研，A+B同行</div>
+      <div class="task-note-desc">趋势调研为主，双方共同参与，五五分摊。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 1.0</span>
+        <span class="split-score s-b">B 1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">供应商实地拜访（持续）</div>
+      <div class="task-note">27年底前A+B同行</div>
+      <div class="task-note-desc">B主导现场技术判断（约2/3）。A负责后续文件跟进（约1/3）。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 1.5</span>
+        <span class="split-score s-b">B 3.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">首笔订单履约</div>
+      <div class="task-note">合同／文件／货源／质检／物流／海关</div>
+      <div class="task-note-desc">A负责合同谈判／客户沟通／文件。B负责货源确认／质检／物流／报关。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span></div>
+      <div class="effort-num">5</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 2.5</span>
+        <span class="split-score s-b">B 2.5</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">退货／质量纠纷处理</div>
+      <div class="task-note">低频发生，涉及商品／物流／财务／工厂</div>
+      <div class="task-note-desc">A负责客户沟通端，B负责供应链端交涉处理。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span></div>
+      <div class="effort-num">4</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 2.0</span>
+        <span class="split-score s-b">B 2.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">新品类扩展决策</div>
+      <div class="task-note">双方同意方可执行</div>
+      <div class="task-note-desc">重大决策，双方同意。A负责市场面评估，B负责供应链面评估。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-light">轻量持续</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 1.5</span>
+        <span class="split-score s-b">B 1.5</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">B全职时间节点谈判</div>
+      <div class="task-note-desc">营业额达到约定触发线后6个月内启动，或24个月后重新协商。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once">一次性</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col">
+      <div class="split-scores">
+        <span class="split-score s-a">A 1.0</span>
+        <span class="split-score s-b">B 1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subtotal-row">
+    <span>A从共同任务得</span>
+    <span class="subtotal-val col-a" style="font-size:14px;margin-left:.5rem">17.0</span>
+    <span style="margin:0 .5rem;color:var(--rule)">·</span>
+    <span>B从共同任务得</span>
+    <span class="subtotal-val col-b" style="font-size:14px;margin-left:.5rem">18.0</span>
+  </div>
+</div>
+
+<!-- ═══ ASSIST ═══ -->
+<div class="module-header">
+  <span class="module-number">04</span>
+  <span class="module-tag tag-assist">辅助参与</span>
+  <span class="module-title-text">实质性输入，非主导</span>
+</div>
+
+<div class="task-grid">
+  <div class="task-row header-row">
+    <div>任务</div>
+    <div>方向</div>
+    <div>主任务Effort</div>
+    <div style="text-align:right;padding-right:.5rem">辅助得分</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">B辅助 · 独立站技术内容审核</div>
+      <div class="task-note-desc">B审核独立站技术表述准确性。按实际估算计入。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once" style="background:var(--b-bg);color:var(--b-color)">B→A</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col col-b" style="font-size:13px">B +0.9</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">B辅助 · 报价模板技术参数确认</div>
+      <div class="task-note-desc">B确认报价模板中产品规格描述准确性。按实际估算计入。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once" style="background:var(--b-bg);color:var(--b-color)">B→A</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">3</div>
+    </div>
+    <div class="score-col col-b" style="font-size:13px">B +0.9</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">A辅助 · 出口文件英文版本审核</div>
+      <div class="task-note-desc">A审核出口文件英文准确性。每笔订单执行。按实际估算计入。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once" style="background:var(--a-bg);color:var(--a-color)">A→B</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+      <div class="effort-num">2</div>
+    </div>
+    <div class="score-col col-a" style="font-size:13px">A +0.6</div>
+  </div>
+
+  <div class="task-row">
+    <div class="task-name-col">
+      <div class="task-name">A辅助 · 供应商谈判市场信息支持</div>
+      <div class="task-note-desc">A向B提供目标市场买家规格偏好等信息，辅助供应商谈判。按实际估算计入。</div>
+    </div>
+    <div class="effort-col"><span class="nat-pill nat-once" style="background:var(--a-bg);color:var(--a-color)">A→B</span></div>
+    <div class="effort-col">
+      <div class="dots-row"><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d on"></span><span class="d"></span></div>
+      <div class="effort-num">4</div>
+    </div>
+    <div class="score-col col-a" style="font-size:13px">A +0.5</div>
+  </div>
+
+  <div class="subtotal-row">
+    <span>A辅助附加</span>
+    <span class="subtotal-val col-a" style="font-size:14px;margin-left:.5rem">+1.1</span>
+    <span style="margin:0 .5rem;color:var(--rule)">·</span>
+    <span>B辅助附加</span>
+    <span class="subtotal-val col-b" style="font-size:14px;margin-left:.5rem">+1.8</span>
+  </div>
+</div>
+
+<!-- ═══ RATIO ═══ -->
+<div class="ratio-section">
+  <div class="ratio-headline">
+    <span class="pct-a">60.4%</span>
+    <span class="divider">/</span>
+    <span class="pct-b">39.6%</span>
+    <span style="font-size:.9rem;color:var(--ink-faint);margin-left:.5rem;font-family:'DM Mono',monospace">加权贡献比</span>
+  </div>
+
+  <div class="ratio-bar-outer">
+    <div class="ratio-bar-a" style="width:60.4%"></div>
+    <div class="ratio-bar-b" style="width:39.6%"></div>
+  </div>
+
+  <div class="ratio-grid">
+    <div class="ratio-card">
+      <div class="ratio-card-label">合伙人 A · 加权总分</div>
+      <div class="ratio-card-total col-a">72.1</div>
+      <div class="ratio-card-breakdown">
+        独立主导 <b>54.0</b>　共同任务 <b>17.0</b>　辅助 <b>1.1</b><br>
+        重度持续任务集中：AI工具链、双线客户开发、长期客户维护
+      </div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-card-label">合伙人 B · 加权总分</div>
+      <div class="ratio-card-total col-b">47.3</div>
+      <div class="ratio-card-breakdown">
+        独立主导 <b>27.5</b>　共同任务 <b>18.0</b>　辅助 <b>1.8</b><br>
+        核心任务：供应商开发维护、质检跟单、文件体系
+      </div>
+    </div>
+  </div>
+
+  <div class="note-block">
+    <strong>关于贡献比的说明：</strong>60/40的加权贡献比对应两种不同性质的工作：A承担以持续性为主的对外职能（客户开发、品牌运营、AI工具体系），B承担以执行性为主的供应链职能（供应商管理、质检、物流、报关）。两类职能在业务运转中互为依赖，缺一不可。当前股权结构60/40与贡献比一致。
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+
+</body>
+</html>
